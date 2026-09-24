@@ -1,0 +1,381 @@
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #f4f7fb;
+
+    color: #1f2937;
+
+    min-height: 100vh;
+}
+
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar {
+    width: 100%;
+
+    background: white;
+
+    padding: 18px 50px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+
+.logo {
+    font-size: 25px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: #2563eb;
+}
+
+
+.topbar-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+.welcome {
+    font-size: 14px;
+
+    color: #6b7280;
+}
+
+
+.logout-button {
+    border: none;
+
+    background: #ef4444;
+
+    color: white;
+
+    padding: 10px 18px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.logout-button:hover {
+    background: #dc2626;
+}
+
+
+.logout-button:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard {
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 50px 25px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 55px 50px;
+
+    margin-bottom: 45px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+    text-align: center;
+}
+
+
+.subtitle {
+    margin: 0 0 15px 0;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #6b7280;
+}
+
+
+.hero h1 {
+    margin: 0;
+
+    font-size: 42px;
+
+    line-height: 1.2;
+
+    color: #111827;
+}
+
+
+.hero h1 span {
+    color: #2563eb;
+}
+
+
+.description {
+    max-width: 700px;
+
+    margin: 20px auto 0 auto;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    color: #6b7280;
+}
+
+
+/* =========================
+   MENU SECTION
+========================= */
+
+.menu-section h2 {
+    margin: 0 0 25px 0;
+
+    font-size: 28px;
+
+    color: #111827;
+}
+
+
+.menu-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 25px;
+}
+
+
+/* =========================
+   MENU CARD
+========================= */
+
+.menu-card {
+    background: white;
+
+    min-height: 250px;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    border: 1px solid #e5e7eb;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+
+    transition: 0.25s;
+
+    display: block;
+}
+
+
+.menu-card:hover {
+    transform: translateY(-6px);
+
+    border-color: #2563eb;
+
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.15);
+}
+
+
+.card-icon {
+    width: 60px;
+
+    height: 60px;
+
+    border-radius: 14px;
+
+    background: #eff6ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 30px;
+
+    margin-bottom: 20px;
+}
+
+
+.menu-card h3 {
+    margin: 0 0 12px 0;
+
+    font-size: 21px;
+
+    color: #111827;
+}
+
+
+.menu-card p {
+    margin: 0;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    color: #6b7280;
+}
+
+
+.card-link {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    color: #2563eb;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   LOCKED CARD
+========================= */
+
+.locked {
+    cursor: not-allowed;
+
+    opacity: 0.7;
+}
+
+
+.locked:hover {
+    transform: none;
+
+    border-color: #e5e7eb;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+
+.locked-text {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    font-size: 14px;
+
+    color: #9ca3af;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    text-align: center;
+
+    margin-top: 60px;
+
+    padding-top: 30px;
+
+    border-top: 1px solid #e5e7eb;
+
+    color: #9ca3af;
+
+    font-size: 13px;
+}
+
+
+.footer p {
+    margin: 5px 0;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    .topbar {
+        padding: 15px 20px;
+    }
+
+
+    .welcome {
+        display: none;
+    }
+
+
+    .dashboard {
+        padding: 30px 15px;
+    }
+
+
+    .hero {
+        padding: 40px 25px;
+    }
+
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

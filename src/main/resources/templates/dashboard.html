@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aetherlia - Dashboard</title>
+
+<link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+
+<body>
+
+	<!-- Thanh trên cùng -->
+	<header class="topbar">
+
+		<div class="logo">AETHERLIA</div>
+
+		<div class="topbar-right">
+
+			<span class="welcome"> Chào mừng, Trainer! </span>
+
+			<form th:action="@{/logout}" method="post">
+
+				<button type="submit" class="logout-button">Đăng xuất</button>
+
+			</form>
+
+		</div>
+
+	</header>
+
+
+	<!-- Nội dung chính -->
+	<main class="dashboard">
+
+		<!-- Tiêu đề -->
+		<section class="hero">
+
+			<div class="hero-content">
+
+				<p class="subtitle">HÀNH TRÌNH CỦA ANH BẮT ĐẦU TỪ ĐÂY</p>
+
+				<h1>
+					Chào mừng đến với <span>Aetherlia!</span>
+				</h1>
+
+				<p class="description">Khám phá thế giới Aetherlia, thu phục
+					những Monster mạnh mẽ và xây dựng đội hình của riêng anh.</p>
+
+			</div>
+
+		</section>
+
+
+		<!-- Các chức năng -->
+		<section class="menu-section">
+
+			<h2>Hành trình của Trainer</h2>
+
+			<div class="menu-grid">
+
+
+				<!-- Chọn Monster -->
+				<a th:href="@{/starter-monsters}" class="menu-card">
+
+					<div class="card-icon">⚡</div>
+
+					<h3>Chọn Monster khởi đầu</h3>
+
+					<p>Chọn Monster đầu tiên để bắt đầu hành trình khám phá
+						Aetherlia.</p> <span class="card-link"> Bắt đầu → </span>
+
+				</a>
+
+
+				<!-- Monster của tôi -->
+				<a th:href="@{/my-monsters}" class="menu-card">
+
+					<div class="card-icon">🐾</div>
+
+					<h3>Monster của tôi</h3>
+
+					<p>Xem những Monster mà anh đang sở hữu, cấp độ, EXP và HP.</p> <span
+					class="card-link"> Xem Monster → </span>
+
+				</a> <a th:href="@{/team}" class="menu-card">
+
+					<div class="card-icon">⚔️</div>
+
+					<h3>Đội Monster</h3>
+
+					<p>Quản lý đội hình và chọn Monster tham gia chiến đấu.</p> <span
+					class="card-link"> Quản lý Team → </span>
+
+				</a> <a th:href="@{/map}" class="menu-card">
+
+					<div class="card-icon">🗺️</div>
+
+					<h3>Bản đồ Aetherlia</h3>
+
+					<p>Khám phá các khu vực, thành phố, Dungeon và những nơi chưa
+						được mở khóa.</p> <span class="card-link"> Mở bản đồ → </span>
+
+				</a>
+
+
+				<!-- Battle -->
+				<div class="menu-card locked">
+
+					<div class="card-icon">⚔️</div>
+
+					<h3>Battle</h3>
+
+					<p>Tham gia những trận chiến theo lượt cùng đội Monster của
+						anh.</p>
+
+					<span class="locked-text"> 🔒 Chưa mở khóa </span>
+
+				</div>
+
+			</div>
+
+		</section>
+
+
+		<!-- Footer -->
+		<footer class="footer">
+
+			<p>AETHERLIA © 2026</p>
+
+			<p>Hành trình thu phục Monster bắt đầu từ đây.</p>
+
+		</footer>
+
+	</main>
+
+</body>
+
+</html>

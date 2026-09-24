@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Wild Encounter - Aetherlia</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/wild-encounter.css}">
+
+</head>
+
+<body>
+
+<main class="encounter-page">
+
+
+    <!-- ============================== -->
+    <!-- HEADER -->
+    <!-- ============================== -->
+
+    <p class="battle-label">
+        WILD ENCOUNTER
+    </p>
+
+
+    <h1>
+        Một Monster hoang dã xuất hiện!
+    </h1>
+
+
+    <!-- ============================== -->
+    <!-- MONSTER -->
+    <!-- ============================== -->
+
+    <section class="monster-card">
+
+
+        <div class="monster-icon">
+            🐾
+        </div>
+
+
+        <div class="monster-info">
+
+            <p class="monster-id">
+                WILD MONSTER
+            </p>
+
+
+            <h2
+                th:text="${encounter.monster.name}">
+            </h2>
+
+
+            <div class="monster-badges">
+
+                <span class="type-badge">
+
+                    <span
+                        th:text="${encounter.monster.type}">
+                    </span>
+
+                </span>
+
+
+                <span class="level-badge">
+
+                    Lv.
+
+                    <span
+                        th:text="${encounter.level}">
+                    </span>
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================== -->
+    <!-- HP -->
+    <!-- ============================== -->
+
+    <section class="hp-section">
+
+        <div class="hp-label">
+
+            <span>
+                HP
+            </span>
+
+            <span>
+
+                <strong
+                    th:text="${encounter.currentHp}">
+                </strong>
+
+                /
+
+                <span
+                    th:text="${encounter.monster.baseHp}">
+                </span>
+
+            </span>
+
+        </div>
+
+
+        <div class="hp-bar">
+
+            <div
+                class="hp-fill"
+                th:style="'width:' +
+                    (${encounter.currentHp} * 100 /
+                    ${encounter.monster.baseHp}) +
+                    '%'">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================== -->
+    <!-- ACTION -->
+    <!-- ============================== -->
+
+    <section class="action-panel">
+
+        <p>
+            Monster hoang dã đang chờ trận chiến.
+        </p>
+
+
+        <!-- Bắt đầu Battle -->
+
+        <a
+            th:href="@{/battle}"
+            class="battle-button">
+
+            ⚔️ Bắt đầu Battle
+
+        </a>
+
+
+        <!-- Quay lại Route -->
+
+        <a
+            th:href="@{/map/1}"
+            class="back-button">
+
+            ← Quay lại Route Cỏ Cao
+
+        </a>
+
+    </section>
+
+
+</main>
+
+</body>
+
+</html>

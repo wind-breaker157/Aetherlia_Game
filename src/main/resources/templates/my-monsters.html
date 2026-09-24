@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Monster của tôi - Aetherlia</title>
+</head>
+
+<body>
+
+    <h1>Monster của tôi</h1>
+
+    <p th:if="${#lists.isEmpty(playerMonsters)}">
+        Anh chưa sở hữu Monster nào.
+    </p>
+
+    <table
+        border="1"
+        th:if="${!#lists.isEmpty(playerMonsters)}">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Monster</th>
+                <th>Type</th>
+                <th>Level</th>
+                <th>EXP</th>
+                <th>HP hiện tại</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <tr th:each="pm : ${playerMonsters}">
+
+                <td th:text="${pm.id}"></td>
+
+                <td th:text="${pm.monster.name}"></td>
+
+                <td th:text="${pm.monster.type}"></td>
+
+                <td th:text="${pm.level}"></td>
+
+                <td th:text="${pm.exp}"></td>
+
+                <td th:text="${pm.currentHp}"></td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</body>
+
+</html>

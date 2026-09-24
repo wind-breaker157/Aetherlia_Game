@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bản đồ - Aetherlia</title>
+
+<link rel="stylesheet" th:href="@{/css/map.css}">
+
+<script>
+
+    const worldMap = document.getElementById("worldMap");
+    const mapCanvas = document.getElementById("mapCanvas");
+
+    let isDragging = false;
+
+    let startX = 0;
+    let startY = 0;
+
+    let currentX = 0;
+    let currentY = 0;
+
+
+    worldMap.addEventListener("mousedown", function (event) {
+
+        /*
+         * Nếu bấm vào Link Map đã mở
+         * thì cho phép click bình thường.
+         */
+        if (event.target.closest("a")) {
+            return;
+        }
+
+        isDragging = true;
+
+        worldMap.classList.add("dragging");
+
+        startX = event.clientX - currentX;
+        startY = event.clientY - currentY;
+
+    });
+
+
+    document.addEventListener("mousemove", function (event) {
+
+        if (!isDragging) {
+            return;
+        }
+
+        currentX = event.clientX - startX;
+        currentY = event.clientY - startY;
+
+        mapCanvas.style.transform =
+            `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px))`;
+
+    });
+
+
+    document.addEventListener("mouseup", function () {
+
+        isDragging = false;
+
+        worldMap.classList.remove("dragging");
+
+    });
+
+
+    /*
+     * Hỗ trợ kéo bằng điện thoại.
+     */
+
+    worldMap.addEventListener("touchstart", function (event) {
+
+        if (event.target.closest("a")) {
+            return;
+        }
+
+        const touch = event.touches[0];
+
+        isDragging = true;
+
+        startX = touch.clientX - currentX;
+        startY = touch.clientY - currentY;
+
+    });
+
+
+    worldMap.addEventListener("touchmove", function (event) {
+
+        if (!isDragging) {
+            return;
+        }
+
+        const touch = event.touches[0];
+
+        currentX = touch.clientX - startX;
+        currentY = touch.clientY - startY;
+
+        mapCanvas.style.transform =
+            `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px))`;
+
+    });
+
+
+    worldMap.addEventListener("touchend", function () {
+
+        isDragging = false;
+
+    });
+
+</script>
+
+</head>
+
+<body>
+
+	<main class="map-page">
+
+
+		<!-- ========================= -->
+		<!-- HEADER -->
+		<!-- ========================= -->
+
+		<section class="map-header">
+
+			<div class="map-title-icon">🗺️</div>
+
+			<div>
+
+				<p class="map-subtitle">THẾ GIỚI AETHERLIA</p>
+
+				<h1>Bản đồ hành trình</h1>
+
+				<p class="map-description">Khám phá những vùng đất mới và tiếp
+					tục hành trình của Trainer.</p>
+
+			</div>
+
+		</section>
+
+
+		<!-- ========================= -->
+		<!-- WORLD MAP -->
+		<!-- ========================= -->
+
+		<section class="world-map" id="worldMap">
+
+			<div class="map-canvas" id="mapCanvas">
+
+				<!-- ĐƯỜNG CHỮ S -->
+				<svg class="map-road" viewBox="0 0 1000 700"
+					preserveAspectRatio="none">
+
+            <path
+						d="
+                M 170 115
+                H 500
+                H 830
+                V 350
+                H 500
+                H 170
+                V 585
+                H 500
+                H 830
+                "
+						fill="none" stroke="rgba(37, 99, 235, 0.18)" stroke-width="14"
+						stroke-linecap="round" stroke-linejoin="round">
+            </path>
+
+            <path
+						d="
+                M 170 115
+                H 500
+                H 830
+                V 350
+                H 500
+                H 170
+                V 585
+                H 500
+                H 830
+                "
+						fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="4"
+						stroke-linecap="round" stroke-linejoin="round"
+						stroke-dasharray="12 12">
+            </path>
+
+        </svg>
+
+
+				<div class="map-grid">
+
+					<div th:each="playerMap : ${playerMaps}"
+						th:class="'map-node map-' + ${playerMap.mapArea.mapNumber}"
+						th:classappend="${playerMap.unlocked} ? ' unlocked' : ' locked'">
+
+
+						<!-- MAP ĐÃ MỞ -->
+						<a th:if="${playerMap.unlocked}"
+							th:href="@{/map/{mapNumber}(mapNumber=${playerMap.mapArea.mapNumber})}"
+							class="map-card">
+
+							<div class="map-card-icon">📍</div>
+
+							<div class="map-number">
+								MAP <span th:text="${playerMap.mapArea.mapNumber}"> </span>
+							</div>
+
+							<h2 th:text="${playerMap.mapArea.name}"></h2>
+
+							<p class="terrain">
+								🌎 <span th:text="${playerMap.mapArea.terrain}"> </span>
+							</p>
+
+							<div class="available-badge">
+
+								<span class="status-dot"></span> ĐÃ MỞ KHÓA
+
+							</div>
+
+						</a>
+
+
+						<!-- MAP CHƯA MỞ -->
+						<div th:unless="${playerMap.unlocked}" class="map-card">
+
+							<div class="map-card-icon">🔒</div>
+
+							<div class="map-number">
+								MAP <span th:text="${playerMap.mapArea.mapNumber}"> </span>
+							</div>
+
+							<h2 th:text="${playerMap.mapArea.name}"></h2>
+
+							<p class="terrain">
+								🌎 <span th:text="${playerMap.mapArea.terrain}"> </span>
+							</p>
+
+							<div class="locked-badge">🔒 CHƯA MỞ</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</section>
+
+
+		<!-- ========================= -->
+		<!-- NOTE -->
+		<!-- ========================= -->
+
+		<section class="map-note">
+
+			<span> ✨ </span>
+
+			<p>Các khu vực mới sẽ xuất hiện khi anh mở khóa chúng.</p>
+
+		</section>
+
+
+		<!-- ========================= -->
+		<!-- BACK -->
+		<!-- ========================= -->
+
+		<a th:href="@{/dashboard}" class="back-button"> ← Quay lại
+			Dashboard </a>
+
+	</main>
+
+</body>
+
+</html>

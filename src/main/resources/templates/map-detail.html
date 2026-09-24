@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="_csrf" th:content="${_csrf.token}">
+
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
+
+<title th:text="${mapArea.name} + ' - Aetherlia'"></title>
+
+<link rel="stylesheet" th:href="@{/css/map-detail.css}">
+
+</head>
+
+<body>
+
+	<main class="map-detail-page">
+
+		<!-- ============================== -->
+		<!-- HEADER -->
+		<!-- ============================== -->
+
+		<section class="map-header">
+
+			<p class="map-label">AETHERLIA WORLD</p>
+
+			<h1 th:text="${mapArea.name}">Làng Lục Diệp</h1>
+
+			<p>
+				Điều khiển nhân vật bằng <strong>W A S D</strong> hoặc <strong>↑
+					↓ ← →</strong>
+			</p>
+
+		</section>
+
+
+		<!-- ============================== -->
+		<!-- GAME WORLD -->
+		<!-- ============================== -->
+
+		<section class="game-world-wrapper">
+
+			<div id="gameWorld" class="game-world">
+
+
+				<!-- GRASS -->
+
+				<div class="world-decoration grass grass-1">🌿</div>
+
+				<div class="world-decoration grass grass-2">🌿</div>
+
+				<div class="world-decoration grass grass-3">🌿</div>
+
+
+				<!-- TREES -->
+
+				<div class="world-decoration tree tree-1">🌳</div>
+
+				<div class="world-decoration tree tree-2">🌳</div>
+
+				<div class="world-decoration tree tree-3">🌳</div>
+
+
+				<!-- HOUSE -->
+
+				<div class="building house">🏠</div>
+
+
+				<!-- PLAYER -->
+
+				<div id="playerCharacter" class="player-character"
+					th:style="'left:' +
+                    (${position.x} * 100 / 900) +
+                    '%; top:' +
+                    (${position.y} * 100 / 500) +
+                    '%'">
+
+					🧑 <span class="player-name" th:text="${character.name}">
+						Player </span>
+
+				</div>
+
+
+			</div>
+
+		</section>
+
+
+		<!-- ============================== -->
+		<!-- LOCATION -->
+		<!-- ============================== -->
+
+		<section class="location-panel">
+
+			<p>
+
+				📍 Vị trí: <strong th:text="${position.locationCode}">
+					village </strong>
+
+			</p>
+
+			<p>
+
+				X: <strong id="playerX" th:text="${position.x}"> 450 </strong> | Y:
+
+				<strong id="playerY" th:text="${position.y}"> 250 </strong>
+
+			</p>
+
+		</section>
+
+
+		<!-- ============================== -->
+		<!-- CONTROLS -->
+		<!-- ============================== -->
+
+		<section class="controls-panel">
+
+			<button type="button" data-direction="UP">↑</button>
+
+			<div>
+
+				<button type="button" data-direction="LEFT">←</button>
+
+				<button type="button" data-direction="DOWN">↓</button>
+
+				<button type="button" data-direction="RIGHT">→</button>
+
+			</div>
+
+		</section>
+
+
+		<!-- ============================== -->
+		<!-- ROUTE -->
+		<!-- ============================== -->
+
+		<section th:if="${position.locationCode == 'route_grass'}"
+			class="explore-panel">
+
+			<h2>🌿 Route Cỏ Cao</h2>
+
+			<p>Monster hoang dã có thể xuất hiện ở khu vực này.</p>
+
+			<a th:href="@{/explore}" class="explore-button"> ⚔️ Khám phá cỏ
+				cao </a>
+
+		</section>
+
+
+		<a th:href="@{/map}" class="back-button"> ← Quay lại World Map </a>
+
+	</main>
+
+</body>
+
+<script>
+
+const player =
+    document.getElementById("playerCharacter");
+
+const playerX =
+    document.getElementById("playerX");
+
+const playerY =
+    document.getElementById("playerY");
+
+const csrfToken =
+    document.querySelector(
+        'meta[name="_csrf"]'
+    ).content;
+
+const csrfHeader =
+    document.querySelector(
+        'meta[name="_csrf_header"]'
+    ).content;
+
+
+/*
+ * Đưa Player tới vị trí mới.
+ */
+function updatePlayerPosition(x, y) {
+
+    player.style.left =
+        (x * 100 / 900) + "%";
+
+    player.style.top =
+        (y * 100 / 500) + "%";
+
+    playerX.textContent = x;
+
+    playerY.textContent = y;
+}
+
+
+/*
+ * Gửi yêu cầu di chuyển lên Server.
+ */
+function movePlayer(direction) {
+
+    const body =
+        new URLSearchParams();
+
+    body.append(
+        "direction",
+        direction
+    );
+
+    fetch(
+        "/player/move",
+        {
+            method: "POST",
+
+            headers: {
+                [csrfHeader]: csrfToken,
+
+                "Content-Type":
+                    "application/x-www-form-urlencoded"
+            },
+
+            body: body
+        }
+    )
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error(
+                "Không thể di chuyển."
+            );
+        }
+
+        return response.json();
+    })
+    .then(data => {
+
+        updatePlayerPosition(
+            data.x,
+            data.y
+        );
+
+    })
+    .catch(error => {
+
+        console.error(error);
+
+    });
+}
+
+
+/*
+ * Keyboard
+ */
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        let direction = null;
+
+        switch (event.key.toLowerCase()) {
+
+            case "w":
+            case "arrowup":
+                direction = "UP";
+                break;
+
+            case "s":
+            case "arrowdown":
+                direction = "DOWN";
+                break;
+
+            case "a":
+            case "arrowleft":
+                direction = "LEFT";
+                break;
+
+            case "d":
+            case "arrowright":
+                direction = "RIGHT";
+                break;
+        }
+
+        if (direction !== null) {
+
+            event.preventDefault();
+
+            movePlayer(direction);
+        }
+    }
+);
+
+
+/*
+ * Các nút điều khiển trên màn hình
+ */
+document
+    .querySelectorAll(
+        "[data-direction]"
+    )
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                movePlayer(
+                    button.dataset.direction
+                );
+
+            }
+        );
+
+    });
+
+</script>
+
+</html>

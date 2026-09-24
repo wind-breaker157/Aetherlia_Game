@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Team - Aetherlia</title>
+
+</head>
+
+<body>
+
+	<h1>Đội Monster của tôi</h1>
+
+	<p>Team tối đa 6 Monster.</p>
+
+
+	<!-- ========================= -->
+	<!-- TEAM HIỆN TẠI -->
+	<!-- ========================= -->
+
+	<h2>Team hiện tại</h2>
+
+	<p th:if="${#lists.isEmpty(teamMembers)}">Team chưa có Monster nào.
+	</p>
+
+
+	<table border="1" th:if="${!#lists.isEmpty(teamMembers)}">
+
+		<thead>
+
+			<tr>
+				<th>Vị trí</th>
+				<th>Monster</th>
+				<th>Type</th>
+				<th>Level</th>
+				<th>EXP</th>
+				<th>HP</th>
+				<th>Thao tác</th>
+			</tr>
+
+		</thead>
+
+
+		<tbody>
+
+			<tr th:each="member : ${teamMembers}">
+
+				<td th:text="${member.position}"></td>
+
+
+				<td th:text="${member.playerMonster.monster.name}"></td>
+
+
+				<td th:text="${member.playerMonster.monster.type}"></td>
+
+
+				<td th:text="${member.playerMonster.level}"></td>
+
+
+				<td th:text="${member.playerMonster.exp}"></td>
+
+
+				<td th:text="${member.playerMonster.currentHp}"></td>
+
+
+				<td>
+					<!-- XÓA KHỎI TEAM -->
+					<form th:action="@{/team/remove}" method="post">
+
+						<input type="hidden" name="playerMonsterId"
+							th:value="${member.playerMonster.id}">
+
+						<!-- CSRF -->
+						<input type="hidden" th:name="${_csrf.parameterName}"
+							th:value="${_csrf.token}">
+
+						<button type="submit">Xóa khỏi Team</button>
+
+					</form>
+
+				</td>
+
+			</tr>
+
+		</tbody>
+
+	</table>
+
+
+	<!-- ========================= -->
+	<!-- MONSTER CỦA TÔI -->
+	<!-- ========================= -->
+
+	<h2>Monster của tôi</h2>
+
+
+	<table border="1">
+
+		<thead>
+
+			<tr>
+				<th>Monster</th>
+				<th>Type</th>
+				<th>Level</th>
+				<th>EXP</th>
+				<th>HP</th>
+				<th>Thao tác</th>
+			</tr>
+
+		</thead>
+
+
+		<tbody>
+
+			<tr th:each="pm : ${myMonsters}">
+
+				<td th:text="${pm.monster.name}"></td>
+
+
+				<td th:text="${pm.monster.type}"></td>
+
+
+				<td th:text="${pm.level}"></td>
+
+
+				<td th:text="${pm.exp}"></td>
+
+
+				<td th:text="${pm.currentHp}"></td>
+
+
+				<td>
+					<!-- Monster chưa nằm trong Team -->
+					<form th:if="${!teamPlayerMonsterIds.contains(pm.id)}"
+						th:action="@{/team/add}" method="post">
+
+						<input type="hidden" name="playerMonsterId" th:value="${pm.id}">
+
+						<input type="hidden" th:name="${_csrf.parameterName}"
+							th:value="${_csrf.token}">
+
+						<button type="submit">Thêm vào Team</button>
+
+					</form> <!-- Monster đã nằm trong Team --> <span
+					th:if="${teamPlayerMonsterIds.contains(pm.id)}"> ✓ Đang
+						trong Team </span>
+				</td>
+
+			</tr>
+
+		</tbody>
+
+	</table>
+
+
+	<br>
+
+
+	<a th:href="@{/dashboard}"> ← Quay lại Dashboard </a>
+
+
+	<br>
+	<br>
+
+
+	<a th:href="@{/my-monsters}"> Xem Monster của tôi </a>
+
+</body>
+
+</html>

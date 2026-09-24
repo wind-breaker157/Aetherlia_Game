@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chọn Monster khởi đầu - Aetherlia</title>
+</head>
+
+<body>
+
+    <h1>Chọn Monster khởi đầu</h1>
+
+    <p>
+        Hãy chọn một Monster để bắt đầu hành trình.
+    </p>
+
+    <div th:each="monster : ${monsters}">
+
+        <h2 th:text="${monster.name}"></h2>
+
+        <p>
+            Type:
+            <span th:text="${monster.type}"></span>
+        </p>
+
+        <p>
+            HP:
+            <span th:text="${monster.baseHp}"></span>
+        </p>
+
+        <p>
+            Attack:
+            <span th:text="${monster.baseAttack}"></span>
+        </p>
+
+        <p>
+            Defense:
+            <span th:text="${monster.baseDefense}"></span>
+        </p>
+
+        <form th:action="@{/choose-starter}" method="post">
+
+            <input
+                type="hidden"
+                name="monsterId"
+                th:value="${monster.id}">
+
+            <button type="submit">
+                Chọn Monster này
+            </button>
+
+        </form>
+
+        <hr>
+
+    </div>
+
+</body>
+
+</html>
