@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Bản đồ - Aetherlia</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/map.css}">
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+        }
+    }
+    </script>
+
+</head>
+
+<body>
+
+<main class="map-page">
+
+    <!-- ========================================= -->
+    <!-- HEADER -->
+    <!-- ========================================= -->
+
+    <section class="map-header">
+
+        <div class="map-title-icon">
+            🗺️
+        </div>
+
+        <div>
+
+            <p class="map-subtitle">
+                THẾ GIỚI AETHERLIA
+            </p>
+
+            <h1>
+                Bản đồ hành trình
+            </h1>
+
+            <p class="map-description">
+                Khám phá những vùng đất mới và tiếp tục
+                hành trình của Trainer.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================= -->
+    <!-- 3D WORLD MAP -->
+    <!-- ========================================= -->
+
+    <section class="world-map-3d-wrapper">
+
+        <div id="world-map-3d"
+             class="world-map-3d">
+        </div>
+
+
+        <!-- ===================================== -->
+        <!-- LOCKED MESSAGE -->
+        <!-- ===================================== -->
+
+        <div id="map3d-message"
+             class="map3d-message">
+        </div>
+
+
+        <!-- ===================================== -->
+        <!-- MAP DATA -->
+        <!-- ===================================== -->
+
+        <div class="map-data-layer">
+
+            <div th:each="playerMap : ${playerMaps}"
+                 class="map-data-node"
+
+                 th:attr="
+                    data-map-number=${playerMap.mapArea.mapNumber},
+                    data-map-name=${playerMap.mapArea.name},
+                    data-map-terrain=${playerMap.mapArea.terrain},
+                    data-unlocked=${playerMap.unlocked}">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================= -->
+    <!-- 2D MAP INFORMATION -->
+    <!-- ========================================= -->
+
+    <section class="map-list">
+
+        <div class="map-list-title">
+            <span>🌍</span>
+            <h2>Các khu vực</h2>
+        </div>
+
+
+        <div class="map-grid">
+
+            <!-- ================================= -->
+            <!-- MAP -->
+            <!-- ================================= -->
+
+            <div th:each="playerMap : ${playerMaps}"
+
+                 th:class="'map-node map-' +
+                           ${playerMap.mapArea.mapNumber}"
+
+                 th:classappend="${playerMap.unlocked}
+                                 ? ' unlocked'
+                                 : ' locked'">
+
+
+                <!-- ============================= -->
+                <!-- UNLOCKED -->
+                <!-- ============================= -->
+
+                <a th:if="${playerMap.unlocked}"
+
+                   th:href="@{/map/{mapNumber}(
+                        mapNumber=${playerMap.mapArea.mapNumber}
+                   )}"
+
+                   class="map-card">
+
+                    <div class="map-card-icon">
+                        📍
+                    </div>
+
+                    <div class="map-number">
+
+                        MAP
+
+                        <span
+                            th:text="${playerMap.mapArea.mapNumber}">
+                        </span>
+
+                    </div>
+
+                    <h2
+                        th:text="${playerMap.mapArea.name}">
+                    </h2>
+
+                    <p class="terrain">
+
+                        🌎
+
+                        <span
+                            th:text="${playerMap.mapArea.terrain}">
+                        </span>
+
+                    </p>
+
+                    <div class="available-badge">
+
+                        <span class="status-dot"></span>
+
+                        ĐÃ MỞ KHÓA
+
+                    </div>
+
+                </a>
+
+
+                <!-- ============================= -->
+                <!-- LOCKED -->
+                <!-- ============================= -->
+
+                <div
+                    th:unless="${playerMap.unlocked}"
+
+                    class="map-card">
+
+                    <div class="map-card-icon">
+                        🔒
+                    </div>
+
+                    <div class="map-number">
+
+                        MAP
+
+                        <span
+                            th:text="${playerMap.mapArea.mapNumber}">
+                        </span>
+
+                    </div>
+
+                    <h2
+                        th:text="${playerMap.mapArea.name}">
+                    </h2>
+
+                    <p class="terrain">
+
+                        🌎
+
+                        <span
+                            th:text="${playerMap.mapArea.terrain}">
+                        </span>
+
+                    </p>
+
+                    <div class="locked-badge">
+
+                        🔒 CHƯA MỞ
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================= -->
+    <!-- NOTE -->
+    <!-- ========================================= -->
+
+    <section class="map-note">
+
+        <span>
+            ✨
+        </span>
+
+        <p>
+            Các khu vực mới sẽ xuất hiện khi anh mở khóa chúng.
+        </p>
+
+    </section>
+
+
+    <!-- ========================================= -->
+    <!-- BACK -->
+    <!-- ========================================= -->
+
+    <a th:href="@{/dashboard}"
+       class="back-button">
+
+        ← Quay lại Dashboard
+
+    </a>
+
+</main>
+
+
+<!-- ============================================= -->
+<!-- THREE.JS -->
+<!-- ============================================= -->
+
+<script type="module"
+        th:src="@{/js/map3d.js}">
+</script>
+
+</body>
+
+</html>

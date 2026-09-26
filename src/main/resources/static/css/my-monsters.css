@@ -1,0 +1,902 @@
+/* =========================================
+   RESET
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================================
+   BODY
+   ========================================= */
+
+body {
+    background:
+        linear-gradient(
+            135deg,
+            #eef4ff,
+            #f8fafc
+        );
+
+    color: #1f2937;
+}
+
+
+/* =========================================
+   PAGE
+   ========================================= */
+
+.monsters-page {
+    width: min(
+        1150px,
+        calc(100% - 32px)
+    );
+
+    margin: 30px auto 50px;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.monsters-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 24px 28px;
+    margin-bottom: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe4f0;
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(
+            15,
+            23,
+            42,
+            0.07
+        );
+}
+
+
+.header-label {
+    margin: 0 0 5px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: #2563eb;
+}
+
+
+.monsters-header h1 {
+    margin: 0;
+
+    font-size: 32px;
+    line-height: 1.2;
+}
+
+
+.header-description {
+    margin: 7px 0 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   HEADER ACTIONS
+   ========================================= */
+
+.header-actions {
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+
+.header-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 0 15px;
+
+    border-radius: 11px;
+
+    background: #eff6ff;
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.header-button:hover {
+    transform: translateY(-2px);
+
+    background: #dbeafe;
+
+    box-shadow:
+        0 6px 15px rgba(
+            37,
+            99,
+            235,
+            0.12
+        );
+}
+
+
+/* =========================================
+   SUMMARY
+   ========================================= */
+
+.monster-summary {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 20px 24px;
+
+    margin-bottom: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe4f0;
+    border-radius: 18px;
+
+    box-shadow:
+        0 6px 20px rgba(
+            15,
+            23,
+            42,
+            0.04
+        );
+}
+
+
+.summary-box {
+    min-width: 130px;
+
+    padding: 13px 16px;
+
+    text-align: center;
+
+    border-radius: 14px;
+
+    background: #eff6ff;
+}
+
+
+.summary-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+
+    font-weight: 700;
+
+    color: #64748b;
+}
+
+
+.summary-box strong {
+    font-size: 28px;
+
+    color: #2563eb;
+}
+
+
+.summary-text strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 16px;
+}
+
+
+.summary-text p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   MONSTER GRID
+   ========================================= */
+
+.monster-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+/* =========================================
+   MONSTER CARD
+   ========================================= */
+
+.monster-card {
+    min-width: 0;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe4f0;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 8px 25px rgba(
+            15,
+            23,
+            42,
+            0.05
+        );
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.monster-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #93c5fd;
+
+    box-shadow:
+        0 12px 30px rgba(
+            15,
+            23,
+            42,
+            0.08
+        );
+}
+
+
+/* =========================================
+   NUMBER
+   ========================================= */
+
+.monster-number {
+    font-size: 10px;
+
+    font-weight: 700;
+
+    color: #64748b;
+
+    letter-spacing: 1px;
+}
+
+
+.monster-number span {
+    color: #2563eb;
+}
+
+
+/* =========================================
+   VISUAL AREA
+   ========================================= */
+
+.monster-visual {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    height: 150px;
+
+    margin-top: 12px;
+
+    padding: 10px;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #f8fafc
+        );
+}
+
+
+/* =========================================
+   MONSTER ICON CONTAINER
+   ========================================= */
+
+.monster-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 110px;
+    height: 110px;
+
+    min-width: 110px;
+    min-height: 110px;
+
+    padding: 0;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 8px 20px rgba(
+            15,
+            23,
+            42,
+            0.08
+        );
+}
+
+
+/* =========================================
+   IMAGE INSIDE ICON CONTAINER
+   ========================================= */
+
+.monster-icon img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    object-fit: contain;
+
+    object-position: center;
+}
+
+
+/* =========================================
+   IF IMG ITSELF HAS monster-icon CLASS
+   ========================================= */
+
+img.monster-icon {
+    display: block;
+
+    width: 110px;
+    height: 110px;
+
+    max-width: 110px;
+    max-height: 110px;
+
+    object-fit: contain;
+
+    object-position: center;
+}
+
+
+/* =========================================
+   GENERAL MONSTER IMAGE
+   ========================================= */
+
+.monster-image {
+    display: block;
+
+    width: 110px;
+    height: 110px;
+
+    max-width: 110px;
+    max-height: 110px;
+
+    object-fit: contain;
+
+    object-position: center;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   NAME
+   ========================================= */
+
+.monster-card h2 {
+    margin: 17px 0 7px;
+
+    font-size: 22px;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================
+   TYPE
+   ========================================= */
+
+.monster-type {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 8px;
+
+    background: #f1f5f9;
+
+    color: #475569;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   LEVEL
+   ========================================= */
+
+.monster-level {
+    margin-top: 14px;
+
+    font-size: 13px;
+
+    color: #64748b;
+}
+
+
+.monster-level strong {
+    color: #1f2937;
+
+    font-size: 16px;
+}
+
+
+/* =========================================
+   HP SECTION
+   ========================================= */
+
+.hp-section {
+    margin-top: 16px;
+}
+
+
+/* =========================================
+   HP HEADER
+   ========================================= */
+
+.hp-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 7px;
+
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+
+.hp-header strong {
+    color: #1f2937;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   HP BAR
+   ========================================= */
+
+.hp-bar {
+    width: 100%;
+
+    height: 9px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #e5e7eb;
+}
+
+
+/* =========================================
+   HP FILL
+   ========================================= */
+
+.hp-fill {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #2563eb;
+
+    transition:
+        width 0.3s ease;
+}
+
+
+/* =========================================
+   EXP
+   ========================================= */
+
+.exp-row {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 15px;
+
+    padding-top: 12px;
+
+    border-top: 1px solid #eef2f7;
+
+    font-size: 11px;
+
+    color: #64748b;
+}
+
+
+.exp-row strong {
+    color: #1f2937;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   EMPTY COLLECTION
+   ========================================= */
+
+.empty-collection {
+    grid-column: 1 / -1;
+
+    padding: 60px 20px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px dashed #cbd5e1;
+
+    border-radius: 20px;
+}
+
+
+.empty-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 85px;
+    height: 85px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #eff6ff;
+
+    font-size: 42px;
+}
+
+
+.empty-collection h2 {
+    margin: 0 0 8px;
+
+    font-size: 23px;
+}
+
+
+.empty-collection p {
+    margin: 0 auto 20px;
+
+    max-width: 430px;
+
+    color: #64748b;
+
+    line-height: 1.6;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   EXPLORE BUTTON
+   ========================================= */
+
+.explore-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding: 0 18px;
+
+    border-radius: 12px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.explore-button:hover {
+    transform: translateY(-2px);
+
+    background: #1d4ed8;
+
+    box-shadow:
+        0 8px 18px rgba(
+            37,
+            99,
+            235,
+            0.18
+        );
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 950px) {
+
+    .monster-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    .monsters-page {
+        width: calc(100% - 20px);
+
+        margin:
+            10px auto
+            30px;
+    }
+
+
+    .monsters-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding: 20px;
+    }
+
+
+    .monsters-header h1 {
+        font-size: 27px;
+    }
+
+
+    .header-actions {
+        width: 100%;
+    }
+
+
+    .header-button {
+        flex: 1;
+    }
+
+
+    .monster-summary {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        padding: 16px;
+    }
+
+
+    .summary-box {
+        width: 100%;
+    }
+
+
+    .summary-text {
+        text-align: center;
+    }
+
+
+    .monster-grid {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+
+    .monster-card {
+        padding: 17px;
+    }
+
+
+    .monster-visual {
+        height: 145px;
+    }
+
+
+    .monster-icon {
+        width: 105px;
+        height: 105px;
+
+        min-width: 105px;
+        min-height: 105px;
+    }
+
+
+    img.monster-icon {
+        width: 105px;
+        height: 105px;
+
+        max-width: 105px;
+        max-height: 105px;
+    }
+
+
+    .monster-image {
+        width: 105px;
+        height: 105px;
+
+        max-width: 105px;
+        max-height: 105px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 420px) {
+
+    .monsters-page {
+        width: calc(100% - 14px);
+    }
+
+
+    .monsters-header {
+        padding: 16px;
+    }
+
+
+    .header-actions {
+        flex-direction: column;
+    }
+
+
+    .header-button {
+        width: 100%;
+        flex: none;
+    }
+
+
+    .monster-summary {
+        gap: 12px;
+    }
+
+
+    .monster-card {
+        padding: 15px;
+    }
+
+
+    .monster-visual {
+        height: 135px;
+    }
+
+
+    .monster-icon {
+        width: 95px;
+        height: 95px;
+
+        min-width: 95px;
+        min-height: 95px;
+    }
+
+
+    img.monster-icon {
+        width: 95px;
+        height: 95px;
+
+        max-width: 95px;
+        max-height: 95px;
+    }
+
+
+    .monster-image {
+        width: 95px;
+        height: 95px;
+
+        max-width: 95px;
+        max-height: 95px;
+    }
+
+
+    .monster-card h2 {
+        font-size: 20px;
+    }
+
+}

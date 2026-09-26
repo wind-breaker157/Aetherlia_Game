@@ -1,0 +1,1336 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+    background: #dff2ff;
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.map-detail-page {
+    width: 100%;
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.map-header {
+    width: 100%;
+    padding: 28px 20px;
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.18);
+}
+
+
+/* MAP LABEL */
+
+.map-label {
+    margin: 0 0 8px;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    opacity: 0.85;
+}
+
+
+/* MAP TITLE */
+
+.map-header h1 {
+    margin: 0 0 10px;
+
+    font-size: 32px;
+    line-height: 1.2;
+}
+
+
+/* MAP DESCRIPTION */
+
+.map-header p:last-child {
+    margin: 0;
+
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+
+/* HIGHLIGHT */
+
+.map-header strong {
+    color: #fef08a;
+}
+
+
+/* =========================================================
+   GAME WORLD WRAPPER
+========================================================= */
+
+.game-world-wrapper {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px 20px 10px;
+}
+
+
+/* =========================================================
+   MAIN GAME WORLD
+========================================================= */
+
+.game-world {
+    position: relative;
+
+    width: 900px;
+    height: 500px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #9fdb8f 0%,
+            #8ed081 55%,
+            #7bc36d 100%
+        );
+
+    border: 6px solid #365314;
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.25),
+        inset 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
+
+/* =========================================================
+   OLD 2D GROUND EFFECT
+   Giữ fallback nhưng nằm dưới 3D
+========================================================= */
+
+.game-world::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 100px;
+
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            rgba(55, 125, 55, 0.08),
+            rgba(55, 125, 55, 0.08) 8px,
+            transparent 8px,
+            transparent 16px
+        );
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   OLD 2D GRASS AREA
+   Để làm fallback, nhưng đặt dưới 3D
+========================================================= */
+
+.game-world::after {
+    content: "";
+
+    position: absolute;
+
+    left: 45px;
+    top: 255px;
+
+    width: 300px;
+    height: 215px;
+
+    background:
+        radial-gradient(
+            circle at 15px 15px,
+            #4f9f42 2px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 45px 30px,
+            #4f9f42 2px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 75px 15px,
+            #4f9f42 2px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 105px 38px,
+            #4f9f42 2px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 135px 18px,
+            #4f9f42 2px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 165px 42px,
+            #4f9f42 2px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 195px 20px,
+            #4f9f42 2px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 225px 40px,
+            #4f9f42 2px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 255px 18px,
+            #4f9f42 2px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 285px 45px,
+            #4f9f42 2px,
+            transparent 3px
+        );
+
+    background-size: 75px 55px;
+
+    background-color: #72ba5e;
+
+    border: 4px solid #4d963e;
+    border-radius: 14px;
+
+    opacity: 0.95;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   3D WORLD
+========================================================= */
+
+.game-world-3d {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: inherit;
+
+    background: #8ed081;
+
+    z-index: 10;
+
+    /*
+     * Không chặn WASD / button / game.js
+     */
+    pointer-events: none;
+}
+
+
+/* THREE.JS CANVAS */
+
+.game-world-3d canvas {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: none;
+
+    outline: none;
+}
+
+
+/* =========================================================
+   3D OVERLAY
+========================================================= */
+
+.game-world-3d::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.04),
+            rgba(0, 0, 0, 0.07)
+        );
+
+    z-index: 20;
+}
+
+
+/* =========================================================
+   OLD WORLD DECORATION
+   Không để 2D đè lên 3D
+========================================================= */
+
+.game-world > .world-decoration,
+.game-world > .building {
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   WORLD DECORATION
+========================================================= */
+
+.world-decoration {
+    position: absolute;
+
+    user-select: none;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   GRASS 2D
+========================================================= */
+
+.grass {
+    z-index: 10;
+
+    font-size: 32px;
+    line-height: 1;
+}
+
+.grass-1 {
+    left: 90px;
+    top: 275px;
+}
+
+.grass-2 {
+    left: 250px;
+    top: 370px;
+}
+
+.grass-3 {
+    left: 590px;
+    top: 300px;
+}
+
+
+/* =========================================================
+   TREE 2D
+========================================================= */
+
+.tree {
+    z-index: 30;
+
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 58px;
+    line-height: 1;
+
+    filter:
+        drop-shadow(
+            0 5px 4px rgba(0, 0, 0, 0.22)
+        );
+}
+
+.tree-1 {
+    left: 55px;
+    top: 55px;
+}
+
+.tree-2 {
+    left: 665px;
+    top: 50px;
+}
+
+.tree-3 {
+    left: 700px;
+    top: 330px;
+}
+
+
+/* =========================================================
+   HOUSE 2D
+========================================================= */
+
+.building {
+    position: absolute;
+
+    user-select: none;
+
+    pointer-events: none;
+}
+
+.house {
+    left: 350px;
+    top: 75px;
+
+    width: 200px;
+    height: 150px;
+
+    z-index: 25;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 115px;
+    line-height: 1;
+
+    filter:
+        drop-shadow(
+            0 7px 5px rgba(0, 0, 0, 0.25)
+        );
+}
+
+
+/* =========================================================
+   2D PLAYER HOLDER
+   game.js vẫn thao tác với #player
+========================================================= */
+
+#player {
+    position: absolute;
+
+    width: 64px;
+    height: 100px;
+
+    z-index: 1000;
+
+    transform:
+        translate(-50%, -100%);
+
+    pointer-events: none;
+
+    overflow: visible;
+
+    will-change:
+        left,
+        top,
+        transform;
+
+    /*
+     * Ẩn nhân vật SVG 2D.
+     * game3d.js sẽ tạo Trainer 3D riêng.
+     */
+    opacity: 0;
+}
+
+
+/* =========================================================
+   PLAYER CHARACTER
+========================================================= */
+
+.player-character {
+    cursor: default;
+}
+
+
+/* =========================================================
+   PLAYER NAME 2D
+========================================================= */
+
+.player-name {
+    position: absolute;
+
+    left: 50%;
+    top: -28px;
+
+    transform:
+        translateX(-50%);
+
+    min-width: 70px;
+
+    padding: 4px 8px;
+
+    background:
+        rgba(15, 23, 42, 0.85);
+
+    color: white;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.35);
+
+    border-radius: 6px;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    line-height: 1.2;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    z-index: 1200;
+
+    text-shadow:
+        0 1px 2px
+        rgba(0, 0, 0, 0.7);
+}
+
+
+/* =========================================================
+   PLAYER VISUAL 2D
+========================================================= */
+
+.player-visual {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 64px;
+    height: 100px;
+
+    overflow: visible;
+}
+
+.player-svg {
+    display: block;
+
+    width: 64px;
+    height: 100px;
+
+    min-width: 64px;
+    min-height: 100px;
+
+    overflow: visible;
+}
+
+
+/* =========================================================
+   PLAYER SHADOW 2D
+========================================================= */
+
+.player-shadow {
+    position: absolute;
+
+    left: 50%;
+    bottom: -3px;
+
+    width: 38px;
+    height: 12px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        rgba(0, 0, 0, 0.25);
+
+    border-radius: 50%;
+
+    z-index: -1;
+}
+
+
+/* =========================================================
+   PLAYER FACING
+========================================================= */
+
+#player.facing-left .player-visual {
+    transform: scaleX(-1);
+}
+
+#player.facing-right .player-visual {
+    transform: scaleX(1);
+}
+
+#player.facing-up .player-visual {
+    transform: scaleX(1);
+}
+
+#player.facing-down .player-visual {
+    transform: scaleX(1);
+}
+
+
+/* =========================================================
+   PLAYER WALKING
+========================================================= */
+
+#player.walking .body-group {
+    animation:
+        bodyBob
+        0.35s
+        infinite
+        alternate;
+}
+
+#player.walking .arm-left {
+    transform-box: fill-box;
+
+    transform-origin: center;
+
+    animation:
+        armWalkLeft
+        0.35s
+        infinite
+        alternate;
+}
+
+#player.walking .arm-right {
+    transform-box: fill-box;
+
+    transform-origin: center;
+
+    animation:
+        armWalkRight
+        0.35s
+        infinite
+        alternate;
+}
+
+#player.walking .leg-left {
+    transform-box: fill-box;
+
+    transform-origin: center;
+
+    animation:
+        legWalkLeft
+        0.35s
+        infinite
+        alternate;
+}
+
+#player.walking .leg-right {
+    transform-box: fill-box;
+
+    transform-origin: center;
+
+    animation:
+        legWalkRight
+        0.35s
+        infinite
+        alternate;
+}
+
+
+/* =========================================================
+   WALK ANIMATION
+========================================================= */
+
+@keyframes bodyBob {
+
+    from {
+        transform:
+            translateY(0);
+    }
+
+    to {
+        transform:
+            translateY(-2px);
+    }
+}
+
+
+@keyframes armWalkLeft {
+
+    from {
+        transform:
+            rotate(10deg);
+    }
+
+    to {
+        transform:
+            rotate(-10deg);
+    }
+}
+
+
+@keyframes armWalkRight {
+
+    from {
+        transform:
+            rotate(-10deg);
+    }
+
+    to {
+        transform:
+            rotate(10deg);
+    }
+}
+
+
+@keyframes legWalkLeft {
+
+    from {
+        transform:
+            rotate(8deg);
+    }
+
+    to {
+        transform:
+            rotate(-8deg);
+    }
+}
+
+
+@keyframes legWalkRight {
+
+    from {
+        transform:
+            rotate(-8deg);
+    }
+
+    to {
+        transform:
+            rotate(8deg);
+    }
+}
+
+
+/* =========================================================
+   COLLISION SHAKE
+========================================================= */
+
+#player.collision-shake {
+    animation:
+        collisionShake
+        0.2s;
+}
+
+
+@keyframes collisionShake {
+
+    0% {
+        transform:
+            translate(-50%, -100%);
+    }
+
+    25% {
+        transform:
+            translate(
+                calc(-50% - 3px),
+                -100%
+            );
+    }
+
+    50% {
+        transform:
+            translate(
+                calc(-50% + 3px),
+                -100%
+            );
+    }
+
+    75% {
+        transform:
+            translate(
+                calc(-50% - 2px),
+                -100%
+            );
+    }
+
+    100% {
+        transform:
+            translate(-50%, -100%);
+    }
+}
+
+
+/* =========================================================
+   DEBUG POSITION
+========================================================= */
+
+.debug-position {
+    position: relative;
+
+    z-index: 100;
+}
+
+
+/* =========================================================
+   LOCATION PANEL
+========================================================= */
+
+.location-panel {
+    width: 900px;
+
+    margin: 15px auto 0;
+
+    padding: 15px 20px;
+
+    background: white;
+
+    border:
+        1px solid
+        #cbd5e1;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.12);
+
+    text-align: center;
+
+    position: relative;
+
+    z-index: 50;
+}
+
+
+.location-panel p {
+    margin: 6px 0;
+
+    font-size: 15px;
+
+    line-height: 1.4;
+}
+
+
+.location-panel strong {
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   CONTROLS PANEL
+========================================================= */
+
+.controls-panel {
+    width: 900px;
+
+    margin: 20px auto 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 6px;
+
+    position: relative;
+
+    z-index: 50;
+}
+
+
+.controls-panel > div {
+    display: flex;
+
+    gap: 6px;
+}
+
+
+.controls-panel button {
+    width: 54px;
+    height: 54px;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 25px;
+    font-weight: bold;
+
+    line-height: 1;
+
+    box-shadow:
+        0 4px 8px
+        rgba(0, 0, 0, 0.18);
+
+    cursor: pointer;
+
+    user-select: none;
+
+    touch-action: none;
+
+    transition:
+        transform 0.1s ease,
+        background 0.1s ease,
+        box-shadow 0.1s ease;
+}
+
+
+.controls-panel button:hover {
+    background: #1d4ed8;
+
+    box-shadow:
+        0 5px 10px
+        rgba(0, 0, 0, 0.22);
+}
+
+
+.controls-panel button:active {
+    transform:
+        scale(0.93);
+
+    box-shadow:
+        0 2px 4px
+        rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================================
+   EXPLORE PANEL
+========================================================= */
+
+.explore-panel {
+    width: 900px;
+
+    margin: 20px auto 0;
+
+    padding: 22px;
+
+    background: #f0fdf4;
+
+    border:
+        2px solid
+        #86efac;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.1);
+
+    position: relative;
+
+    z-index: 50;
+}
+
+
+.explore-panel h2 {
+    margin: 0 0 10px;
+
+    color: #166534;
+
+    font-size: 22px;
+}
+
+
+.explore-panel p {
+    margin: 0 0 18px;
+
+    color: #365314;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   EXPLORE BUTTON
+========================================================= */
+
+.explore-button {
+    display: inline-block;
+
+    padding: 12px 22px;
+
+    background: #16a34a;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    transition:
+        transform 0.1s ease,
+        background 0.1s ease;
+}
+
+
+.explore-button:hover {
+    background: #15803d;
+}
+
+
+.explore-button:active {
+    transform:
+        scale(0.96);
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-button {
+    display: block;
+
+    width: fit-content;
+
+    margin: 25px auto 0;
+
+    padding: 10px 18px;
+
+    background: #475569;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    transition:
+        background 0.1s ease,
+        transform 0.1s ease;
+
+    position: relative;
+
+    z-index: 50;
+}
+
+
+.back-button:hover {
+    background: #334155;
+}
+
+
+.back-button:active {
+    transform:
+        scale(0.97);
+}
+
+
+/* =========================================================
+   COLLISION DEBUG BOX
+========================================================= */
+
+.debug-collision-box {
+    position: absolute;
+
+    display: none;
+
+    border:
+        3px dashed
+        red;
+
+    background:
+        rgba(255, 0, 0, 0.18);
+
+    pointer-events: none;
+
+    box-sizing: border-box;
+
+    z-index: 4000;
+
+    color: red;
+
+    font-size: 10px;
+}
+
+
+body.debug-collision
+.debug-collision-box {
+    display: block;
+}
+
+
+/* =========================================================
+   3D WORLD DEBUG / STATUS
+========================================================= */
+
+.game-world-3d .world-status {
+    position: absolute;
+
+    left: 50%;
+    bottom: 15px;
+
+    transform:
+        translateX(-50%);
+
+    padding: 6px 12px;
+
+    background:
+        rgba(15, 23, 42, 0.72);
+
+    color: white;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+
+    z-index: 30;
+}
+
+
+/* =========================================================
+   3D TRAINER SUPPORT
+========================================================= */
+
+.game-world-3d .trainer-3d,
+.game-world-3d .player-3d,
+.game-world-3d .trainer-model {
+    position: absolute;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   MOBILE TOUCH SAFETY
+========================================================= */
+
+.game-world-3d,
+.game-world {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+
+/* =========================================================
+   TABLET / SMALL DESKTOP
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .game-world-wrapper {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+    .game-world {
+        width: 95vw;
+
+        height: 52.78vw;
+
+        min-height: 360px;
+        max-height: 500px;
+    }
+
+
+    .location-panel,
+    .controls-panel,
+    .explore-panel {
+        width: 95vw;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .map-header {
+        padding: 20px 12px;
+    }
+
+
+    .map-header h1 {
+        font-size: 25px;
+    }
+
+
+    .map-header p:last-child {
+        font-size: 13px;
+    }
+
+
+    .map-label {
+        font-size: 12px;
+
+        letter-spacing: 2px;
+    }
+
+
+    .game-world {
+        border-width: 4px;
+
+        border-radius: 12px;
+    }
+
+
+    .tree {
+        font-size: 42px;
+    }
+
+
+    .house {
+        font-size: 80px;
+    }
+
+
+    .controls-panel {
+        margin-top: 15px;
+    }
+
+
+    .controls-panel button {
+        width: 48px;
+        height: 48px;
+
+        font-size: 21px;
+    }
+
+
+    .location-panel {
+        padding: 12px 10px;
+    }
+
+
+    .location-panel p {
+        font-size: 13px;
+    }
+
+
+    .explore-panel {
+        padding: 18px 12px;
+    }
+
+
+    .explore-panel h2 {
+        font-size: 19px;
+    }
+
+
+    .explore-panel p {
+        font-size: 13px;
+    }
+}
+
+
+/* =========================================================
+   EXTRA SMALL PHONE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .map-header h1 {
+        font-size: 21px;
+    }
+
+
+    .map-label {
+        font-size: 10px;
+
+        letter-spacing: 1.5px;
+    }
+
+
+    .map-header p:last-child {
+        font-size: 12px;
+    }
+
+
+    .game-world {
+        min-height: 280px;
+    }
+
+
+    .controls-panel button {
+        width: 44px;
+        height: 44px;
+
+        font-size: 19px;
+    }
+
+
+    .location-panel {
+        margin-top: 10px;
+    }
+
+
+    .location-panel p {
+        font-size: 12px;
+    }
+
+
+    .explore-button {
+        padding: 10px 18px;
+
+        font-size: 13px;
+    }
+
+
+    .back-button {
+        padding: 9px 15px;
+
+        font-size: 13px;
+    }
+}

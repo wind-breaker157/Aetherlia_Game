@@ -1,0 +1,585 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    background: #dff2ff;
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   GAME PAGE
+========================= */
+
+.game-page {
+    width: 100%;
+    min-height: 100vh;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.game-header {
+    width: 100%;
+    height: 70px;
+
+    background: #2563eb;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 30px;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.game-logo {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 18px;
+}
+
+
+/* =========================
+   GAME WORLD
+========================= */
+
+.game-world {
+    position: relative;
+
+    width: 900px;
+    height: 500px;
+
+    margin: 30px auto;
+
+    overflow: hidden;
+
+    background: #8ed081;
+
+    border: 5px solid #365314;
+    border-radius: 12px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================
+   PLAYER
+========================= */
+
+.player {
+    position: absolute;
+
+    width: 64px;
+    height: 100px;
+
+    z-index: 1000;
+
+    transform: translate(-50%, -100%);
+
+    pointer-events: none;
+
+    overflow: visible;
+}
+
+.player-visual {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 64px;
+    height: 100px;
+
+    overflow: visible;
+}
+
+.player-svg {
+    display: block;
+
+    width: 64px;
+    height: 100px;
+
+    min-width: 64px;
+    min-height: 100px;
+
+    overflow: visible;
+}
+
+
+/* =========================
+   PLAYER SHADOW
+========================= */
+
+.player-shadow {
+    position: absolute;
+
+    left: 50%;
+    bottom: -3px;
+
+    width: 38px;
+    height: 12px;
+
+    transform: translateX(-50%);
+
+    background: rgba(0, 0, 0, 0.25);
+
+    border-radius: 50%;
+}
+
+
+/* =========================
+   PLAYER FACING
+========================= */
+
+.player.facing-left .player-visual {
+    transform: scaleX(-1);
+}
+
+.player.facing-right .player-visual {
+    transform: scaleX(1);
+}
+
+.player.facing-up .player-visual {
+    transform: scaleX(1);
+}
+
+.player.facing-down .player-visual {
+    transform: scaleX(1);
+}
+
+
+/* =========================
+   TREES
+========================= */
+
+.tree {
+    position: absolute;
+
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 52px;
+
+    z-index: 20;
+
+    user-select: none;
+}
+
+.tree-1 {
+    left: 70px;
+    top: 80px;
+}
+
+.tree-2 {
+    left: 665px;
+    top: 80px;
+}
+
+.tree-3 {
+    left: 710px;
+    top: 330px;
+}
+
+
+/* =========================
+   HOUSE
+========================= */
+
+.house {
+    position: absolute;
+
+    left: 360px;
+    top: 90px;
+
+    width: 180px;
+    height: 120px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 100px;
+
+    z-index: 15;
+
+    user-select: none;
+}
+
+
+/* =========================
+   GRASS ZONE
+========================= */
+
+.grass-zone {
+    position: absolute;
+
+    left: 100px;
+    top: 300px;
+
+    width: 220px;
+    height: 130px;
+
+    z-index: 5;
+
+    padding: 20px;
+
+    background:
+        radial-gradient(
+            circle at 10px 10px,
+            #4f9f42 2px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 25px 20px,
+            #4f9f42 2px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 40px 8px,
+            #4f9f42 2px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 15px 35px,
+            #4f9f42 2px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 35px 30px,
+            #4f9f42 2px,
+            transparent 3px
+        );
+
+    background-size: 50px 45px;
+
+    background-color: #72ba5e;
+
+    border: 3px solid #4d963e;
+
+    font-size: 25px;
+    line-height: 35px;
+
+    border-radius: 8px;
+}
+
+
+/* =========================
+   DEBUG POSITION
+========================= */
+
+.debug-position {
+    position: absolute;
+
+    left: 10px;
+    top: 10px;
+
+    z-index: 5000;
+
+    padding: 6px 10px;
+
+    background: rgba(0, 0, 0, 0.7);
+
+    color: white;
+
+    border-radius: 5px;
+
+    font-size: 13px;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   COLLISION DEBUG
+========================= */
+
+.collision-debug {
+    position: absolute;
+
+    z-index: 3000;
+
+    display: none;
+
+    border: 2px dashed red;
+
+    background: rgba(255, 0, 0, 0.15);
+
+    pointer-events: none;
+}
+
+.debug-collision .collision-debug {
+    display: block;
+}
+
+
+/* =========================
+   COLLISION BOX
+========================= */
+
+.tree-debug-1 {
+    left: 84px;
+    top: 100px;
+
+    width: 22px;
+    height: 32px;
+}
+
+.tree-debug-2 {
+    left: 678px;
+    top: 100px;
+
+    width: 22px;
+    height: 32px;
+}
+
+.tree-debug-3 {
+    left: 723px;
+    top: 348px;
+
+    width: 25px;
+    height: 34px;
+}
+
+.house-debug {
+    left: 360px;
+    top: 96px;
+
+    width: 180px;
+    height: 54px;
+}
+
+
+/* =========================
+   CONTROL GUIDE
+========================= */
+
+.control-guide {
+    width: 900px;
+
+    margin: 0 auto 30px;
+
+    padding: 15px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+
+    text-align: center;
+}
+
+.control-guide p {
+    margin: 6px 0;
+}
+
+.control-guide strong {
+    color: #2563eb;
+}
+
+
+/* =========================
+   WALKING ANIMATION
+========================= */
+
+.player.walking .body-group {
+    animation: bodyBob 0.35s infinite alternate;
+}
+
+.player.walking .arm-left {
+    transform-box: fill-box;
+    transform-origin: center;
+
+    animation:
+        armWalkLeft
+        0.35s
+        infinite
+        alternate;
+}
+
+.player.walking .arm-right {
+    transform-box: fill-box;
+    transform-origin: center;
+
+    animation:
+        armWalkRight
+        0.35s
+        infinite
+        alternate;
+}
+
+.player.walking .leg-left {
+    transform-box: fill-box;
+    transform-origin: center;
+
+    animation:
+        legWalkLeft
+        0.35s
+        infinite
+        alternate;
+}
+
+.player.walking .leg-right {
+    transform-box: fill-box;
+    transform-origin: center;
+
+    animation:
+        legWalkRight
+        0.35s
+        infinite
+        alternate;
+}
+
+
+/* =========================
+   WALK ANIMATION KEYFRAMES
+========================= */
+
+@keyframes bodyBob {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-2px);
+    }
+}
+
+@keyframes armWalkLeft {
+
+    from {
+        transform: rotate(10deg);
+    }
+
+    to {
+        transform: rotate(-10deg);
+    }
+}
+
+@keyframes armWalkRight {
+
+    from {
+        transform: rotate(-10deg);
+    }
+
+    to {
+        transform: rotate(10deg);
+    }
+}
+
+@keyframes legWalkLeft {
+
+    from {
+        transform: rotate(8deg);
+    }
+
+    to {
+        transform: rotate(-8deg);
+    }
+}
+
+@keyframes legWalkRight {
+
+    from {
+        transform: rotate(-8deg);
+    }
+
+    to {
+        transform: rotate(8deg);
+    }
+}
+
+
+/* =========================
+   COLLISION SHAKE
+========================= */
+
+.player.collision-shake {
+    animation: collisionShake 0.2s;
+}
+
+@keyframes collisionShake {
+
+    0% {
+        transform: translate(-50%, -100%);
+    }
+
+    25% {
+        transform: translate(
+            calc(-50% - 3px),
+            -100%
+        );
+    }
+
+    50% {
+        transform: translate(
+            calc(-50% + 3px),
+            -100%
+        );
+    }
+
+    75% {
+        transform: translate(
+            calc(-50% - 2px),
+            -100%
+        );
+    }
+
+    100% {
+        transform: translate(-50%, -100%);
+    }
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 950px) {
+
+    .game-world {
+        width: 95vw;
+        height: 70vh;
+    }
+
+    .control-guide {
+        width: 95vw;
+    }
+}

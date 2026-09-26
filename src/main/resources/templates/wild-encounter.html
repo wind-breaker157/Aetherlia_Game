@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Wild Encounter - AETHERLIA</title>
+
+<link rel="stylesheet" th:href="@{/css/wild-encounter.css}">
+<link rel="stylesheet" th:href="@{/css/monster-sprite.css}">
+</head>
+
+<body>
+
+	<div class="encounter-page">
+
+		<header class="encounter-header">
+			<div>
+				<h1>AETHERLIA</h1>
+				<p>WILD ENCOUNTER</p>
+			</div>
+
+			<a th:href="@{/map/1}" class="back-button"> ← Quay lại bản đồ </a>
+		</header>
+
+
+		<main class="encounter-content">
+
+			<section class="encounter-card">
+
+				<div class="encounter-title">
+					<span>⚡</span>
+					<h2>Một Monster hoang dã xuất hiện!</h2>
+				</div>
+
+
+				<div class="monster-display">
+
+					<div class="monster-sprite-box">
+
+						<div
+							th:replace="~{fragments/monster-sprite :: sprite(${encounter.monster.name})}">
+						</div>
+
+					</div>
+
+
+					<div class="monster-info">
+
+						<h3 th:text="${encounter.monster.name}">Monster</h3>
+
+						<div class="info-row">
+							<span class="label">Type</span> <span class="value"
+								th:text="${encounter.monster.type}"> GRASS </span>
+						</div>
+
+
+						<div class="info-row">
+							<span class="label">Level</span> <span class="value"
+								th:text="${encounter.level}"> 5 </span>
+						</div>
+
+
+						<div class="info-row">
+							<span class="label">HP</span> <span class="value"
+								th:text="${encounter.currentHp}"> 45 </span>
+						</div>
+
+					</div>
+
+				</div>
+
+
+				<div class="encounter-message">
+
+					<p>Monster hoang dã đang chờ bạn chiến đấu.</p>
+
+					<p>Hãy chọn Monster đầu tiên trong Team để bắt đầu trận chiến.
+					</p>
+
+				</div>
+
+
+				<div class="encounter-actions">
+
+					<a th:href="@{/battle/start}" class="battle-button"> ⚔ Bắt đầu
+						Battle </a> <a th:href="@{/map/1}" class="leave-button"> Rời khỏi
+					</a>
+
+				</div>
+
+			</section>
+
+		</main>
+
+	</div>
+
+</body>
+</html>

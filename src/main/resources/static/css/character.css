@@ -1,0 +1,542 @@
+/* =========================================
+   RESET
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================================
+   BODY
+   ========================================= */
+
+body {
+    background:
+        linear-gradient(
+            135deg,
+            #eaf2ff,
+            #f8fbff
+        );
+
+    color: #1f2937;
+}
+
+
+/* =========================================
+   PAGE
+   ========================================= */
+
+.character-page {
+    width: min(1100px, calc(100% - 32px));
+    margin: 30px auto 50px;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.character-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 24px;
+
+    padding: 24px 28px;
+
+    border: 1px solid #dbe4f0;
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.07);
+}
+
+.header-label {
+    margin: 0 0 5px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: #2563eb;
+}
+
+.character-header h1 {
+    margin: 0;
+
+    font-size: 30px;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   BACK BUTTON
+   ========================================= */
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding: 0 18px;
+
+    border-radius: 12px;
+
+    background: #eff6ff;
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.back-button:hover {
+    transform: translateY(-2px);
+    background: #dbeafe;
+}
+
+
+/* =========================================
+   CHARACTER MAIN
+   ========================================= */
+
+.character-main {
+    display: grid;
+
+    grid-template-columns:
+        minmax(320px, 0.9fr)
+        minmax(360px, 1.1fr);
+
+    gap: 24px;
+}
+
+
+/* =========================================
+   CHARACTER PREVIEW
+   ========================================= */
+
+.character-preview {
+    padding: 22px;
+
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe4f0;
+
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.07);
+}
+
+.preview-title {
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #64748b;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================================
+   CHARACTER STAGE
+   ========================================= */
+
+.character-stage {
+    position: relative;
+
+    min-height: 430px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #dbeafe 0%,
+            #eff6ff 60%,
+            #d1fae5 60%,
+            #bbf7d0 100%
+        );
+}
+
+
+/* =========================================
+   SHADOW
+   ========================================= */
+
+.character-shadow {
+    position: absolute;
+
+    bottom: 58px;
+
+    width: 110px;
+    height: 24px;
+
+    border-radius: 50%;
+
+    background: rgba(15, 23, 42, 0.18);
+}
+
+
+/* =========================================
+   SVG CHARACTER
+   ========================================= */
+
+.character-svg {
+    position: relative;
+
+    width: 180px;
+    height: 280px;
+
+    z-index: 2;
+
+    overflow: visible;
+}
+
+
+/* =========================================
+   CHARACTER COLORS
+   ========================================= */
+
+.body-group rect {
+    fill: #2563eb;
+}
+
+.leg-left rect,
+.leg-right rect {
+    fill: #334155;
+}
+
+.arm-left rect,
+.arm-right rect {
+    fill: #2563eb;
+}
+
+.character-svg > rect {
+    fill: #f4c7a1;
+}
+
+.head-group circle {
+    fill: #f4c7a1;
+}
+
+.head-group path:first-of-type {
+    fill: #3f2d20;
+}
+
+.head-group circle:nth-of-type(2),
+.head-group circle:nth-of-type(3),
+.head-group circle:nth-of-type(4) {
+    fill: #111827;
+}
+
+.head-group path:last-of-type {
+    stroke: #7c2d12;
+}
+
+
+/* =========================================
+   CHARACTER NAME
+   ========================================= */
+
+.character-stage-label {
+    margin-top: 15px;
+
+    text-align: center;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   CHARACTER INFO
+   ========================================= */
+
+.character-info {
+    padding: 28px;
+
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe4f0;
+
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.07);
+}
+
+.info-heading {
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.info-heading p {
+    margin: 0 0 6px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    color: #64748b;
+
+    letter-spacing: 2px;
+}
+
+.info-heading h2 {
+    margin: 0;
+
+    font-size: 30px;
+}
+
+
+/* =========================================
+   INFO ROW
+   ========================================= */
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 16px 0;
+
+    border-bottom: 1px solid #eef2f7;
+}
+
+.info-label {
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+.info-value {
+    font-weight: 700;
+
+    text-transform: none;
+}
+
+.facing-value {
+    color: #2563eb;
+}
+
+
+/* =========================================
+   POSITION BOX
+   ========================================= */
+
+.position-box {
+    margin-top: 20px;
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+}
+
+.position-title {
+    margin-bottom: 14px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #64748b;
+}
+
+.position-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+}
+
+.position-item {
+    padding: 14px;
+
+    text-align: center;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+}
+
+.position-item span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 12px;
+
+    color: #64748b;
+}
+
+.position-item strong {
+    font-size: 24px;
+}
+
+
+/* =========================================
+   QUICK MENU
+   ========================================= */
+
+.quick-menu {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-top: 24px;
+}
+
+.quick-card {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 18px;
+
+    border: 1px solid #dbe4f0;
+
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    text-decoration: none;
+
+    color: #1f2937;
+
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.05);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.quick-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #93c5fd;
+}
+
+.quick-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 14px;
+
+    background: #eff6ff;
+
+    font-size: 22px;
+}
+
+.quick-card span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #64748b;
+}
+
+.quick-card strong {
+    font-size: 14px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 850px) {
+
+    .character-main {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-menu {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .character-page {
+        width: min(
+            100% - 20px,
+            1100px
+        );
+
+        margin-top: 10px;
+    }
+
+    .character-header {
+        padding: 20px;
+
+        align-items: flex-start;
+
+        gap: 15px;
+
+        flex-direction: column;
+    }
+
+    .character-header h1 {
+        font-size: 24px;
+    }
+
+    .character-stage {
+        min-height: 350px;
+    }
+
+    .character-info {
+        padding: 20px;
+    }
+}

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Nhân vật - Aetherlia</title>
+
+	<link rel="stylesheet" th:href="@{/css/character.css}">
+
+</head>
+
+<body>
+
+	<main class="character-page">
+
+		<!-- ============================== -->
+		<!-- HEADER -->
+		<!-- ============================== -->
+
+		<header class="character-header">
+
+			<div>
+
+				<p class="header-label">
+					AETHERLIA
+				</p>
+
+				<h1>
+					NHÂN VẬT
+				</h1>
+
+			</div>
+
+			<a th:href="@{/map/1}" class="back-button">
+
+				← Quay lại Map
+
+			</a>
+
+		</header>
+
+
+		<!-- ============================== -->
+		<!-- MAIN CHARACTER -->
+		<!-- ============================== -->
+
+		<section class="character-main">
+
+
+			<!-- ========================== -->
+			<!-- CHARACTER PREVIEW -->
+			<!-- ========================== -->
+
+			<div class="character-preview">
+
+				<div class="preview-title">
+					CHARACTER
+				</div>
+
+				<div class="character-stage">
+
+					<div class="character-shadow">
+					</div>
+
+					<svg class="character-svg" viewBox="0 0 64 100" xmlns="http://www.w3.org/2000/svg">
+
+						<!-- LEGS -->
+
+						<g class="leg-left">
+
+							<rect x="20" y="72" width="9" height="19" rx="3">
+							</rect>
+
+							<rect x="17" y="89" width="13" height="7" rx="3">
+							</rect>
+
+						</g>
+
+
+						<g class="leg-right">
+
+							<rect x="35" y="72" width="9" height="19" rx="3">
+							</rect>
+
+							<rect x="34" y="89" width="13" height="7" rx="3">
+							</rect>
+
+						</g>
+
+
+						<!-- BODY -->
+
+						<g class="body-group">
+
+							<rect x="18" y="42" width="28" height="34" rx="9">
+							</rect>
+
+							<rect x="23" y="38" width="18" height="10" rx="4">
+							</rect>
+
+						</g>
+
+
+						<!-- ARMS -->
+
+						<g class="arm-left">
+
+							<rect x="11" y="46" width="9" height="28" rx="4">
+							</rect>
+
+						</g>
+
+
+						<g class="arm-right">
+
+							<rect x="44" y="46" width="9" height="28" rx="4">
+							</rect>
+
+						</g>
+
+
+						<!-- NECK -->
+
+						<rect x="27" y="34" width="10" height="10" rx="3">
+						</rect>
+
+
+						<!-- HEAD -->
+
+						<g class="head-group">
+
+							<circle cx="32" cy="24" r="14">
+							</circle>
+
+
+							<!-- HAIR -->
+
+							<path d="M18 23
+                                 C18 11,
+                                   24 6,
+                                   32 6
+                                 C40 6,
+                                   46 12,
+                                   46 23
+                                 L42 18
+                                 L39 22
+                                 L36 16
+                                 L32 22
+                                 L28 16
+                                 L24 22
+                                 L21 18
+                                 Z">
+							</path>
+
+
+							<!-- EYES -->
+
+							<circle cx="26" cy="26" r="1.6">
+							</circle>
+
+							<circle cx="38" cy="26" r="1.6">
+							</circle>
+
+
+							<!-- NOSE -->
+
+							<circle cx="32" cy="29" r="0.8">
+							</circle>
+
+
+							<!-- MOUTH -->
+
+							<path d="M28 33
+                                 Q32 36
+                                   36 33" fill="none" stroke-width="1.5">
+							</path>
+
+						</g>
+
+					</svg>
+
+				</div>
+
+
+				<div class="character-stage-label">
+					<span th:text="${character.name}">
+						Player
+					</span>
+				</div>
+
+			</div>
+
+
+			<!-- ========================== -->
+			<!-- CHARACTER INFORMATION -->
+			<!-- ========================== -->
+
+			<div class="character-info">
+
+				<div class="info-heading">
+
+					<p>
+						PLAYER PROFILE
+					</p>
+
+					<h2 th:text="${character.name}">
+						Player
+					</h2>
+
+				</div>
+
+
+				<!-- NAME -->
+
+				<div class="info-row">
+
+					<span class="info-label">
+						Tên nhân vật
+					</span>
+
+					<span class="info-value" th:text="${character.name}">
+						Player
+					</span>
+
+				</div>
+
+
+				<!-- SPRITE -->
+
+				<div class="info-row">
+
+					<span class="info-label">
+						Sprite
+					</span>
+
+					<span class="info-value" th:text="${character.spriteCode}">
+						player_default
+					</span>
+
+				</div>
+
+
+				<!-- FACING -->
+
+				<div class="info-row">
+
+					<span class="info-label">
+						Hướng nhìn
+					</span>
+
+					<span class="info-value facing-value" th:text="${character.facing}">
+						DOWN
+					</span>
+
+				</div>
+
+
+				<!-- MAP -->
+
+				<div class="info-row">
+
+					<span class="info-label">
+						Bản đồ
+					</span>
+
+					<span class="info-value" th:text="${position.mapArea.name}">
+						Làng Lục Diệp
+					</span>
+
+				</div>
+
+
+				<!-- LOCATION -->
+
+				<div class="info-row">
+
+					<span class="info-label">
+						Khu vực
+					</span>
+
+					<span class="info-value" th:text="${position.locationCode}">
+						village
+					</span>
+
+				</div>
+
+
+				<!-- POSITION -->
+
+				<div class="position-box">
+
+					<div class="position-title">
+						VỊ TRÍ
+					</div>
+
+					<div class="position-grid">
+
+						<div class="position-item">
+
+							<span>
+								X
+							</span>
+
+							<strong th:text="${position.x}">
+								450
+							</strong>
+
+						</div>
+
+
+						<div class="position-item">
+
+							<span>
+								Y
+							</span>
+
+							<strong th:text="${position.y}">
+								250
+							</strong>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</section>
+
+
+		<!-- ============================== -->
+		<!-- QUICK MENU -->
+		<!-- ============================== -->
+
+		<section class="quick-menu">
+
+			<a th:href="@{/team}" class="quick-card">
+
+				<div class="quick-icon">
+					👥
+				</div>
+
+				<div>
+
+					<span>
+						TEAM
+					</span>
+
+					<strong>
+						Đội hình Monster
+					</strong>
+
+				</div>
+
+			</a>
+
+
+			<a th:href="@{/inventory}" class="quick-card">
+
+				<div class="quick-icon">
+					🎒
+				</div>
+
+				<div>
+
+					<span>
+						INVENTORY
+					</span>
+
+					<strong>
+						Vật phẩm
+					</strong>
+
+				</div>
+
+			</a>
+
+
+			<a th:href="@{/map/1}" class="quick-card">
+
+				<div class="quick-icon">
+					🗺
+				</div>
+
+				<div>
+
+					<span>
+						MAP
+					</span>
+
+					<strong>
+						Quay về thế giới
+					</strong>
+
+				</div>
+
+			</a>
+
+		</section>
+
+	</main>
+
+</body>
+
+</html>

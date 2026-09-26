@@ -1,0 +1,899 @@
+/* ==========================================
+   RESET
+========================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    color: #1f2937;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #ffffff 0%,
+            #eef4ff 45%,
+            #e8eef8 100%
+        );
+
+    min-height: 100vh;
+}
+
+
+/* ==========================================
+   PAGE
+========================================== */
+
+.map-page {
+    width: 100%;
+    max-width: 1300px;
+
+    margin: 0 auto;
+
+    padding: 40px 25px 60px;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.map-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+
+.map-title-icon {
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: #eff6ff;
+
+    border: 1px solid #bfdbfe;
+
+    font-size: 34px;
+
+    box-shadow:
+        0 8px 25px rgba(37, 99, 235, 0.12);
+}
+
+
+.map-subtitle {
+    margin: 0 0 5px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: #6b7280;
+}
+
+
+.map-header h1 {
+    margin: 0;
+
+    font-size: 36px;
+
+    color: #111827;
+}
+
+
+.map-description {
+    margin: 8px 0 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   WORLD MAP VIEWPORT
+========================================== */
+
+.world-map {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 760px;
+
+    overflow: hidden;
+
+    border-radius: 30px;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(219, 234, 254, 0.8),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(224, 231, 255, 0.7),
+            transparent 30%
+        ),
+
+        #f8fbff;
+
+    border: 1px solid #dbeafe;
+
+    box-shadow:
+        inset 0 0 40px rgba(37, 99, 235, 0.04),
+        0 15px 45px rgba(15, 23, 42, 0.08);
+
+    cursor: grab;
+
+    user-select: none;
+}
+
+
+.world-map.dragging {
+    cursor: grabbing;
+}
+
+
+/* ==========================================
+   MAP CANVAS
+========================================== */
+
+.map-canvas {
+
+    position: absolute;
+
+    width: 1200px;
+
+    height: 760px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    transition:
+        transform 0.15s ease-out;
+
+}
+
+
+/*
+   Khi kéo bản đồ:
+   Không animation để chuột bám sát vị trí.
+*/
+
+.world-map.dragging .map-canvas {
+    transition: none;
+}
+
+
+/* ==========================================
+   DECORATIVE ROAD
+========================================== */
+
+.map-road {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* ==========================================
+   MAP GRID
+========================================== */
+
+.map-grid {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    height: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    grid-template-rows:
+        repeat(3, 1fr);
+
+    gap: 10px;
+}
+
+
+/* ==========================================
+   MAP POSITION
+========================================== */
+
+.map-node {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* ==========================================
+   S-SHAPE
+========================================== */
+
+.map-1 {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.map-2 {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.map-3 {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.map-4 {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.map-5 {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.map-6 {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.map-7 {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.map-8 {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.map-9 {
+    grid-column: 3;
+    grid-row: 3;
+}
+
+
+/* ==========================================
+   MAP CARD - CƠ BẢN
+========================================== */
+
+.map-card {
+
+    position: relative;
+
+    width: 250px;
+
+    min-height: 225px;
+
+    padding: 24px;
+
+    display: block;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f8fbff
+        );
+
+    border: 2px solid #d1d5db;
+
+    box-shadow:
+        0 8px 20px rgba(15, 23, 42, 0.08);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease,
+        opacity 0.25s ease;
+
+}
+
+
+/* ==========================================
+   MAP ĐÃ MỞ
+========================================== */
+
+.map-node.unlocked .map-card {
+
+    border-color: #60a5fa;
+
+    box-shadow:
+
+        0 0 0 5px rgba(37, 99, 235, 0.06),
+
+        0 10px 30px rgba(37, 99, 235, 0.13),
+
+        0 0 35px rgba(37, 99, 235, 0.14);
+
+    cursor: pointer;
+}
+
+
+/* Glow */
+
+.map-node.unlocked .map-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -4px;
+
+    border-radius: 27px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(96, 165, 250, 0.6),
+            transparent,
+            rgba(147, 197, 253, 0.4)
+        );
+
+    filter: blur(9px);
+
+    z-index: -1;
+
+    opacity: 0.7;
+}
+
+
+/* Hover */
+
+.map-node.unlocked .map-card:hover {
+
+    transform:
+        translateY(-8px)
+        scale(1.03);
+
+    border-color: #2563eb;
+
+    box-shadow:
+
+        0 0 0 7px rgba(37, 99, 235, 0.07),
+
+        0 18px 40px rgba(37, 99, 235, 0.18),
+
+        0 0 50px rgba(37, 99, 235, 0.20);
+}
+
+
+/* ==========================================
+   MAP CHƯA MỞ
+========================================== */
+
+.map-node.locked {
+
+    opacity: 0.38;
+
+    filter: grayscale(0.8);
+}
+
+
+.map-node.locked .map-card {
+
+    cursor: not-allowed;
+
+    border-color: #cbd5e1;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f3f4f6,
+            #e5e7eb
+        );
+
+    box-shadow:
+        0 5px 15px rgba(15, 23, 42, 0.04);
+}
+
+
+.map-node.locked .map-card:hover {
+
+    transform: none;
+
+    box-shadow:
+        0 5px 15px rgba(15, 23, 42, 0.04);
+
+    border-color: #cbd5e1;
+}
+
+
+/* ==========================================
+   ICON
+========================================== */
+
+.map-card-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 14px;
+
+    border-radius: 14px;
+
+    background: #eff6ff;
+
+    border: 1px solid #bfdbfe;
+
+    font-size: 26px;
+}
+
+
+.map-node.locked .map-card-icon {
+
+    background: #e5e7eb;
+
+    border-color: #d1d5db;
+}
+
+
+/* ==========================================
+   MAP NUMBER
+========================================== */
+
+.map-number {
+
+    display: inline-block;
+
+    margin-bottom: 6px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    color: #2563eb;
+}
+
+
+.map-node.locked .map-number {
+    color: #6b7280;
+}
+
+
+/* ==========================================
+   NAME
+========================================== */
+
+.map-card h2 {
+
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 21px;
+
+    line-height: 1.3;
+}
+
+
+/* ==========================================
+   TERRAIN
+========================================== */
+
+.terrain {
+
+    margin: 11px 0 14px;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   AVAILABLE
+========================================== */
+
+.available-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 11px;
+
+    border-radius: 999px;
+
+    background: #dcfce7;
+
+    color: #166534;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+/* ==========================================
+   LOCKED
+========================================== */
+
+.locked-badge {
+
+    display: inline-block;
+
+    padding: 7px 11px;
+
+    border-radius: 999px;
+
+    background: #d1d5db;
+
+    color: #4b5563;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+/* ==========================================
+   STATUS DOT
+========================================== */
+
+.status-dot {
+
+    width: 8px;
+
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 4px rgba(34, 197, 94, 0.12);
+
+    animation: pulse 1.8s infinite;
+}
+
+
+@keyframes pulse {
+
+    0% {
+        box-shadow:
+            0 0 0 0 rgba(34, 197, 94, 0.35);
+    }
+
+    70% {
+        box-shadow:
+            0 0 0 7px rgba(34, 197, 94, 0);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+
+/* ==========================================
+   NOTE
+========================================== */
+
+.map-note {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+    padding: 14px 20px;
+
+    border-radius: 14px;
+
+    background: #eff6ff;
+
+    border: 1px solid #dbeafe;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+
+.map-note p {
+    margin: 0;
+}
+
+
+/* ==========================================
+   BACK BUTTON
+========================================== */
+
+.back-button {
+
+    display: inline-block;
+
+    margin-top: 22px;
+
+    padding: 11px 18px;
+
+    background: white;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 9px;
+
+    color: #374151;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition: 0.2s;
+}
+
+
+.back-button:hover {
+
+    color: #2563eb;
+
+    border-color: #60a5fa;
+
+    background: #eff6ff;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 700px) {
+
+    .map-page {
+        padding: 25px 15px 40px;
+    }
+
+    .map-header {
+        align-items: flex-start;
+    }
+
+    .map-header h1 {
+        font-size: 29px;
+    }
+
+    .world-map {
+        height: 620px;
+    }
+
+    .map-canvas {
+        transform:
+            translate(-50%, -50%)
+            scale(0.72);
+        transform-origin: center;
+    }
+}
+
+/* =====================================================
+   AETHERLIA 3D WORLD MAP
+   ===================================================== */
+
+.world-map-3d-wrapper {
+    position: relative;
+    width: 100%;
+    height: 650px;
+    margin: 32px 0;
+    border-radius: 28px;
+    overflow: hidden;
+    background: #b9ddf7;
+    box-shadow:
+        0 20px 60px rgba(15, 23, 42, 0.15);
+}
+
+.world-map-3d {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.world-map-3d canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* =====================================================
+   3D MESSAGE
+   ===================================================== */
+
+.map3d-message {
+    position: absolute;
+
+    left: 50%;
+    bottom: 28px;
+
+    transform:
+        translate(-50%, 20px);
+
+    padding: 12px 20px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(15, 23, 42, 0.88);
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+
+    z-index: 20;
+}
+
+.map3d-message.show {
+    opacity: 1;
+
+    transform:
+        translate(-50%, 0);
+}
+
+
+/* =====================================================
+   DATA LAYER
+   ===================================================== */
+
+.map-data-layer {
+    position: absolute;
+
+    width: 0;
+    height: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+.map-data-node {
+    display: none;
+}
+
+
+/* =====================================================
+   MAP LIST
+   ===================================================== */
+
+.map-list {
+    margin-top: 30px;
+}
+
+.map-list-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+}
+
+.map-list-title span {
+    font-size: 28px;
+}
+
+.map-list-title h2 {
+    margin: 0;
+
+    font-size: 24px;
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+    .world-map-3d-wrapper {
+        height: 500px;
+
+        border-radius: 20px;
+    }
+
+    .map3d-message {
+        font-size: 13px;
+
+        padding:
+            10px 16px;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .world-map-3d-wrapper {
+        height: 420px;
+    }
+
+}

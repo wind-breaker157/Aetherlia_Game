@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Aetherlia - Monsters</title>
+</head>
+
+<body>
+
+    <h1>Danh sách Monster</h1>
+
+    <table border="1">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Type</th>
+                <th>HP</th>
+                <th>Attack</th>
+                <th>Defense</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <tr th:each="monster : ${monsters}">
+
+                <td th:text="${monster.id}"></td>
+
+                <td th:text="${monster.name}"></td>
+
+                <td th:text="${monster.type}"></td>
+
+                <td th:text="${monster.baseHp}"></td>
+
+                <td th:text="${monster.baseAttack}"></td>
+
+                <td th:text="${monster.baseDefense}"></td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</body>
+
+</html>

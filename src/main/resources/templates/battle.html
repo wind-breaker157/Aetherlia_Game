@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AETHERLIA - Battle</title>
+
+
+<!-- =================================================
+         BATTLE CSS
+    ================================================== -->
+
+<link rel="stylesheet" th:href="@{/css/battle.css}">
+
+
+<!-- =================================================
+         THREE.JS IMPORT MAP
+    ================================================== -->
+
+<script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+        }
+    }
+    </script>
+
+</head>
+
+
+<body>
+
+
+	<div class="battle-page">
+
+
+		<!-- =================================================
+         HEADER
+    ================================================== -->
+
+		<header class="battle-header">
+
+			<div class="logo-area">
+
+				<h1>AETHERLIA</h1>
+
+				<span> BATTLE </span>
+
+			</div>
+
+
+			<a th:href="@{/battle/leave}" class="leave-button"> Rời Battle </a>
+
+		</header>
+
+
+
+		<!-- =================================================
+         MAIN BATTLE
+    ================================================== -->
+
+		<main class="battle-arena"
+			th:data-player-monster-name="${playerMonster.monster.name}"
+			th:data-wild-monster-name="${encounter.monster.name}">
+
+
+			<!-- =================================================
+             3D STAGE
+        ================================================== -->
+
+			<div id="battle-3d-stage" class="battle-3d-stage"></div>
+
+
+
+			<!-- =================================================
+             WILD MONSTER INFO
+        ================================================== -->
+
+			<section class="wild-side">
+
+
+				<div class="battle-info">
+
+
+					<div class="monster-name">
+
+						<span> WILD </span>
+
+
+						<h2 th:text="${encounter.monster.name}">Spriglet</h2>
+
+					</div>
+
+
+					<div class="level">
+
+						Lv. <span th:text="${encounter.level}"> 4 </span>
+
+					</div>
+
+				</div>
+
+
+
+				<!-- WILD HP -->
+
+				<div class="hp-container">
+
+
+					<div class="hp-label">
+
+						<span> HP </span> <span> <strong id="wild-hp-text"
+							th:text="${encounter.currentHp}"> 49 </strong> / <span
+							id="wild-max-hp-text" th:text="${wildMaxHp}"> 49 </span>
+
+						</span>
+
+					</div>
+
+
+					<div class="hp-bar">
+
+						<div id="wild-hp-fill" class="hp-fill wild-hp"
+							th:style="'width:' + (${wildMaxHp > 0 ? encounter.currentHp * 100 / wildMaxHp : 0}) + '%'">
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</section>
+
+
+
+			<!-- =================================================
+             VS
+        ================================================== -->
+
+			<div class="versus">VS</div>
+
+
+
+			<!-- =================================================
+             PLAYER MONSTER INFO
+        ================================================== -->
+
+			<section class="player-side">
+
+
+				<div class="battle-info">
+
+
+					<div class="monster-name">
+
+						<span> YOUR MONSTER </span>
+
+
+						<h2 th:text="${playerMonster.monster.name}">Spriglet</h2>
+
+					</div>
+
+
+					<div class="level">
+
+						Lv. <span th:text="${playerMonster.level}"> 9 </span>
+
+					</div>
+
+				</div>
+
+
+
+				<!-- PLAYER HP -->
+
+				<div class="hp-container">
+
+
+					<div class="hp-label">
+
+						<span> HP </span> <span> <strong id="player-hp-text"
+							th:text="${playerMonster.currentHp}"> 11 </strong> / <span
+							id="player-max-hp-text" th:text="${playerMaxHp}"> 57 </span>
+
+						</span>
+
+					</div>
+
+
+					<div class="hp-bar">
+
+						<div id="player-hp-fill" class="hp-fill player-hp"
+							th:style="'width:' + (${playerMaxHp > 0 ? playerMonster.currentHp * 100 / playerMaxHp : 0}) + '%'">
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</section>
+
+
+
+			<!-- =================================================
+             BATTLE MESSAGE
+        ================================================== -->
+
+			<section class="battle-message">
+
+				<p id="battle-message-text"
+					th:text="${message != null ? message : 'Chọn một Skill để tấn công.'}">
+
+					Chọn một Skill để tấn công.</p>
+
+			</section>
+
+
+
+			<!-- =================================================
+             CAPTURE MESSAGE
+        ================================================== -->
+
+			<section class="capture-message" th:if="${captureMessage != null}">
+
+				<p th:text="${captureMessage}">Monster thoát khỏi Orb!</p>
+
+			</section>
+
+
+
+			<!-- =================================================
+             VICTORY
+        ================================================== -->
+
+			<section class="result-box victory-box" th:if="${victory}">
+
+				<h2>🎉 VICTORY!</h2>
+
+				<p>Bạn đã đánh bại Monster hoang dã!</p>
+
+			</section>
+
+
+
+			<!-- =================================================
+             DEFEAT
+        ================================================== -->
+
+			<section class="result-box defeat-box" th:if="${defeat}">
+
+				<h2>DEFEAT</h2>
+
+				<p>Monster của bạn đã bị hạ.</p>
+
+			</section>
+
+
+
+			<!-- =================================================
+             BATTLE ACTIONS
+        ================================================== -->
+
+			<section class="battle-actions" th:if="${!victory and !defeat}">
+
+
+				<!-- =================================================
+                 SKILLS
+            ================================================== -->
+
+				<div class="skills-panel">
+
+					<h3>Chọn Skill</h3>
+
+
+					<div class="skill-list">
+
+
+						<form th:each="skill : ${skills}" th:action="@{/battle/attack}"
+							method="post">
+
+
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}"> <input type="hidden"
+								name="skillId" th:value="${skill.id}">
+
+
+							<button type="submit" class="skill-button">
+
+
+								<span class="skill-name" th:text="${skill.name}"> Basic
+									Attack </span> <span class="skill-type" th:text="${skill.type}">
+
+									NORMAL </span>
+
+
+							</button>
+
+
+						</form>
+
+
+					</div>
+
+				</div>
+
+
+
+				<!-- =================================================
+                 CAPTURE ORBS
+            ================================================== -->
+
+				<div class="items-panel">
+
+					<h3>Capture Orbs</h3>
+
+
+					<div class="orb-list">
+
+
+						<form th:action="@{/battle/capture}" method="post">
+
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}"> <input type="hidden"
+								name="orbType" value="BASIC_ORB">
+
+
+							<button type="submit" class="orb-button"
+								th:disabled="${basicOrb <= 0}">
+
+								<span> Basic Orb </span> <span th:text="'x' + ${basicOrb}">
+									x1 </span>
+
+							</button>
+
+						</form>
+
+
+						<form th:action="@{/battle/capture}" method="post">
+
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}"> <input type="hidden"
+								name="orbType" value="GREAT_ORB">
+
+
+							<button type="submit" class="orb-button"
+								th:disabled="${greatOrb <= 0}">
+
+								<span> Great Orb </span> <span th:text="'x' + ${greatOrb}">
+									x0 </span>
+
+							</button>
+
+						</form>
+
+
+						<form th:action="@{/battle/capture}" method="post">
+
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}"> <input type="hidden"
+								name="orbType" value="ULTRA_ORB">
+
+
+							<button type="submit" class="orb-button"
+								th:disabled="${ultraOrb <= 0}">
+
+								<span> Ultra Orb </span> <span th:text="'x' + ${ultraOrb}">
+									x0 </span>
+
+							</button>
+
+						</form>
+
+
+						<form th:action="@{/battle/capture}" method="post">
+
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}"> <input type="hidden"
+								name="orbType" value="MASTER_ORB">
+
+
+							<button type="submit" class="orb-button master"
+								th:disabled="${masterOrb <= 0}">
+
+								<span> Master Orb </span> <span th:text="'x' + ${masterOrb}">
+									x0 </span>
+
+							</button>
+
+						</form>
+
+
+					</div>
+
+				</div>
+
+
+
+				<!-- =================================================
+                 HEALING ITEMS
+            ================================================== -->
+
+				<div class="healing-panel">
+
+					<h3>Healing Items</h3>
+
+
+					<div class="healing-list">
+
+
+						<form th:action="@{/battle/item}" method="post">
+
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}"> <input type="hidden"
+								name="itemCode" value="POTION"> <input type="hidden"
+								name="targetPlayerMonsterId" th:value="${playerMonster.id}">
+
+
+							<button type="submit" class="item-button"
+								th:disabled="${potion <= 0 or playerMonster.currentHp >= playerMaxHp}">
+
+								<span> Potion +30 HP </span> <span th:text="'x' + ${potion}">
+									x0 </span>
+
+							</button>
+
+						</form>
+
+
+
+						<form th:action="@{/battle/item}" method="post">
+
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}"> <input type="hidden"
+								name="itemCode" value="SUPER_POTION"> <input
+								type="hidden" name="targetPlayerMonsterId"
+								th:value="${playerMonster.id}">
+
+
+							<button type="submit" class="item-button"
+								th:disabled="${superPotion <= 0 or playerMonster.currentHp >= playerMaxHp}">
+
+								<span> Super Potion +100 HP </span> <span
+									th:text="'x' + ${superPotion}"> x0 </span>
+
+							</button>
+
+						</form>
+
+
+
+						<form th:each="member : ${teamMembers}"
+							th:if="${member.playerMonster.id == playerMonster.id and playerMonster.currentHp <= 0}"
+							th:action="@{/battle/item}" method="post">
+
+
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}"> <input type="hidden"
+								name="itemCode" value="REVIVE"> <input type="hidden"
+								name="targetPlayerMonsterId" th:value="${playerMonster.id}">
+
+
+							<button type="submit" class="item-button"
+								th:disabled="${revive <= 0}">
+
+								<span> Revive </span> <span th:text="'x' + ${revive}"> x0
+								</span>
+
+							</button>
+
+						</form>
+
+
+					</div>
+
+				</div>
+
+
+
+				<!-- =================================================
+                 SWITCH MONSTER
+            ================================================== -->
+
+				<div class="switch-panel">
+
+					<h3>Switch Monster</h3>
+
+
+					<div class="switch-list">
+
+
+						<form th:each="member : ${teamMembers}"
+							th:action="@{/battle/switch}" method="post">
+
+
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}"> <input type="hidden"
+								name="playerMonsterId" th:value="${member.playerMonster.id}">
+
+
+							<button type="submit" class="switch-button"
+								th:disabled="${member.playerMonster.id == playerMonster.id or member.playerMonster.currentHp <= 0}">
+
+
+								<span th:text="${member.playerMonster.monster.name}">
+									Spriglet </span> <span> Lv. </span> <span
+									th:text="${member.playerMonster.level}"> 9 </span> <span>
+									HP: </span> <span th:text="${member.playerMonster.currentHp}">
+									11 </span> <span> / </span> <span
+									th:text="${@statService.calculatePlayerMaxHp(member.playerMonster)}">
+									57 </span>
+
+
+							</button>
+
+						</form>
+
+
+					</div>
+
+				</div>
+
+
+
+				<!-- =================================================
+                 RUN
+            ================================================== -->
+
+				<div class="run-panel">
+
+					<a th:href="@{/battle/run}" class="run-button"> 🏃 Chạy khỏi
+						Battle </a>
+
+				</div>
+
+
+			</section>
+
+
+
+			<!-- =================================================
+             RESULT ACTIONS
+        ================================================== -->
+
+			<div class="result-actions" th:if="${victory or defeat}">
+
+
+				<a th:href="@{/map/1}" class="result-button"> ← Quay về Map </a> <a
+					th:href="@{/my-monsters}" class="result-button"> 📦 Xem Monster
+
+				</a>
+
+
+			</div>
+
+
+		</main>
+
+
+	</div>
+
+
+
+	<!-- =====================================================
+     THREE.JS BATTLE
+====================================================== -->
+
+	<script type="module" th:src="@{/js/battle3d.js}">
+</script>
+
+
+
+	<!-- =====================================================
+     BATTLE AJAX
+====================================================== -->
+
+	<script th:src="@{/js/battle.js}" defer>
+		
+	</script>
+
+
+</body>
+
+</html>

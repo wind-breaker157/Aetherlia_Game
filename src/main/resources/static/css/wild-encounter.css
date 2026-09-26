@@ -1,0 +1,375 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #0f172a;
+    color: #ffffff;
+}
+
+.encounter-page {
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.encounter-header {
+    width: 100%;
+    min-height: 85px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px 35px;
+
+    background: #111827;
+    border-bottom: 1px solid #374151;
+}
+
+.encounter-header h1 {
+    margin: 0;
+
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 2px;
+
+    color: #60a5fa;
+}
+
+.encounter-header p {
+    margin: 5px 0 0;
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    color: #9ca3af;
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 10px 18px;
+
+    text-decoration: none;
+
+    color: #ffffff;
+    background: #374151;
+
+    border-radius: 10px;
+
+    transition: 0.2s;
+}
+
+.back-button:hover {
+    background: #4b5563;
+}
+
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.encounter-content {
+    width: 100%;
+    max-width: 1000px;
+
+    margin: 50px auto 0;
+
+    padding: 0 20px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.encounter-card {
+    width: 100%;
+
+    padding: 35px;
+
+    background: #1e293b;
+
+    border: 1px solid #334155;
+    border-radius: 20px;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.encounter-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-bottom: 30px;
+}
+
+.encounter-title span {
+    font-size: 30px;
+}
+
+.encounter-title h2 {
+    margin: 0;
+
+    font-size: 28px;
+    color: #f8fafc;
+}
+
+
+/* =========================
+   MONSTER DISPLAY
+========================= */
+
+.monster-display {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 40px;
+
+    align-items: center;
+
+    min-height: 300px;
+}
+
+
+/* =========================
+   SPRITE BOX
+========================= */
+
+.monster-sprite-box {
+    min-height: 300px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #334155 0%,
+            #1e293b 65%,
+            #172033 100%
+        );
+
+    border: 1px solid #475569;
+}
+
+
+/* =========================
+   MONSTER INFO
+========================= */
+
+.monster-info {
+    padding: 25px;
+
+    background: #0f172a;
+
+    border: 1px solid #334155;
+    border-radius: 16px;
+}
+
+.monster-info h3 {
+    margin: 0 0 25px;
+
+    font-size: 36px;
+
+    color: #f8fafc;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid #334155;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.label {
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #94a3b8;
+}
+
+.value {
+    font-size: 18px;
+    font-weight: 800;
+
+    color: #ffffff;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.encounter-message {
+    margin-top: 30px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    background: #172033;
+
+    border: 1px solid #334155;
+
+    border-radius: 14px;
+}
+
+.encounter-message p {
+    margin: 6px 0;
+
+    color: #cbd5e1;
+
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   ACTIONS
+========================= */
+
+.encounter-actions {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+.battle-button,
+.leave-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 180px;
+
+    padding: 14px 24px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 16px;
+    font-weight: 800;
+
+    transition: 0.2s;
+}
+
+.battle-button {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.battle-button:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-2px);
+}
+
+.leave-button {
+    background: #374151;
+    color: #ffffff;
+}
+
+.leave-button:hover {
+    background: #4b5563;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+    .encounter-header {
+        padding: 15px 20px;
+
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .encounter-content {
+        margin-top: 25px;
+
+        padding: 0 12px;
+    }
+
+    .encounter-card {
+        padding: 20px;
+    }
+
+    .encounter-title h2 {
+        font-size: 22px;
+
+        text-align: center;
+    }
+
+    .monster-display {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .monster-sprite-box {
+        min-height: 250px;
+    }
+
+    .monster-info h3 {
+        font-size: 28px;
+    }
+
+    .encounter-actions {
+        flex-direction: column;
+    }
+
+    .battle-button,
+    .leave-button {
+        width: 100%;
+    }
+}

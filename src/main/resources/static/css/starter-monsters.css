@@ -1,0 +1,784 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #eef6ff 0%,
+            #dbeafe 45%,
+            #c7ddf7 100%
+        );
+
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.starter-page {
+    width: 100%;
+    min-height: 100vh;
+
+    padding:
+        0
+        20px
+        40px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.starter-header {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding:
+        50px
+        20px
+        30px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   BADGE
+========================================================= */
+
+.starter-badge {
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    padding:
+        7px
+        16px;
+
+    border:
+        1px solid
+        rgba(37, 99, 235, 0.2);
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.75);
+
+    color: #2563eb;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.starter-header h1 {
+    margin:
+        0
+        0
+        12px;
+
+    color: #0f172a;
+
+    font-size: 38px;
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.starter-header p {
+    margin:
+        0
+        0
+        8px;
+
+    color: #475569;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+.starter-note {
+    font-size: 14px !important;
+
+    color: #64748b !important;
+}
+
+
+/* =========================================================
+   STARTER SECTION
+========================================================= */
+
+.starter-section {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   STARTER GRID
+========================================================= */
+
+.starter-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 24px;
+}
+
+
+/* =========================================================
+   MONSTER CARD
+========================================================= */
+
+.monster-card {
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border:
+        2px solid
+        #dbe4ef;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0
+        12px
+        35px
+        rgba(15, 23, 42, 0.10);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+
+    cursor: default;
+}
+
+
+.monster-card:hover {
+    transform:
+        translateY(-8px);
+
+    border-color:
+        #93c5fd;
+
+    box-shadow:
+        0
+        18px
+        45px
+        rgba(37, 99, 235, 0.18);
+}
+
+
+/* =========================================================
+   3D WRAPPER
+========================================================= */
+
+.monster-3d-wrapper {
+    position: relative;
+
+    width: 100%;
+    height: 310px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #ffffff 0%,
+            #eaf4ff 60%,
+            #d6e8fb 100%
+        );
+
+    border-bottom:
+        1px solid
+        #e2e8f0;
+}
+
+
+/* =========================================================
+   3D CONTAINER
+========================================================= */
+
+.monster-3d {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+
+/* THREE.JS CANVAS */
+
+.monster-3d canvas {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    outline: none;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.monster-3d-loading {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding:
+        9px
+        14px;
+
+    background:
+        rgba(255, 255, 255, 0.88);
+
+    border:
+        1px solid
+        #dbeafe;
+
+    border-radius: 999px;
+
+    color: #475569;
+
+    font-size: 13px;
+
+    white-space: nowrap;
+
+    z-index: 5;
+}
+
+
+.loading-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background:
+        #2563eb;
+
+    animation:
+        loadingPulse
+        0.9s
+        infinite
+        alternate;
+}
+
+
+@keyframes loadingPulse {
+
+    from {
+        opacity: 0.35;
+        transform:
+            scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            scale(1.15);
+    }
+}
+
+
+/* =========================================================
+   3D TIP
+========================================================= */
+
+.monster-3d-tip {
+    position: absolute;
+
+    left: 50%;
+    bottom: 10px;
+
+    transform:
+        translateX(-50%);
+
+    padding:
+        5px
+        10px;
+
+    background:
+        rgba(15, 23, 42, 0.65);
+
+    color: white;
+
+    border-radius: 999px;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+
+    z-index: 10;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.monster-content {
+    padding:
+        22px
+        22px
+        24px;
+}
+
+
+/* =========================================================
+   MONSTER NAME
+========================================================= */
+
+.monster-name {
+    margin:
+        0
+        0
+        12px;
+
+    color: #0f172a;
+
+    font-size: 28px;
+    font-weight: 800;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   TYPE
+========================================================= */
+
+.monster-type {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+}
+
+
+.info-label {
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+.type-badge {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 80px;
+
+    padding:
+        5px
+        12px;
+
+    background:
+        #eff6ff;
+
+    color:
+        #1d4ed8;
+
+    border:
+        1px solid
+        #bfdbfe;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.monster-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0, 1fr)
+        );
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+}
+
+
+.stat-box {
+    padding:
+        10px
+        5px;
+
+    text-align: center;
+
+    background:
+        #f8fafc;
+
+    border:
+        1px solid
+        #e2e8f0;
+
+    border-radius: 10px;
+}
+
+
+.stat-label {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #64748b;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    text-transform: uppercase;
+}
+
+
+.stat-box strong {
+    display: block;
+
+    color: #0f172a;
+
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.choose-form {
+    width: 100%;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.choose-button {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding:
+        14px
+        18px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0
+        5px
+        12px
+        rgba(37, 99, 235, 0.25);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        filter 0.15s ease;
+}
+
+
+.choose-button:hover {
+    filter:
+        brightness(1.07);
+
+    box-shadow:
+        0
+        7px
+        16px
+        rgba(37, 99, 235, 0.32);
+}
+
+
+.choose-button:active {
+    transform:
+        scale(0.97);
+
+    box-shadow:
+        0
+        3px
+        8px
+        rgba(37, 99, 235, 0.22);
+}
+
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+.choose-arrow {
+    font-size: 20px;
+
+    transition:
+        transform 0.15s ease;
+}
+
+
+.choose-button:hover .choose-arrow {
+    transform:
+        translateX(4px);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.starter-footer {
+    max-width: 1200px;
+
+    margin:
+        35px
+        auto
+        0;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid
+        rgba(100, 116, 139, 0.2);
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .starter-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .starter-page {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+
+    .starter-header {
+        padding:
+            35px
+            10px
+            25px;
+    }
+
+
+    .starter-header h1 {
+        font-size: 30px;
+    }
+
+
+    .starter-header p {
+        font-size: 14px;
+    }
+
+
+    .starter-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .monster-3d-wrapper {
+        height: 330px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .starter-header h1 {
+        font-size: 26px;
+    }
+
+
+    .starter-badge {
+        font-size: 10px;
+
+        letter-spacing: 2px;
+    }
+
+
+    .monster-content {
+        padding:
+            18px;
+    }
+
+
+    .monster-name {
+        font-size: 24px;
+    }
+
+
+    .monster-3d-wrapper {
+        height: 300px;
+    }
+
+
+    .monster-stats {
+        gap: 5px;
+    }
+
+
+    .stat-box strong {
+        font-size: 15px;
+    }
+
+
+    .choose-button {
+        padding:
+            12px
+            15px;
+
+        font-size: 13px;
+    }
+
+
+    .starter-footer {
+        flex-direction: column;
+
+        gap: 3px;
+    }
+
+}

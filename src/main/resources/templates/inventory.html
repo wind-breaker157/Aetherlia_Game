@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Inventory - Aetherlia</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/inventory.css}">
+
+</head>
+
+<body>
+
+<main class="inventory-page">
+
+    <!-- ===================================== -->
+    <!-- HEADER -->
+    <!-- ===================================== -->
+
+    <header class="inventory-header">
+
+        <div>
+
+            <p class="header-label">
+                AETHERLIA
+            </p>
+
+            <h1>
+                INVENTORY
+            </h1>
+
+            <p class="header-description">
+                Kho vật phẩm của anh
+            </p>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <a th:href="@{/character}"
+               class="header-button">
+
+                ← Nhân vật
+
+            </a>
+
+            <a th:href="@{/map/1}"
+               class="header-button">
+
+                🗺 Map
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ===================================== -->
+    <!-- QUICK SUMMARY -->
+    <!-- ===================================== -->
+
+    <section class="inventory-summary">
+
+        <div class="summary-title">
+
+            <span>
+                🎒
+            </span>
+
+            <div>
+
+                <strong>
+                    Vật phẩm của anh
+                </strong>
+
+                <p>
+                    Số lượng hiện tại
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-orbs">
+
+            <div class="summary-orb">
+
+                <span>
+                    Basic
+                </span>
+
+                <strong th:text="${basicOrb}">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="summary-orb">
+
+                <span>
+                    Great
+                </span>
+
+                <strong th:text="${greatOrb}">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="summary-orb">
+
+                <span>
+                    Ultra
+                </span>
+
+                <strong th:text="${ultraOrb}">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===================================== -->
+    <!-- ITEM GRID -->
+    <!-- ===================================== -->
+
+    <section class="item-grid">
+
+        <!-- ================================= -->
+        <!-- BASIC ORB -->
+        <!-- ================================= -->
+
+        <article class="item-card">
+
+            <div class="item-icon capture-icon">
+                🎯
+            </div>
+
+            <div class="item-content">
+
+                <span class="item-category">
+                    CAPTURE
+                </span>
+
+                <h2>
+                    Basic Orb
+                </h2>
+
+                <p>
+                    Capture Orb cơ bản.
+                </p>
+
+                <div class="item-bottom">
+
+                    <span>
+                        Multiplier
+                    </span>
+
+                    <strong>
+                        ×1.0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="item-quantity">
+
+                <span>
+                    Số lượng
+                </span>
+
+                <strong th:text="${basicOrb}">
+                    0
+                </strong>
+
+            </div>
+
+        </article>
+
+
+        <!-- ================================= -->
+        <!-- GREAT ORB -->
+        <!-- ================================= -->
+
+        <article class="item-card">
+
+            <div class="item-icon capture-icon">
+                🎯
+            </div>
+
+            <div class="item-content">
+
+                <span class="item-category">
+                    CAPTURE
+                </span>
+
+                <h2>
+                    Great Orb
+                </h2>
+
+                <p>
+                    Capture Orb có khả năng bắt tốt hơn.
+                </p>
+
+                <div class="item-bottom">
+
+                    <span>
+                        Multiplier
+                    </span>
+
+                    <strong>
+                        ×1.5
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="item-quantity">
+
+                <span>
+                    Số lượng
+                </span>
+
+                <strong th:text="${greatOrb}">
+                    0
+                </strong>
+
+            </div>
+
+        </article>
+
+
+        <!-- ================================= -->
+        <!-- ULTRA ORB -->
+        <!-- ================================= -->
+
+        <article class="item-card">
+
+            <div class="item-icon capture-icon">
+                🎯
+            </div>
+
+            <div class="item-content">
+
+                <span class="item-category">
+                    CAPTURE
+                </span>
+
+                <h2>
+                    Ultra Orb
+                </h2>
+
+                <p>
+                    Capture Orb mạnh hơn Great Orb.
+                </p>
+
+                <div class="item-bottom">
+
+                    <span>
+                        Multiplier
+                    </span>
+
+                    <strong>
+                        ×2.0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="item-quantity">
+
+                <span>
+                    Số lượng
+                </span>
+
+                <strong th:text="${ultraOrb}">
+                    0
+                </strong>
+
+            </div>
+
+        </article>
+
+
+        <!-- ================================= -->
+        <!-- MASTER ORB -->
+        <!-- ================================= -->
+
+        <article class="item-card rare-card">
+
+            <div class="item-icon capture-icon">
+                👑
+            </div>
+
+            <div class="item-content">
+
+                <span class="item-category">
+                    SPECIAL
+                </span>
+
+                <h2>
+                    Master Orb
+                </h2>
+
+                <p>
+                    Capture Orb đặc biệt với tỷ lệ bắt rất cao.
+                </p>
+
+                <div class="item-bottom">
+
+                    <span>
+                        Multiplier
+                    </span>
+
+                    <strong>
+                        ×100
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="item-quantity">
+
+                <span>
+                    Số lượng
+                </span>
+
+                <strong th:text="${masterOrb}">
+                    0
+                </strong>
+
+            </div>
+
+        </article>
+
+
+        <!-- ================================= -->
+        <!-- POTION -->
+        <!-- ================================= -->
+
+        <article class="item-card">
+
+            <div class="item-icon heal-icon">
+                🧪
+            </div>
+
+            <div class="item-content">
+
+                <span class="item-category">
+                    RECOVERY
+                </span>
+
+                <h2>
+                    Potion
+                </h2>
+
+                <p>
+                    Hồi 30 HP cho Monster.
+                </p>
+
+                <div class="item-bottom">
+
+                    <span>
+                        Hiệu ứng
+                    </span>
+
+                    <strong>
+                        +30 HP
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="item-quantity">
+
+                <span>
+                    Số lượng
+                </span>
+
+                <strong th:text="${potion}">
+                    0
+                </strong>
+
+            </div>
+
+        </article>
+
+
+        <!-- ================================= -->
+        <!-- SUPER POTION -->
+        <!-- ================================= -->
+
+        <article class="item-card">
+
+            <div class="item-icon heal-icon">
+                🧪
+            </div>
+
+            <div class="item-content">
+
+                <span class="item-category">
+                    RECOVERY
+                </span>
+
+                <h2>
+                    Super Potion
+                </h2>
+
+                <p>
+                    Hồi 100 HP cho Monster.
+                </p>
+
+                <div class="item-bottom">
+
+                    <span>
+                        Hiệu ứng
+                    </span>
+
+                    <strong>
+                        +100 HP
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="item-quantity">
+
+                <span>
+                    Số lượng
+                </span>
+
+                <strong th:text="${superPotion}">
+                    0
+                </strong>
+
+            </div>
+
+        </article>
+
+
+        <!-- ================================= -->
+        <!-- REVIVE -->
+        <!-- ================================= -->
+
+        <article class="item-card">
+
+            <div class="item-icon revive-icon">
+                💊
+            </div>
+
+            <div class="item-content">
+
+                <span class="item-category">
+                    RECOVERY
+                </span>
+
+                <h2>
+                    Revive
+                </h2>
+
+                <p>
+                    Hồi sinh Monster đã bị hạ.
+                </p>
+
+                <div class="item-bottom">
+
+                    <span>
+                        Hiệu ứng
+                    </span>
+
+                    <strong>
+                        Revive
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="item-quantity">
+
+                <span>
+                    Số lượng
+                </span>
+
+                <strong th:text="${revive}">
+                    0
+                </strong>
+
+            </div>
+
+        </article>
+
+
+        <!-- ================================= -->
+        <!-- DATABASE ITEMS -->
+        <!-- ================================= -->
+
+        <article th:each="item : ${items}"
+                 class="item-card database-card">
+
+            <div class="item-icon">
+                📦
+            </div>
+
+            <div class="item-content">
+
+                <span class="item-category">
+                    INVENTORY
+                </span>
+
+                <h2 th:text="${item.itemCode}">
+                    ITEM
+                </h2>
+
+                <p>
+                    Item đang được lưu trong kho.
+                </p>
+
+            </div>
+
+
+            <div class="item-quantity">
+
+                <span>
+                    Số lượng
+                </span>
+
+                <strong th:text="${item.quantity}">
+                    0
+                </strong>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- ===================================== -->
+    <!-- INFO -->
+    <!-- ===================================== -->
+
+    <section class="inventory-info">
+
+        <div class="info-icon">
+            ℹ️
+        </div>
+
+        <div>
+
+            <h2>
+                Inventory hoạt động như thế nào?
+            </h2>
+
+            <p>
+                Vật phẩm được lưu riêng theo từng tài khoản.
+                Khi sử dụng Capture Orb, số lượng trong kho
+                sẽ tự động giảm đi 1.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+
+</html>

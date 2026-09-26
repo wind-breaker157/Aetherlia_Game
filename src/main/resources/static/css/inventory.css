@@ -1,0 +1,600 @@
+/* =========================================
+   RESET
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================================
+   BODY
+   ========================================= */
+
+body {
+    background:
+        linear-gradient(
+            135deg,
+            #eef4ff,
+            #f8fafc
+        );
+
+    color: #1f2937;
+}
+
+
+/* =========================================
+   PAGE
+   ========================================= */
+
+.inventory-page {
+    width: min(
+        1150px,
+        calc(100% - 32px)
+    );
+
+    margin: 30px auto 50px;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.inventory-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 24px 28px;
+
+    margin-bottom: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe4f0;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(
+            15,
+            23,
+            42,
+            0.07
+        );
+}
+
+.header-label {
+    margin: 0 0 5px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: #2563eb;
+}
+
+.inventory-header h1 {
+    margin: 0;
+
+    font-size: 32px;
+}
+
+.header-description {
+    margin: 7px 0 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   HEADER ACTIONS
+   ========================================= */
+
+.header-actions {
+    display: flex;
+
+    gap: 10px;
+}
+
+.header-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 0 16px;
+
+    border-radius: 11px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.header-button:hover {
+    transform: translateY(-2px);
+
+    background: #dbeafe;
+}
+
+
+/* =========================================
+   SUMMARY
+   ========================================= */
+
+.inventory-summary {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 25px;
+
+    padding: 20px 24px;
+
+    margin-bottom: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe4f0;
+
+    border-radius: 18px;
+}
+
+.summary-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+.summary-title > span {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 14px;
+
+    background: #eff6ff;
+
+    font-size: 23px;
+}
+
+.summary-title strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 16px;
+}
+
+.summary-title p {
+    margin: 0;
+
+    font-size: 12px;
+
+    color: #64748b;
+}
+
+
+/* =========================================
+   SUMMARY ORBS
+   ========================================= */
+
+.summary-orbs {
+    display: flex;
+
+    gap: 12px;
+}
+
+.summary-orb {
+    min-width: 85px;
+
+    padding: 10px 14px;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    text-align: center;
+}
+
+.summary-orb span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #64748b;
+}
+
+.summary-orb strong {
+    font-size: 20px;
+
+    color: #2563eb;
+}
+
+
+/* =========================================
+   ITEM GRID
+   ========================================= */
+
+.item-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+
+/* =========================================
+   ITEM CARD
+   ========================================= */
+
+.item-card {
+    position: relative;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 17px;
+
+    min-height: 185px;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe4f0;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px rgba(
+            15,
+            23,
+            42,
+            0.05
+        );
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.item-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #93c5fd;
+}
+
+
+/* =========================================
+   ITEM ICON
+   ========================================= */
+
+.item-icon {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 64px;
+
+    height: 64px;
+
+    border-radius: 16px;
+
+    background: #f1f5f9;
+
+    font-size: 30px;
+}
+
+.capture-icon {
+    background: #eff6ff;
+}
+
+.heal-icon {
+    background: #ecfdf5;
+}
+
+.revive-icon {
+    background: #fef3c7;
+}
+
+
+/* =========================================
+   ITEM CONTENT
+   ========================================= */
+
+.item-content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.item-category {
+    display: inline-block;
+
+    margin-bottom: 6px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #64748b;
+}
+
+.item-content h2 {
+    margin: 0 0 7px;
+
+    font-size: 21px;
+}
+
+.item-content p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   ITEM BOTTOM
+   ========================================= */
+
+.item-bottom {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 18px;
+
+    padding-top: 12px;
+
+    border-top: 1px solid #eef2f7;
+
+    font-size: 11px;
+
+    color: #64748b;
+}
+
+.item-bottom strong {
+    color: #2563eb;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   QUANTITY
+   ========================================= */
+
+.item-quantity {
+    min-width: 68px;
+
+    padding: 11px;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    text-align: center;
+
+    border: 1px solid #e2e8f0;
+}
+
+.item-quantity span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 9px;
+
+    color: #64748b;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+.item-quantity strong {
+    font-size: 24px;
+
+    color: #111827;
+}
+
+
+/* =========================================
+   RARE
+   ========================================= */
+
+.rare-card {
+    border-color: #fde68a;
+}
+
+
+/* =========================================
+   INFO
+   ========================================= */
+
+.inventory-info {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 13px;
+
+    margin-top: 22px;
+
+    padding: 20px 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe4f0;
+
+    border-radius: 18px;
+}
+
+.info-icon {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 12px;
+
+    background: #eff6ff;
+
+    font-size: 19px;
+}
+
+.inventory-info h2 {
+    margin: 0 0 6px;
+
+    font-size: 16px;
+}
+
+.inventory-info p {
+    margin: 0;
+
+    color: #64748b;
+
+    line-height: 1.6;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 850px) {
+
+    .inventory-summary {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .summary-orbs {
+        width: 100%;
+    }
+
+    .summary-orb {
+        flex: 1;
+    }
+
+    .item-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .inventory-page {
+        width: min(
+            100% - 20px,
+            1150px
+        );
+
+        margin-top: 10px;
+    }
+
+    .inventory-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .header-actions {
+        width: 100%;
+    }
+
+    .header-button {
+        flex: 1;
+    }
+
+    .summary-orbs {
+        flex-direction: column;
+    }
+
+    .summary-orb {
+        width: 100%;
+    }
+
+    .item-card {
+        flex-direction: column;
+    }
+
+    .item-quantity {
+        width: 100%;
+    }
+}

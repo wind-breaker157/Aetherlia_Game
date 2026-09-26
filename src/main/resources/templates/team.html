@@ -1,0 +1,968 @@
+```html
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Team - Aetherlia</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/team.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/monster-sprite.css}">
+
+</head>
+
+<body>
+
+<main class="team-page">
+
+    <!-- ===================================== -->
+    <!-- HEADER -->
+    <!-- ===================================== -->
+
+    <header class="team-header">
+
+        <div>
+
+            <p class="header-label">
+                AETHERLIA
+            </p>
+
+            <h1>
+                TEAM
+            </h1>
+
+            <p class="header-description">
+                Quản lý đội hình Monster
+            </p>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <a th:href="@{/character}"
+               class="header-button">
+
+                ← Nhân vật
+
+            </a>
+
+
+            <a th:href="@{/my-monsters}"
+               class="header-button">
+
+                🐾 My Monsters
+
+            </a>
+
+
+            <a th:href="@{/inventory}"
+               class="header-button">
+
+                🎒 Inventory
+
+            </a>
+
+
+            <a th:href="@{/map/1}"
+               class="header-button">
+
+                🗺 Map
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ===================================== -->
+    <!-- TEAM STATUS -->
+    <!-- ===================================== -->
+
+    <section class="team-status">
+
+        <div>
+
+            <span class="status-label">
+                TEAM
+            </span>
+
+            <strong>
+
+                <span th:text="${#lists.size(members)}">
+                    0
+                </span>
+
+                / 6
+
+            </strong>
+
+        </div>
+
+
+        <div class="status-description">
+
+            Slot 1 là Monster xuất chiến đầu tiên.
+
+        </div>
+
+    </section>
+
+
+    <!-- ===================================== -->
+    <!-- CURRENT TEAM -->
+    <!-- ===================================== -->
+
+    <section>
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-label">
+                    CURRENT TEAM
+                </span>
+
+                <h2>
+                    Đội hình hiện tại
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="team-grid">
+
+            <!-- ================================= -->
+            <!-- TEAM MEMBER -->
+            <!-- ================================= -->
+
+            <article th:each="member : ${members}"
+                     class="monster-card"
+                     th:classappend="${member.position == 1} ? ' active-slot' : ''">
+
+
+                <!-- ================================= -->
+                <!-- SLOT -->
+                <!-- ================================= -->
+
+                <div class="slot-number">
+
+                    SLOT
+
+                    <span th:text="${member.position}">
+                        1
+                    </span>
+
+                </div>
+
+
+                <!-- ================================= -->
+                <!-- ACTIVE -->
+                <!-- ================================= -->
+
+                <div th:if="${member.position == 1}"
+                     class="active-badge">
+
+                    ⚔️ XUẤT CHIẾN
+
+                </div>
+
+
+                <!-- ================================= -->
+                <!-- MONSTER VISUAL -->
+                <!-- ================================= -->
+
+                <div class="monster-visual">
+
+                    <div class="monster-placeholder">
+
+
+                        <!-- ================================= -->
+                        <!-- SPRIGLET -->
+                        <!-- ================================= -->
+
+                        <div th:if="${member.playerMonster.monster.name == 'Spriglet'}"
+                             class="monster-sprite">
+
+                            <svg class="monster-svg spriglet-svg"
+                                 viewBox="0 0 160 160"
+                                 xmlns="http://www.w3.org/2000/svg">
+
+                                <ellipse cx="80"
+                                         cy="137"
+                                         rx="42"
+                                         ry="10"
+                                         class="sprite-shadow">
+                                </ellipse>
+
+                                <ellipse cx="80"
+                                         cy="94"
+                                         rx="43"
+                                         ry="39"
+                                         class="spriglet-body">
+                                </ellipse>
+
+                                <circle cx="80"
+                                        cy="63"
+                                        r="31"
+                                        class="spriglet-head">
+                                </circle>
+
+                                <path d="M55 49
+                                         C47 22,
+                                           58 9,
+                                           72 32
+                                         C78 16,
+                                           94 16,
+                                           91 38
+                                         C109 15,
+                                           119 28,
+                                           101 53"
+                                      class="spriglet-leaf">
+                                </path>
+
+                                <circle cx="68"
+                                        cy="65"
+                                        r="5"
+                                        class="sprite-eye">
+                                </circle>
+
+                                <circle cx="92"
+                                        cy="65"
+                                        r="5"
+                                        class="sprite-eye">
+                                </circle>
+
+                                <path d="M73 78
+                                         Q80 84
+                                           87 78"
+                                      class="sprite-mouth">
+                                </path>
+
+                                <ellipse cx="45"
+                                         cy="95"
+                                         rx="15"
+                                         ry="9"
+                                         transform="rotate(-25 45 95)"
+                                         class="spriglet-limb">
+                                </ellipse>
+
+                                <ellipse cx="115"
+                                         cy="95"
+                                         rx="15"
+                                         ry="9"
+                                         transform="rotate(25 115 95)"
+                                         class="spriglet-limb">
+                                </ellipse>
+
+                                <ellipse cx="63"
+                                         cy="128"
+                                         rx="13"
+                                         ry="7"
+                                         class="spriglet-limb">
+                                </ellipse>
+
+                                <ellipse cx="97"
+                                         cy="128"
+                                         rx="13"
+                                         ry="7"
+                                         class="spriglet-limb">
+                                </ellipse>
+
+                            </svg>
+
+                        </div>
+
+
+                        <!-- ================================= -->
+                        <!-- PYRON -->
+                        <!-- ================================= -->
+
+                        <div th:if="${member.playerMonster.monster.name == 'Pyron'}"
+                             class="monster-sprite">
+
+                            <svg class="monster-svg pyron-svg"
+                                 viewBox="0 0 160 160"
+                                 xmlns="http://www.w3.org/2000/svg">
+
+                                <ellipse cx="80"
+                                         cy="137"
+                                         rx="42"
+                                         ry="10"
+                                         class="sprite-shadow">
+                                </ellipse>
+
+                                <path d="M44 104
+                                         C36 83,
+                                           47 55,
+                                           72 45
+                                         C84 40,
+                                           87 29,
+                                           82 17
+                                         C108 29,
+                                           116 55,
+                                           104 76
+                                         C126 70,
+                                           129 95,
+                                           112 111
+                                         C96 127,
+                                           58 126,
+                                           44 104 Z"
+                                      class="pyron-body">
+                                </path>
+
+                                <path d="M80 37
+                                         C87 28,
+                                           96 31,
+                                           100 43
+                                         C92 40,
+                                           88 46,
+                                           86 54
+                                         C79 49,
+                                           76 43,
+                                           80 37 Z"
+                                      class="pyron-flame">
+                                </path>
+
+                                <circle cx="65"
+                                        cy="76"
+                                        r="5"
+                                        class="sprite-eye">
+                                </circle>
+
+                                <circle cx="95"
+                                        cy="76"
+                                        r="5"
+                                        class="sprite-eye">
+                                </circle>
+
+                                <path d="M70 91
+                                         Q80 99
+                                           90 91"
+                                      class="sprite-mouth">
+                                </path>
+
+                                <ellipse cx="48"
+                                         cy="103"
+                                         rx="13"
+                                         ry="9"
+                                         transform="rotate(-20 48 103)"
+                                         class="pyron-limb">
+                                </ellipse>
+
+                                <ellipse cx="112"
+                                         cy="103"
+                                         rx="13"
+                                         ry="9"
+                                         transform="rotate(20 112 103)"
+                                         class="pyron-limb">
+                                </ellipse>
+
+                                <ellipse cx="62"
+                                         cy="127"
+                                         rx="15"
+                                         ry="7"
+                                         class="pyron-limb">
+                                </ellipse>
+
+                                <ellipse cx="98"
+                                         cy="127"
+                                         rx="15"
+                                         ry="7"
+                                         class="pyron-limb">
+                                </ellipse>
+
+                            </svg>
+
+                        </div>
+
+
+                        <!-- ================================= -->
+                        <!-- AQUAFF -->
+                        <!-- ================================= -->
+
+                        <div th:if="${member.playerMonster.monster.name == 'Aquaff'}"
+                             class="monster-sprite">
+
+                            <svg class="monster-svg aquaff-svg"
+                                 viewBox="0 0 160 160"
+                                 xmlns="http://www.w3.org/2000/svg">
+
+                                <ellipse cx="80"
+                                         cy="137"
+                                         rx="45"
+                                         ry="9"
+                                         class="sprite-shadow">
+                                </ellipse>
+
+                                <path d="M47 102
+                                         C38 84,
+                                           43 61,
+                                           58 50
+                                         C72 39,
+                                           91 40,
+                                           105 51
+                                         C120 63,
+                                           124 86,
+                                           113 104
+                                         C102 123,
+                                           59 124,
+                                           47 102 Z"
+                                      class="aquaff-body">
+                                </path>
+
+                                <path d="M62 51
+                                         C54 37,
+                                           61 26,
+                                           73 42
+                                         C80 27,
+                                           91 30,
+                                           88 46"
+                                      class="aquaff-fin">
+                                </path>
+
+                                <circle cx="66"
+                                        cy="76"
+                                        r="5"
+                                        class="sprite-eye">
+                                </circle>
+
+                                <circle cx="94"
+                                        cy="76"
+                                        r="5"
+                                        class="sprite-eye">
+                                </circle>
+
+                                <path d="M70 91
+                                         Q80 98
+                                           90 91"
+                                      class="sprite-mouth">
+                                </path>
+
+                                <ellipse cx="47"
+                                         cy="101"
+                                         rx="14"
+                                         ry="8"
+                                         transform="rotate(-25 47 101)"
+                                         class="aquaff-limb">
+                                </ellipse>
+
+                                <ellipse cx="113"
+                                         cy="101"
+                                         rx="14"
+                                         ry="8"
+                                         transform="rotate(25 113 101)"
+                                         class="aquaff-limb">
+                                </ellipse>
+
+                                <ellipse cx="62"
+                                         cy="127"
+                                         rx="15"
+                                         ry="7"
+                                         class="aquaff-limb">
+                                </ellipse>
+
+                                <ellipse cx="98"
+                                         cy="127"
+                                         rx="15"
+                                         ry="7"
+                                         class="aquaff-limb">
+                                </ellipse>
+
+                                <circle cx="125"
+                                        cy="63"
+                                        r="8"
+                                        class="aquaff-drop">
+                                </circle>
+
+                            </svg>
+
+                        </div>
+
+
+                        <!-- ================================= -->
+                        <!-- DEFAULT MONSTER -->
+                        <!-- ================================= -->
+
+                        <div th:if="${member.playerMonster.monster.name != 'Spriglet'
+                                    and member.playerMonster.monster.name != 'Pyron'
+                                    and member.playerMonster.monster.name != 'Aquaff'}"
+                             class="monster-sprite">
+
+                            <svg class="monster-svg default-monster-svg"
+                                 viewBox="0 0 160 160"
+                                 xmlns="http://www.w3.org/2000/svg">
+
+                                <ellipse cx="80"
+                                         cy="137"
+                                         rx="42"
+                                         ry="10"
+                                         class="sprite-shadow">
+                                </ellipse>
+
+                                <circle cx="80"
+                                        cy="82"
+                                        r="42"
+                                        class="default-monster-body">
+                                </circle>
+
+                                <circle cx="66"
+                                        cy="77"
+                                        r="5"
+                                        class="sprite-eye">
+                                </circle>
+
+                                <circle cx="94"
+                                        cy="77"
+                                        r="5"
+                                        class="sprite-eye">
+                                </circle>
+
+                                <path d="M70 92
+                                         Q80 99
+                                           90 92"
+                                      class="sprite-mouth">
+                                </path>
+
+                            </svg>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================================= -->
+                <!-- NAME -->
+                <!-- ================================= -->
+
+                <h2 th:text="${member.playerMonster.monster.name}">
+                    Monster
+                </h2>
+
+
+                <!-- ================================= -->
+                <!-- TYPE -->
+                <!-- ================================= -->
+
+                <div class="monster-type"
+                     th:text="${member.playerMonster.monster.type}">
+
+                    NORMAL
+
+                </div>
+
+
+                <!-- ================================= -->
+                <!-- LEVEL -->
+                <!-- ================================= -->
+
+                <div class="monster-level">
+
+                    Lv.
+
+                    <strong th:text="${member.playerMonster.level}">
+                        1
+                    </strong>
+
+                </div>
+
+
+                <!-- ================================= -->
+                <!-- HP -->
+                <!-- ================================= -->
+
+                <div class="monster-hp">
+
+                    <div class="hp-header">
+
+                        <span>
+                            HP
+                        </span>
+
+                        <span>
+
+                            <strong
+                                th:text="${member.playerMonster.currentHp}">
+                                40
+                            </strong>
+
+                            /
+
+                            <strong
+                                th:text="${member.playerMonster.monster.baseHp}">
+                                40
+                            </strong>
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="hp-bar">
+
+                        <div class="hp-fill"
+                             th:style="'width:' + (${member.playerMonster.currentHp} * 100 / ${member.playerMonster.monster.baseHp}) + '%'">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================================= -->
+                <!-- FOOTER -->
+                <!-- ================================= -->
+
+                <div class="card-footer">
+
+                    <span th:if="${member.position == 1}">
+                        Monster được dùng khi Battle
+                    </span>
+
+                    <span th:if="${member.position != 1}">
+                        Thành viên Team
+                    </span>
+
+
+                    <!-- ================================= -->
+                    <!-- MOVE -->
+                    <!-- ================================= -->
+
+                    <div class="move-buttons">
+
+
+                        <!-- UP -->
+
+                        <form th:if="${member.position > 1}"
+                              th:action="@{/team/move}"
+                              method="post">
+
+                            <input type="hidden"
+                                   name="playerMonsterId"
+                                   th:value="${member.playerMonster.id}">
+
+                            <input type="hidden"
+                                   name="direction"
+                                   value="UP">
+
+                            <input type="hidden"
+                                   th:name="${_csrf.parameterName}"
+                                   th:value="${_csrf.token}">
+
+                            <button type="submit"
+                                    class="move-button">
+
+                                ↑ Đưa lên
+
+                            </button>
+
+                        </form>
+
+
+                        <!-- DOWN -->
+
+                        <form th:if="${member.position < #lists.size(members)}"
+                              th:action="@{/team/move}"
+                              method="post">
+
+                            <input type="hidden"
+                                   name="playerMonsterId"
+                                   th:value="${member.playerMonster.id}">
+
+                            <input type="hidden"
+                                   name="direction"
+                                   value="DOWN">
+
+                            <input type="hidden"
+                                   th:name="${_csrf.parameterName}"
+                                   th:value="${_csrf.token}">
+
+                            <button type="submit"
+                                    class="move-button">
+
+                                ↓ Đưa xuống
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- ================================= -->
+                    <!-- REMOVE -->
+                    <!-- ================================= -->
+
+                    <form th:action="@{/team/remove}"
+                          method="post"
+                          class="remove-form">
+
+                        <input type="hidden"
+                               name="playerMonsterId"
+                               th:value="${member.playerMonster.id}">
+
+                        <input type="hidden"
+                               th:name="${_csrf.parameterName}"
+                               th:value="${_csrf.token}">
+
+                        <button type="submit"
+                                class="remove-button">
+
+                            Xóa khỏi Team
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </article>
+
+
+            <!-- ================================= -->
+            <!-- EMPTY SLOTS -->
+            <!-- ================================= -->
+
+            <div th:if="${#lists.size(members) < 6}"
+                 th:each="slot : ${#numbers.sequence(#lists.size(members) + 1, 6)}"
+                 class="monster-card empty-slot">
+
+                <div class="slot-number">
+
+                    SLOT
+
+                    <span th:text="${slot}">
+                        2
+                    </span>
+
+                </div>
+
+
+                <div class="empty-icon">
+                    +
+                </div>
+
+
+                <p>
+                    Chưa có Monster
+                </p>
+
+
+                <span>
+                    Có thể thêm Monster
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===================================== -->
+    <!-- ADD MONSTER -->
+    <!-- ===================================== -->
+
+    <section class="add-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-label">
+                    COLLECTION
+                </span>
+
+                <h2>
+                    Thêm Monster vào Team
+                </h2>
+
+                <p>
+                    Monster đã nằm trong Team sẽ không
+                    xuất hiện ở danh sách này.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="available-grid">
+
+            <article th:each="playerMonster : ${playerMonsters}"
+                     th:if="${!teamMonsterIds.contains(playerMonster.id)}"
+                     class="available-card">
+
+
+                <!-- ICON -->
+
+                <div class="available-icon">
+
+                    <div th:if="${playerMonster.monster.name == 'Spriglet'}"
+                         class="mini-monster spriglet-mini">
+
+                        🌿
+
+                    </div>
+
+
+                    <div th:if="${playerMonster.monster.name == 'Pyron'}"
+                         class="mini-monster pyron-mini">
+
+                        🔥
+
+                    </div>
+
+
+                    <div th:if="${playerMonster.monster.name == 'Aquaff'}"
+                         class="mini-monster aquaff-mini">
+
+                        💧
+
+                    </div>
+
+
+                    <div th:if="${playerMonster.monster.name != 'Spriglet'
+                                and playerMonster.monster.name != 'Pyron'
+                                and playerMonster.monster.name != 'Aquaff'}"
+                         class="mini-monster">
+
+                        🐾
+
+                    </div>
+
+                </div>
+
+
+                <!-- INFO -->
+
+                <div class="available-info">
+
+                    <h3
+                        th:text="${playerMonster.monster.name}">
+
+                        Monster
+
+                    </h3>
+
+
+                    <span
+                        th:text="${playerMonster.monster.type}">
+
+                        NORMAL
+
+                    </span>
+
+
+                    <p>
+
+                        Lv.
+
+                        <strong
+                            th:text="${playerMonster.level}">
+
+                            1
+
+                        </strong>
+
+                    </p>
+
+                </div>
+
+
+                <!-- ADD -->
+
+                <form th:action="@{/team/add}"
+                      method="post">
+
+                    <input type="hidden"
+                           name="playerMonsterId"
+                           th:value="${playerMonster.id}">
+
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}">
+
+                    <button type="submit"
+                            class="add-button">
+
+                        + Thêm
+
+                    </button>
+
+                </form>
+
+            </article>
+
+
+            <!-- ================================= -->
+            <!-- NO MONSTER -->
+            <!-- ================================= -->
+
+            <div th:if="${#lists.isEmpty(playerMonsters)}"
+                 class="no-monster-message">
+
+                <div>
+                    🐾
+                </div>
+
+                <h3>
+                    Chưa có Monster
+                </h3>
+
+                <p>
+                    Hãy đi Route Cỏ Cao để tìm Monster.
+                </p>
+
+                <a th:href="@{/map/1}">
+
+                    🗺 Đi tới Map
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===================================== -->
+    <!-- TEAM RULE -->
+    <!-- ===================================== -->
+
+    <section class="team-info">
+
+        <h2>
+            ℹ️ Quy tắc Team
+        </h2>
+
+        <p>
+            Team tối đa 6 Monster. Monster ở Slot 1
+            sẽ được dùng để bắt đầu Battle. Dùng nút
+            ↑ Đưa lên hoặc ↓ Đưa xuống để sắp xếp Team.
+            Xóa Monster khỏi Team không xóa Monster
+            khỏi bộ sưu tập.
+        </p>
+
+    </section>
+
+</main>
+
+</body>
+
+</html>
+```

@@ -1,0 +1,141 @@
+/* =========================================
+   MONSTER SPRITE
+   ========================================= */
+
+.monster-sprite {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: visible;
+}
+
+.monster-svg {
+    width: 100%;
+    height: 100%;
+
+    max-width: 180px;
+    max-height: 180px;
+
+    overflow: visible;
+
+    filter:
+        drop-shadow(
+            0 8px 8px
+            rgba(15, 23, 42, 0.12)
+        );
+}
+
+
+/* =========================================
+   COMMON
+   ========================================= */
+
+.sprite-shadow {
+    fill: rgba(15, 23, 42, 0.18);
+}
+
+.sprite-eye {
+    fill: #111827;
+}
+
+.sprite-mouth {
+    fill: none;
+
+    stroke: #111827;
+
+    stroke-width: 3;
+
+    stroke-linecap: round;
+}
+
+
+/* =========================================
+   SPRIGLET
+   ========================================= */
+
+.spriglet-body {
+    fill: #65a30d;
+}
+
+.spriglet-head {
+    fill: #84cc16;
+}
+
+.spriglet-leaf {
+    fill: #16a34a;
+}
+
+.spriglet-limb {
+    fill: #4d7c0f;
+}
+
+
+/* =========================================
+   PYRON
+   ========================================= */
+
+.pyron-body {
+    fill: #ef4444;
+}
+
+.pyron-flame {
+    fill: #facc15;
+}
+
+.pyron-limb {
+    fill: #b91c1c;
+}
+
+
+/* =========================================
+   AQUAFF
+   ========================================= */
+
+.aquaff-body {
+    fill: #38bdf8;
+}
+
+.aquaff-fin {
+    fill: #0ea5e9;
+}
+
+.aquaff-limb {
+    fill: #0284c7;
+}
+
+.aquaff-drop {
+    fill: #bae6fd;
+}
+
+
+/* =========================================
+   DEFAULT
+   ========================================= */
+
+.default-monster-body {
+    fill: #94a3b8;
+}
+
+
+/* =========================================
+   ANIMATION
+   ========================================= */
+
+.monster-sprite:hover .monster-svg {
+    transform:
+        translateY(-5px)
+        scale(1.03);
+
+    transition:
+        transform 0.2s ease;
+}
+
+.monster-svg {
+    transition:
+        transform 0.2s ease;
+}

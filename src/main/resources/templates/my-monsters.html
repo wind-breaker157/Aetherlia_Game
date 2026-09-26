@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Monsters - Aetherlia</title>
+
+<link rel="stylesheet" th:href="@{/css/my-monsters.css}">
+<link rel="stylesheet" th:href="@{/css/monster-sprite.css}">
+</head>
+
+<body>
+
+	<main class="monsters-page">
+
+		<!-- ===================================== -->
+		<!-- HEADER -->
+		<!-- ===================================== -->
+
+		<header class="monsters-header">
+
+			<div>
+
+				<p class="header-label">AETHERLIA</p>
+
+				<h1>MY MONSTERS</h1>
+
+				<p class="header-description">Bộ sưu tập Monster của anh</p>
+
+			</div>
+
+
+			<div class="header-actions">
+
+				<a th:href="@{/team}" class="header-button"> 👥 Team </a> <a
+					th:href="@{/character}" class="header-button"> 👤 Nhân vật </a> <a
+					th:href="@{/inventory}" class="header-button"> 🎒 Inventory </a> <a
+					th:href="@{/map/1}" class="header-button"> 🗺 Map </a>
+
+			</div>
+
+		</header>
+
+
+		<!-- ===================================== -->
+		<!-- SUMMARY -->
+		<!-- ===================================== -->
+
+		<section class="monster-summary">
+
+			<div class="summary-box">
+
+				<span class="summary-label"> TOTAL MONSTERS </span> <strong
+					th:text="${#lists.size(playerMonsters)}"> 0 </strong>
+
+			</div>
+
+
+			<div class="summary-text">
+
+				<strong> Bộ sưu tập Monster </strong>
+
+				<p>Monster được thu phục sẽ được lưu vào bộ sưu tập của tài
+					khoản.</p>
+
+			</div>
+
+		</section>
+
+
+		<!-- ===================================== -->
+		<!-- MONSTER GRID -->
+		<!-- ===================================== -->
+
+		<section class="monster-grid">
+
+
+			<!-- ================================= -->
+			<!-- MONSTER CARD -->
+			<!-- ================================= -->
+
+			<article th:each="playerMonster : ${playerMonsters}"
+				class="monster-card">
+
+
+				<!-- MONSTER ID -->
+
+				<div class="monster-number">
+
+					MONSTER # <span th:text="${playerMonster.id}"> 1 </span>
+
+				</div>
+
+
+				<!-- MONSTER VISUAL -->
+
+				<div class="monster-visual">
+
+					<div class="monster-icon">
+
+						<div
+							th:replace="~{fragments/monster-sprite :: sprite(${playerMonster.monster.name})}">
+						</div>
+
+					</div>
+
+				</div>
+
+
+				<!-- MONSTER NAME -->
+
+				<h2 th:text="${playerMonster.monster.name}">Monster</h2>
+
+
+				<!-- TYPE -->
+
+				<span class="monster-type" th:text="${playerMonster.monster.type}">
+					NORMAL </span>
+
+
+				<!-- LEVEL -->
+
+				<div class="monster-level">
+
+					Level <strong th:text="${playerMonster.level}"> 1 </strong>
+
+				</div>
+
+
+				<!-- HP -->
+
+				<div class="hp-section">
+
+					<div class="hp-header">
+
+						<span> HP </span> <span> <strong
+							th:text="${playerMonster.currentHp}"> 40 </strong> / <strong
+							th:text="${playerMonster.monster.baseHp}"> 40 </strong>
+
+						</span>
+
+					</div>
+
+
+					<div class="hp-bar">
+
+						<div class="hp-fill"
+							th:style="'width:' + (${playerMonster.currentHp} * 100 / ${playerMonster.monster.baseHp}) + '%'">
+						</div>
+
+					</div>
+
+				</div>
+
+
+				<!-- EXP -->
+
+				<div class="exp-row">
+
+					<span> EXP </span> <strong th:text="${playerMonster.exp}">
+						0 </strong>
+
+				</div>
+
+			</article>
+
+
+			<!-- ================================= -->
+			<!-- EMPTY COLLECTION -->
+			<!-- ================================= -->
+
+			<div th:if="${#lists.isEmpty(playerMonsters)}"
+				class="empty-collection">
+
+				<div class="empty-icon">🐾</div>
+
+				<h2>Chưa có Monster</h2>
+
+				<p>Hãy đi tới Route Cỏ Cao để tìm và thu phục Monster hoang dã.
+				</p>
+
+				<a th:href="@{/map/1}" class="explore-button"> 🗺 Đi tới Map </a>
+
+			</div>
+
+		</section>
+
+	</main>
+
+</body>
+
+</html>

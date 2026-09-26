@@ -1,0 +1,996 @@
+/* =========================================
+   RESET
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================================
+   BODY
+   ========================================= */
+
+body {
+    background:
+        linear-gradient(
+            135deg,
+            #eef4ff,
+            #f8fafc
+        );
+
+    color: #1f2937;
+}
+
+
+/* =========================================
+   PAGE
+   ========================================= */
+
+.team-page {
+    width: min(1150px, calc(100% - 32px));
+
+    margin: 30px auto 50px;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.team-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 24px 28px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe4f0;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.07);
+
+    margin-bottom: 22px;
+}
+
+.header-label {
+    margin: 0 0 5px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: #2563eb;
+}
+
+.team-header h1 {
+    margin: 0;
+
+    font-size: 32px;
+}
+
+.header-description {
+    margin: 7px 0 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   HEADER ACTIONS
+   ========================================= */
+
+.header-actions {
+    display: flex;
+
+    gap: 10px;
+}
+
+.header-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 0 16px;
+
+    border-radius: 11px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.header-button:hover {
+    transform: translateY(-2px);
+
+    background: #dbeafe;
+}
+
+
+/* =========================================
+   TEAM STATUS
+   ========================================= */
+
+.team-status {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 18px 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe4f0;
+
+    border-radius: 16px;
+
+    margin-bottom: 22px;
+}
+
+.team-status > div:first-child {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.status-label {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #64748b;
+}
+
+.team-status strong {
+    font-size: 24px;
+
+    color: #2563eb;
+}
+
+.status-description {
+    color: #64748b;
+
+    font-size: 13px;
+
+    text-align: right;
+}
+
+
+/* =========================================
+   TEAM GRID
+   ========================================= */
+
+.team-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+/* =========================================
+   MONSTER CARD
+   ========================================= */
+
+.monster-card {
+    position: relative;
+
+    padding: 20px;
+
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe4f0;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, 0.06);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.monster-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #93c5fd;
+}
+
+
+/* =========================================
+   ACTIVE SLOT
+   ========================================= */
+
+.active-slot {
+    border: 2px solid #2563eb;
+
+    box-shadow:
+        0 12px 30px rgba(37, 99, 235, 0.12);
+}
+
+
+/* =========================================
+   SLOT NUMBER
+   ========================================= */
+
+.slot-number {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #64748b;
+
+    text-transform: uppercase;
+}
+
+.slot-number span {
+    color: #2563eb;
+}
+
+
+/* =========================================
+   ACTIVE BADGE
+   ========================================= */
+
+.active-badge {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    padding: 5px 9px;
+
+    border-radius: 8px;
+
+    background: #dbeafe;
+
+    color: #2563eb;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   MONSTER VISUAL
+   ========================================= */
+
+.monster-visual {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    height: 150px;
+
+    margin-top: 12px;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #f8fafc
+        );
+}
+
+.monster-placeholder {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 8px 20px rgba(15, 23, 42, 0.08);
+
+    font-size: 46px;
+}
+
+
+/* =========================================
+   MONSTER NAME
+   ========================================= */
+
+.monster-card h2 {
+    margin: 17px 0 6px;
+
+    font-size: 22px;
+}
+
+
+/* =========================================
+   TYPE
+   ========================================= */
+
+.monster-type {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 8px;
+
+    background: #f1f5f9;
+
+    color: #475569;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   LEVEL
+   ========================================= */
+
+.monster-level {
+    margin-top: 13px;
+
+    font-size: 14px;
+
+    color: #64748b;
+}
+
+.monster-level strong {
+    color: #1f2937;
+}
+
+
+/* =========================================
+   HP
+   ========================================= */
+
+.monster-hp {
+    margin-top: 15px;
+}
+
+.hp-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+
+    font-size: 12px;
+
+    color: #64748b;
+}
+
+.hp-header strong {
+    color: #1f2937;
+}
+
+.hp-bar {
+    width: 100%;
+
+    height: 9px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #e5e7eb;
+}
+
+.hp-fill {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #2563eb;
+
+    transition: width 0.3s ease;
+}
+
+
+/* =========================================
+   CARD FOOTER
+   ========================================= */
+
+.card-footer {
+    margin-top: 17px;
+
+    padding-top: 13px;
+
+    border-top: 1px solid #eef2f7;
+
+    font-size: 12px;
+
+    color: #64748b;
+}
+
+
+/* =========================================
+   EMPTY SLOT
+   ========================================= */
+
+.empty-slot {
+    min-height: 340px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    border-style: dashed;
+
+    box-shadow: none;
+
+    background: #f8fafc;
+}
+
+.empty-slot:hover {
+    transform: none;
+
+    border-color: #cbd5e1;
+}
+
+.empty-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 72px;
+    height: 72px;
+
+    margin-top: 15px;
+
+    border-radius: 50%;
+
+    background: #e2e8f0;
+
+    color: #94a3b8;
+
+    font-size: 34px;
+}
+
+.empty-slot p {
+    margin: 15px 0 5px;
+
+    font-weight: 700;
+}
+
+.empty-slot > span {
+    color: #94a3b8;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   TEAM INFO
+   ========================================= */
+
+.team-info {
+    margin-top: 22px;
+
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe4f0;
+
+    border-radius: 18px;
+}
+
+.team-info h2 {
+    margin: 0 0 9px;
+
+    font-size: 18px;
+}
+
+.team-info p {
+    margin: 0;
+
+    color: #64748b;
+
+    line-height: 1.6;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 950px) {
+
+    .team-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+
+    .team-page {
+        width: min(
+            100% - 20px,
+            1150px
+        );
+
+        margin-top: 10px;
+    }
+
+    .team-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .header-actions {
+        width: 100%;
+    }
+
+    .header-button {
+        flex: 1;
+    }
+
+    .team-status {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .status-description {
+        text-align: left;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================================
+   SECTION HEADING
+   ========================================= */
+
+.section-heading {
+    margin-bottom: 16px;
+}
+
+.section-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #64748b;
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    font-size: 24px;
+}
+
+.section-heading p {
+    margin: 7px 0 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   REMOVE FORM
+   ========================================= */
+
+.remove-form {
+    margin-top: 12px;
+}
+
+.remove-button {
+    width: 100%;
+
+    min-height: 36px;
+
+    border: 1px solid #fecaca;
+
+    border-radius: 9px;
+
+    background: #fef2f2;
+
+    color: #dc2626;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.remove-button:hover {
+    background: #fee2e2;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   ADD SECTION
+   ========================================= */
+
+.add-section {
+    margin-top: 35px;
+
+    padding-top: 30px;
+
+    border-top: 1px solid #dbe4f0;
+}
+
+
+/* =========================================
+   AVAILABLE GRID
+   ========================================= */
+
+.available-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 14px;
+}
+
+
+/* =========================================
+   AVAILABLE CARD
+   ========================================= */
+
+.available-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 15px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe4f0;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 7px 20px rgba(
+            15,
+            23,
+            42,
+            0.04
+        );
+}
+
+.available-icon {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 55px;
+
+    height: 55px;
+
+    flex-shrink: 0;
+
+    border-radius: 14px;
+
+    background: #eff6ff;
+
+    font-size: 28px;
+}
+
+.available-info {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.available-info h3 {
+    margin: 0 0 5px;
+
+    font-size: 17px;
+}
+
+.available-info > span {
+    display: inline-block;
+
+    padding: 4px 8px;
+
+    border-radius: 7px;
+
+    background: #f1f5f9;
+
+    color: #475569;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.available-info p {
+    margin: 7px 0 0;
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   ADD BUTTON
+   ========================================= */
+
+.add-button {
+    min-width: 72px;
+
+    min-height: 38px;
+
+    padding: 0 12px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.add-button:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   EMPTY TEAM
+   ========================================= */
+
+.empty-team {
+    grid-column: 1 / -1;
+
+    padding: 35px;
+
+    text-align: center;
+
+    border: 1px dashed #cbd5e1;
+
+    border-radius: 18px;
+
+    background: #f8fafc;
+}
+
+.empty-team h2 {
+    margin: 10px 0 5px;
+
+    font-size: 20px;
+}
+
+.empty-team p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   NO MONSTER MESSAGE
+   ========================================= */
+
+.no-monster-message {
+    grid-column: 1 / -1;
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px dashed #cbd5e1;
+
+    border-radius: 18px;
+}
+
+.no-monster-message > div {
+    font-size: 40px;
+}
+
+.no-monster-message h3 {
+    margin: 10px 0 6px;
+
+    font-size: 20px;
+}
+
+.no-monster-message p {
+    margin: 0 0 18px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+.no-monster-message a {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 40px;
+
+    padding: 0 15px;
+
+    border-radius: 10px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    .available-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .available-card {
+        flex-wrap: wrap;
+    }
+
+    .available-info {
+        min-width: calc(100% - 75px);
+    }
+
+    .available-card form {
+        width: 100%;
+    }
+
+    .add-button {
+        width: 100%;
+    }
+}
+/* =========================================
+   MOVE BUTTONS
+   ========================================= */
+
+.move-buttons {
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+.move-buttons form {
+    flex: 1;
+}
+
+.move-button {
+    width: 100%;
+
+    min-height: 34px;
+
+    border: 1px solid #dbeafe;
+
+    border-radius: 8px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.move-button:hover {
+    background: #dbeafe;
+
+    transform: translateY(-1px);
+}

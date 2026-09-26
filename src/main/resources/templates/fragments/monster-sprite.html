@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="sprite(monsterName)">
+
+    <img
+        th:if="${monsterName == 'Spriglet'}"
+        th:src="@{/images/monsters/spriglet/spriglet_icon.png}"
+        alt="Spriglet"
+        class="battle-monster-image"
+    >
+
+    <div
+        th:if="${monsterName != 'Spriglet'}"
+        class="monster-placeholder"
+    >
+        <span th:text="${monsterName}"></span>
+    </div>
+
+</div>
+
+</body>
+</html>
