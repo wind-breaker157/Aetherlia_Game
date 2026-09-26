@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2026 at 11:11 PM
+-- Generation Time: Sep 26, 2026 at 11:41 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,6 +33,16 @@ CREATE TABLE `inventory_items` (
   `quantity` int(11) NOT NULL,
   `user_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `inventory_items`
+--
+
+INSERT INTO `inventory_items` (`id`, `item_code`, `quantity`, `user_id`) VALUES
+(1, 'BASIC_ORB', 54, 1),
+(2, 'GREAT_ORB', 2, 1),
+(3, 'ULTRA_ORB', 2, 1),
+(4, 'MASTER_ORB', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -81,17 +91,18 @@ CREATE TABLE `monsters` (
   `type` varchar(255) NOT NULL,
   `base_exp` int(11) NOT NULL,
   `catch_rate` double NOT NULL,
-  `rarity` varchar(255) NOT NULL
+  `rarity` varchar(255) NOT NULL,
+  `base_speed` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `monsters`
 --
 
-INSERT INTO `monsters` (`id`, `base_attack`, `base_defense`, `base_hp`, `name`, `type`, `base_exp`, `catch_rate`, `rarity`) VALUES
-(1, 49, 49, 45, 'Spriglet', 'GRASS', 50, 1, 'Common'),
-(2, 52, 43, 39, 'Pyron', 'FIRE', 52, 1, 'Common'),
-(3, 48, 65, 44, 'Aquaff', 'WATER', 55, 1, 'Common');
+INSERT INTO `monsters` (`id`, `base_attack`, `base_defense`, `base_hp`, `name`, `type`, `base_exp`, `catch_rate`, `rarity`, `base_speed`) VALUES
+(1, 49, 49, 45, 'Spriglet', 'GRASS', 50, 1, 'Common', 65),
+(2, 52, 43, 39, 'Pyron', 'FIRE', 52, 1, 'Common', 60),
+(3, 48, 65, 44, 'Aquaff', 'WATER', 55, 1, 'Common', 50);
 
 -- --------------------------------------------------------
 
@@ -112,7 +123,7 @@ CREATE TABLE `player_characters` (
 --
 
 INSERT INTO `player_characters` (`id`, `facing`, `name`, `sprite_code`, `user_id`) VALUES
-(1, 'UP', 'admin', 'player_default', 1);
+(1, 'LEFT', 'admin', 'player_default', 1);
 
 -- --------------------------------------------------------
 
@@ -162,7 +173,16 @@ CREATE TABLE `player_monsters` (
 --
 
 INSERT INTO `player_monsters` (`id`, `current_hp`, `exp`, `level`, `monster_id`, `user_id`) VALUES
-(1, 3, 78, 3, 1, 1);
+(1, 53, 487, 9, 1, 1),
+(2, 49, 0, 4, 1, 1),
+(3, 0, 0, 4, 3, 1),
+(4, 40, 0, 2, 2, 1),
+(5, 25, 36, 5, 2, 1),
+(6, 17, 0, 3, 3, 1),
+(7, 0, 0, 5, 1, 1),
+(8, 40, 61, 4, 1, 1),
+(9, 45, 0, 2, 3, 1),
+(10, 48, 0, 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -184,7 +204,7 @@ CREATE TABLE `player_positions` (
 --
 
 INSERT INTO `player_positions` (`id`, `location_code`, `map_area_id`, `user_id`, `x`, `y`) VALUES
-(1, 'route_grass', 1, 1, 482, 282);
+(1, 'route_grass', 1, 1, 304, 452);
 
 -- --------------------------------------------------------
 
@@ -222,7 +242,12 @@ CREATE TABLE `team_members` (
 --
 
 INSERT INTO `team_members` (`id`, `position`, `player_monster_id`, `team_id`) VALUES
-(4, 1, 1, 1);
+(4, 1, 1, 1),
+(6, 2, 3, 1),
+(8, 3, 5, 1),
+(9, 4, 6, 1),
+(10, 5, 7, 1),
+(11, 6, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -271,7 +296,57 @@ INSERT INTO `wild_encounters` (`id`, `active`, `current_hp`, `level`, `monster_i
 (5, b'0', 0, 3, 3, 1),
 (6, b'0', 32, 3, 2, 1),
 (7, b'0', 0, 2, 1, 1),
-(8, b'1', 51, 5, 1, 1);
+(8, b'0', 49, 5, 1, 1),
+(9, b'0', 0, 3, 3, 1),
+(10, b'0', 0, 2, 1, 1),
+(11, b'0', 25, 3, 3, 1),
+(12, b'0', 25, 5, 2, 1),
+(13, b'0', 9, 2, 2, 1),
+(14, b'0', 0, 4, 1, 1),
+(15, b'0', 40, 5, 1, 1),
+(16, b'0', 6, 2, 2, 1),
+(17, b'0', 21, 5, 2, 1),
+(18, b'0', 0, 5, 3, 1),
+(19, b'0', 0, 3, 3, 1),
+(20, b'0', 27, 2, 2, 1),
+(21, b'0', 1, 2, 2, 1),
+(22, b'0', 0, 3, 2, 1),
+(23, b'0', 25, 2, 3, 1),
+(24, b'0', 0, 4, 3, 1),
+(25, b'0', 14, 5, 1, 1),
+(26, b'0', 0, 3, 1, 1),
+(27, b'0', 19, 5, 1, 1),
+(28, b'0', 0, 4, 1, 1),
+(29, b'0', 0, 3, 1, 1),
+(30, b'0', 31, 4, 2, 1),
+(31, b'0', 0, 4, 3, 1),
+(32, b'0', 0, 2, 1, 1),
+(33, b'0', 21, 5, 2, 1),
+(34, b'0', 0, 5, 3, 1),
+(35, b'0', 0, 3, 3, 1),
+(36, b'0', 0, 5, 3, 1),
+(37, b'0', 0, 2, 2, 1),
+(38, b'0', 0, 5, 2, 1),
+(39, b'0', 0, 4, 1, 1),
+(40, b'0', 0, 2, 1, 1),
+(41, b'0', 0, 4, 3, 1),
+(42, b'0', 35, 3, 1, 1),
+(43, b'0', 0, 3, 3, 1),
+(44, b'0', 0, 5, 1, 1),
+(45, b'0', 0, 4, 1, 1),
+(46, b'0', 0, 2, 3, 1),
+(47, b'0', 21, 2, 2, 1),
+(48, b'0', 12, 5, 2, 1),
+(49, b'0', 0, 2, 1, 1),
+(50, b'0', 0, 2, 1, 1),
+(51, b'0', 0, 3, 3, 1),
+(52, b'0', 33, 3, 3, 1),
+(53, b'0', 24, 2, 2, 1),
+(54, b'0', 0, 3, 1, 1),
+(55, b'0', 34, 2, 1, 1),
+(56, b'0', 0, 5, 3, 1),
+(57, b'0', 6, 4, 2, 1),
+(58, b'1', 15, 2, 3, 1);
 
 --
 -- Indexes for dumped tables
@@ -368,7 +443,7 @@ ALTER TABLE `wild_encounters`
 -- AUTO_INCREMENT for table `inventory_items`
 --
 ALTER TABLE `inventory_items`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `map_areas`
@@ -398,7 +473,7 @@ ALTER TABLE `player_maps`
 -- AUTO_INCREMENT for table `player_monsters`
 --
 ALTER TABLE `player_monsters`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `player_positions`
@@ -416,7 +491,7 @@ ALTER TABLE `teams`
 -- AUTO_INCREMENT for table `team_members`
 --
 ALTER TABLE `team_members`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -428,7 +503,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wild_encounters`
 --
 ALTER TABLE `wild_encounters`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Constraints for dumped tables

@@ -1,47 +1,596 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
     <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Đăng ký - Aetherlia</title>
+
+
+    <!-- =====================================================
+         TAILWIND
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        th:href="@{/css/tailwind.css}"
+    >
+
+
+    <!-- =====================================================
+         REGISTER CUSTOM CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        th:href="@{/css/register.css}"
+    >
+
+
+    <!-- =====================================================
+         THREE.JS IMPORT MAP
+    ====================================================== -->
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js"
+        }
+    }
+    </script>
+
 </head>
 
-<body>
 
-    <h1>Đăng ký tài khoản Aetherlia</h1>
+<body class="register-page">
 
-    <form th:action="@{/register}" method="post">
 
-        <div>
-            <label>Username:</label>
-            <input type="text" name="username" required>
-        </div>
+<!-- =========================================================
+     BACKGROUND
+========================================================= -->
 
-        <br>
+<div class="register-background">
 
-        <div>
-            <label>Password:</label>
-            <input type="password" name="password" required>
-        </div>
+    <div class="bg-orb bg-orb-red"></div>
 
-        <br>
+    <div class="bg-orb bg-orb-green"></div>
 
-        <div>
-            <label>Email:</label>
-            <input type="email" name="email" required>
-        </div>
+    <div class="bg-orb bg-orb-purple"></div>
 
-        <br>
+    <div class="bg-orb bg-orb-blue"></div>
 
-        <button type="submit">
-            Đăng ký
-        </button>
 
-    </form>
+    <div class="background-grid"></div>
 
-    <p th:if="${message}"
-       th:text="${message}">
-    </p>
+</div>
+
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="register-main">
+
+
+    <!-- =====================================================
+         REGISTER CARD
+    ====================================================== -->
+
+    <section class="register-shell">
+
+
+        <!-- =================================================
+             LEFT - GAME INTRO
+        ================================================== -->
+
+        <section class="game-intro-panel">
+
+
+            <!-- Decorative glow -->
+
+            <div class="intro-glow intro-glow-red"></div>
+
+            <div class="intro-glow intro-glow-green"></div>
+
+            <div class="intro-glow intro-glow-purple"></div>
+
+
+            <!-- Brand -->
+
+            <div class="intro-brand">
+
+                <div class="intro-logo">
+                    A
+                </div>
+
+
+                <div>
+
+                    <p class="intro-brand-small">
+                        AETHERLIA
+                    </p>
+
+                    <p class="intro-brand-subtitle">
+                        MONSTER ADVENTURE
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Title -->
+
+            <div class="intro-text">
+
+                <span class="intro-badge">
+                    ✦ BẮT ĐẦU HÀNH TRÌNH
+                </span>
+
+
+                <h1>
+                    Một thế giới
+                    <span>
+                        đang chờ anh.
+                    </span>
+                </h1>
+
+
+                <p>
+                    Tạo Trainer của riêng anh,
+                    thu phục Monster và khám phá
+                    những vùng đất chưa được biết đến
+                    trong Aetherlia.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 3D MONSTER
+            ================================================== -->
+
+            <div
+                id="starterMonsterViewer"
+                class="starter-monster-viewer"
+            >
+
+                <div class="viewer-aura"></div>
+
+                <div
+                    id="monster3d"
+                    class="monster3d"
+                ></div>
+
+
+                <!-- Monster name -->
+
+                <div
+                    id="monsterName"
+                    class="monster-name-display"
+                >
+                    Spriglet
+                </div>
+
+
+                <div
+                    id="monsterType"
+                    class="monster-type-display"
+                >
+                    NATURE
+                </div>
+
+
+                <div class="viewer-tip">
+                    ↔ Kéo chuột để xoay
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 FEATURES
+            ================================================== -->
+
+            <div class="game-features">
+
+
+                <div class="game-feature">
+
+                    <div class="feature-icon feature-green">
+                        🌿
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Thu phục Monster
+                        </h3>
+
+                        <p>
+                            Khám phá và xây dựng bộ sưu tập
+                            Monster của riêng anh.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="game-feature">
+
+                    <div class="feature-icon feature-red">
+                        ⚔️
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Battle theo lượt
+                        </h3>
+
+                        <p>
+                            Đưa đội hình của anh vào
+                            những trận chiến chiến thuật.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="game-feature">
+
+                    <div class="feature-icon feature-purple">
+                        🗺️
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Khám phá thế giới
+                        </h3>
+
+                        <p>
+                            Đi qua nhiều khu vực,
+                            Dungeon và thành phố.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- Floating symbols -->
+
+            <span class="floating-symbol symbol-one">
+                ✦
+            </span>
+
+            <span class="floating-symbol symbol-two">
+                ✧
+            </span>
+
+            <span class="floating-symbol symbol-three">
+                ✦
+            </span>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             RIGHT - REGISTER FORM
+        ================================================== -->
+
+        <section class="register-form-panel">
+
+
+            <!-- Close / back -->
+
+            <a
+                th:href="@{/login}"
+                class="back-login"
+            >
+                ← Quay lại đăng nhập
+            </a>
+
+
+            <!-- Form heading -->
+
+            <div class="form-heading">
+
+                <span class="form-heading-badge">
+                    CREATE TRAINER
+                </span>
+
+
+                <h2>
+                    Tạo tài khoản
+                </h2>
+
+
+                <p>
+                    Sẵn sàng bắt đầu cuộc phiêu lưu
+                    của anh tại Aetherlia?
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ERROR / MESSAGE
+            ================================================== -->
+
+            <div
+                th:if="${message}"
+                class="register-message"
+            >
+
+                <span class="message-icon">
+                    ⚠
+                </span>
+
+                <p
+                    th:text="${message}"
+                >
+                    Thông báo
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FORM
+            ================================================== -->
+
+            <form
+                th:action="@{/register}"
+                method="post"
+                id="registerForm"
+                class="register-form"
+            >
+
+
+                <!-- =============================================
+                     USERNAME
+                ============================================== -->
+
+                <div class="register-field">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+
+                    <div class="field-wrapper">
+
+                        <span class="field-icon">
+                            👤
+                        </span>
+
+
+                        <input
+                            id="username"
+                            type="text"
+                            name="username"
+                            placeholder="Nhập username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     EMAIL
+                ============================================== -->
+
+                <div class="register-field">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+
+                    <div class="field-wrapper">
+
+                        <span class="field-icon">
+                            ✉
+                        </span>
+
+
+                        <input
+                            id="email"
+                            type="email"
+                            name="email"
+                            placeholder="example@email.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     PASSWORD
+                ============================================== -->
+
+                <div class="register-field">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+
+                    <div class="field-wrapper">
+
+                        <span class="field-icon">
+                            🔒
+                        </span>
+
+
+                        <input
+                            id="password"
+                            type="password"
+                            name="password"
+                            placeholder="Nhập password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="password-hint">
+                        Sử dụng mật khẩu đủ mạnh để bảo vệ tài khoản.
+                    </div>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     TERMS
+                ============================================== -->
+
+                <label class="terms-row">
+
+                    <input
+                        type="checkbox"
+                        id="agree"
+                        required
+                    >
+
+                    <span class="custom-checkbox">
+                    </span>
+
+
+                    <span class="terms-text">
+
+                        Tôi đồng ý với
+                        <a href="#">
+                            điều khoản sử dụng
+                        </a>
+                        của Aetherlia.
+
+                    </span>
+
+                </label>
+
+
+
+                <!-- =============================================
+                     SUBMIT
+                ============================================== -->
+
+                <button
+                    type="submit"
+                    class="register-submit"
+                >
+
+                    <span class="submit-shine"></span>
+
+                    <span class="submit-content">
+
+                        <span>
+                            Tạo tài khoản
+                        </span>
+
+                        <span class="submit-arrow">
+                            →
+                        </span>
+
+                    </span>
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- =================================================
+                 LOGIN
+            ================================================== -->
+
+            <div class="login-existing">
+
+                <span>
+                    Đã có tài khoản?
+                </span>
+
+
+                <a
+                    th:href="@{/login}"
+                >
+                    Đăng nhập ngay →
+                </a>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SMALL FOOTER
+            ================================================== -->
+
+            <div class="register-mini-footer">
+
+                <span>
+                    AETHERLIA
+                </span>
+
+                <span>
+                    •
+                </span>
+
+                <span>
+                    © 2026
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script
+    type="module"
+    th:src="@{/js/register.js}"
+></script>
+
 
 </body>
 

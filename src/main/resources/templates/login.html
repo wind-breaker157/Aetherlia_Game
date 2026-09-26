@@ -1,72 +1,599 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
     <meta charset="UTF-8">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Đăng nhập - Aetherlia</title>
 
-    <link rel="stylesheet" th:href="@{/css/login.css}">
+
+    <!-- =====================================================
+         TAILWIND
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        th:href="@{/css/tailwind.css}"
+    >
+
+
+    <!-- =====================================================
+         LOGIN CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        th:href="@{/css/login.css}"
+    >
+
+
+    <!-- =====================================================
+         THREE.JS
+    ====================================================== -->
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js"
+        }
+    }
+    </script>
 
 </head>
 
 
-<body>
-
-    <div class="login-container">
-
-        <h1>Đăng nhập Aetherlia</h1>
+<body class="login-page">
 
 
-        <form th:action="@{/login}" method="post">
+<!-- =========================================================
+     BACKGROUND
+========================================================= -->
 
-            <div class="form-group">
+<div class="login-background">
 
-                <label>Username:</label>
+    <div class="bg-orb bg-orb-red"></div>
 
-                <input
-                    type="text"
-                    name="username"
-                    placeholder="Nhập username"
-                    required>
+    <div class="bg-orb bg-orb-green"></div>
+
+    <div class="bg-orb bg-orb-purple"></div>
+
+    <div class="bg-orb bg-orb-blue"></div>
+
+    <div class="background-grid"></div>
+
+</div>
+
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="login-main">
+
+
+    <!-- =====================================================
+         LOGIN SHELL
+    ====================================================== -->
+
+    <section class="login-shell">
+
+
+        <!-- =================================================
+             LEFT SIDE - GAME INTRO
+        ================================================== -->
+
+        <section class="game-intro-panel">
+
+
+            <!-- Decorative glow -->
+
+            <div class="intro-glow intro-glow-red"></div>
+
+            <div class="intro-glow intro-glow-green"></div>
+
+            <div class="intro-glow intro-glow-purple"></div>
+
+
+            <!-- =============================================
+                 BRAND
+            ============================================== -->
+
+            <div class="intro-brand">
+
+                <div class="intro-logo">
+                    A
+                </div>
+
+
+                <div>
+
+                    <p class="intro-brand-small">
+                        AETHERLIA
+                    </p>
+
+                    <p class="intro-brand-subtitle">
+                        MONSTER ADVENTURE
+                    </p>
+
+                </div>
 
             </div>
 
 
-            <div class="form-group">
 
-                <label>Password:</label>
+            <!-- =============================================
+                 INTRO
+            ============================================== -->
 
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Nhập password"
-                    required>
+            <div class="intro-text">
+
+                <span class="intro-badge">
+                    ✦ CHÀO MỪNG TRỞ LẠI
+                </span>
+
+
+                <h1>
+
+                    Hành trình của anh
+                    <span>
+                        vẫn đang tiếp tục.
+                    </span>
+
+                </h1>
+
+
+                <p>
+
+                    Đăng nhập để tiếp tục khám phá
+                    thế giới Aetherlia, huấn luyện
+                    Monster và xây dựng đội hình
+                    của riêng anh.
+
+                </p>
 
             </div>
 
 
-            <button
-                type="submit"
-                class="login-button">
 
-                Đăng nhập
+            <!-- =============================================
+                 3D MONSTER
+            ============================================== -->
 
-            </button>
+            <div
+                id="loginMonsterViewer"
+                class="login-monster-viewer"
+            >
 
-        </form>
+                <div class="viewer-aura"></div>
 
 
-        <div class="register-link">
+                <div
+                    id="loginMonster3d"
+                    class="login-monster3d"
+                ></div>
 
-            <a href="/register">
-                Chưa có tài khoản? Đăng ký
+
+                <div
+                    id="loginMonsterName"
+                    class="monster-name-display"
+                >
+                    Spriglet
+                </div>
+
+
+                <div
+                    id="loginMonsterType"
+                    class="monster-type-display"
+                >
+                    NATURE
+                </div>
+
+
+                <div class="viewer-tip">
+                    ↔ Kéo chuột để xoay
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 FEATURES
+            ============================================== -->
+
+            <div class="game-features">
+
+
+                <div class="game-feature">
+
+                    <div class="feature-icon feature-green">
+                        🌿
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Thu phục Monster
+                        </h3>
+
+                        <p>
+                            Khám phá và xây dựng
+                            bộ sưu tập Monster.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="game-feature">
+
+                    <div class="feature-icon feature-red">
+                        ⚔️
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Battle theo lượt
+                        </h3>
+
+                        <p>
+                            Xây dựng chiến thuật
+                            và chiến đấu.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="game-feature">
+
+                    <div class="feature-icon feature-purple">
+                        🗺️
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Khám phá
+                        </h3>
+
+                        <p>
+                            Nhiều khu vực đang
+                            chờ anh khám phá.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =============================================
+                 FLOATING SYMBOLS
+            ============================================== -->
+
+            <span class="floating-symbol symbol-one">
+                ✦
+            </span>
+
+
+            <span class="floating-symbol symbol-two">
+                ✧
+            </span>
+
+
+            <span class="floating-symbol symbol-three">
+                ✦
+            </span>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             RIGHT SIDE - LOGIN FORM
+        ================================================== -->
+
+        <section class="login-form-panel">
+
+
+            <!-- =============================================
+                 TOP LINK
+            ============================================== -->
+
+            <a
+                href="/"
+                class="back-home"
+            >
+                ← Aetherlia
             </a>
 
-        </div>
 
-    </div>
+
+            <!-- =============================================
+                 HEADING
+            ============================================== -->
+
+            <div class="form-heading">
+
+                <span class="form-heading-badge">
+                    TRAINER LOGIN
+                </span>
+
+
+                <h2>
+                    Chào mừng trở lại
+                </h2>
+
+
+                <p>
+                    Đăng nhập để tiếp tục cuộc phiêu lưu
+                    của anh trong Aetherlia.
+                </p>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 LOGIN ERROR
+            ============================================== -->
+
+            <div
+                th:if="${param.error}"
+                class="login-message login-error"
+            >
+
+                <span>
+                    ⚠️
+                </span>
+
+                <p>
+                    Username hoặc password không chính xác.
+                </p>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 LOGOUT MESSAGE
+            ============================================== -->
+
+            <div
+                th:if="${param.logout}"
+                class="login-message login-success"
+            >
+
+                <span>
+                    ✓
+                </span>
+
+                <p>
+                    Anh đã đăng xuất khỏi Aetherlia.
+                </p>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 FORM
+            ============================================== -->
+
+            <form
+                th:action="@{/login}"
+                method="post"
+                id="loginForm"
+                class="login-form"
+            >
+
+
+                <!-- =========================================
+                     USERNAME
+                ========================================== -->
+
+                <div class="login-field">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+
+                    <div class="field-wrapper">
+
+                        <span class="field-icon">
+                            👤
+                        </span>
+
+
+                        <input
+                            id="username"
+                            type="text"
+                            name="username"
+                            placeholder="Nhập username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =========================================
+                     PASSWORD
+                ========================================== -->
+
+                <div class="login-field">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+
+                    <div class="field-wrapper">
+
+                        <span class="field-icon">
+                            🔒
+                        </span>
+
+
+                        <input
+                            id="password"
+                            type="password"
+                            name="password"
+                            placeholder="Nhập password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="password-toggle"
+                            aria-label="Hiện hoặc ẩn password"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =========================================
+                     SUBMIT
+                ========================================== -->
+
+                <button
+                    type="submit"
+                    class="login-submit"
+                >
+
+                    <span class="submit-shine"></span>
+
+
+                    <span class="submit-content">
+
+                        <span>
+                            Đăng nhập
+                        </span>
+
+                        <span class="submit-arrow">
+                            →
+                        </span>
+
+                    </span>
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- =============================================
+                 DIVIDER
+            ============================================== -->
+
+            <div class="login-divider">
+
+                <span></span>
+
+                <p>
+                    hoặc
+                </p>
+
+                <span></span>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 REGISTER
+            ============================================== -->
+
+            <div class="register-prompt">
+
+                <p>
+                    Chưa có tài khoản?
+                </p>
+
+
+                <a
+                    th:href="@{/register}"
+                >
+                    Tạo tài khoản mới →
+
+                </a>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 FOOTER
+            ============================================== -->
+
+            <div class="login-mini-footer">
+
+                <span>
+                    AETHERLIA
+                </span>
+
+                <span>
+                    •
+                </span>
+
+                <span>
+                    © 2026
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script
+    type="module"
+    th:src="@{/js/login.js}"
+></script>
+
 
 </body>
 

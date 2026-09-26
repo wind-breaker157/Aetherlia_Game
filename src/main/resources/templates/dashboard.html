@@ -1,123 +1,467 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aetherlia - Dashboard</title>
+<title>Aetherlia - Trang chủ</title>
 
-<link rel="stylesheet" th:href="@{/css/dashboard.css}">
+<link rel="stylesheet" th:href="@{/css/tailwind.css}">
+
 </head>
 
-<body>
 
-	<!-- Thanh trên cùng -->
-	<header class="topbar">
+<body class="min-h-screen bg-white text-slate-800">
 
-		<div class="logo">AETHERLIA</div>
 
-		<div class="topbar-right">
+	<!-- =========================================================
+     BACKGROUND DECORATION
+========================================================= -->
 
-			<span class="welcome"> Chào mừng, Trainer! </span>
+	<div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
 
-			<form th:action="@{/logout}" method="post">
+		<div
+			class="absolute -left-32 -top-32 h-96 w-96 rounded-full
+               bg-red-200/40 blur-3xl
+               animate-[floatSlow_8s_ease-in-out_infinite]"></div>
 
-				<button type="submit" class="logout-button">Đăng xuất</button>
 
-			</form>
+		<div
+			class="absolute right-[-120px] top-32 h-96 w-96 rounded-full
+               bg-green-200/40 blur-3xl
+               animate-[floatSlow_10s_ease-in-out_infinite_reverse]"></div>
+
+
+		<div
+			class="absolute bottom-[-140px] left-1/3 h-96 w-96 rounded-full
+               bg-violet-200/40 blur-3xl
+               animate-[floatSlow_12s_ease-in-out_infinite]"></div>
+
+
+		<div
+			class="absolute left-1/4 top-1/3 h-64 w-64 rounded-full
+               bg-blue-100/50 blur-3xl"></div>
+
+
+		<!-- Grid -->
+		<div
+			class="absolute inset-0 opacity-[0.025]
+               bg-[linear-gradient(rgba(30,41,59,0.7)_1px,transparent_1px),linear-gradient(90deg,rgba(30,41,59,0.7)_1px,transparent_1px)]
+               bg-[size:48px_48px]"></div>
+
+	</div>
+
+
+
+	<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+	<header
+		class="sticky top-0 z-50 border-b border-slate-200/80
+           bg-white/85 backdrop-blur-xl">
+
+		<div
+			class="mx-auto flex max-w-7xl items-center justify-between
+               gap-4 px-4 py-4 sm:px-6 lg:px-8">
+
+
+			<!-- LOGO -->
+
+			<a th:href="@{/dashboard}" class="group flex items-center gap-3">
+
+				<div
+					class="relative flex h-11 w-11 items-center justify-center
+                       overflow-hidden rounded-2xl
+                       bg-gradient-to-br from-red-500 via-violet-500 to-blue-500
+                       shadow-lg shadow-violet-200
+                       transition duration-300
+                       group-hover:rotate-3 group-hover:scale-105">
+
+					<div
+						class="absolute inset-0 bg-white/15
+                           animate-pulse"></div>
+
+					<span class="relative text-xl font-black text-white">
+						A </span>
+
+				</div>
+
+
+				<div>
+
+					<div
+						class="text-lg font-black tracking-[0.16em]
+                           text-slate-900">
+						AETHERLIA</div>
+
+					<div
+						class="hidden text-[10px] font-semibold
+                           tracking-[0.28em] text-slate-400
+                           sm:block">
+						MONSTER ADVENTURE</div>
+
+				</div>
+
+			</a>
+
+
+
+			<!-- NAV -->
+
+			<nav class="hidden items-center gap-1 lg:flex">
+
+				<a th:href="@{/dashboard}"
+					class="rounded-xl bg-violet-50 px-4 py-2.5
+                       text-sm font-bold text-violet-700
+                       shadow-sm">
+					Trang chủ </a> <a th:href="@{/my-monsters}"
+					class="rounded-xl px-4 py-2.5 text-sm font-semibold
+                       text-slate-600 transition
+                       hover:bg-green-50 hover:text-green-700">
+					Monster </a> <a th:href="@{/team}"
+					class="rounded-xl px-4 py-2.5 text-sm font-semibold
+                       text-slate-600 transition
+                       hover:bg-red-50 hover:text-red-700">
+					Đội hình </a> <a th:href="@{/map}"
+					class="rounded-xl px-4 py-2.5 text-sm font-semibold
+                       text-slate-600 transition
+                       hover:bg-blue-50 hover:text-blue-700">
+					Bản đồ </a> <a href="#events"
+					class="rounded-xl px-4 py-2.5 text-sm font-semibold
+                       text-slate-600 transition
+                       hover:bg-violet-50 hover:text-violet-700">
+					Sự kiện </a>
+
+			</nav>
+
+
+
+			<!-- ACCOUNT -->
+
+			<div class="flex items-center gap-2 sm:gap-3">
+
+				<a href="/topup"
+					class="hidden rounded-xl
+                       bg-gradient-to-r
+                       from-green-500
+                       to-emerald-500
+                       px-4 py-2.5
+                       text-sm font-bold text-white
+                       shadow-md shadow-green-200
+                       transition duration-200
+                       hover:-translate-y-0.5
+                       hover:shadow-lg
+                       sm:block">
+					💎 Nạp tiền </a>
+
+
+				<form th:action="@{/logout}" method="post">
+
+					<button type="submit"
+						class="rounded-xl border border-red-100
+                           bg-red-50 px-3 py-2.5
+                           text-sm font-bold text-red-600
+                           transition duration-200
+                           hover:bg-red-100
+                           hover:-translate-y-0.5">
+						Đăng xuất</button>
+
+				</form>
+
+			</div>
 
 		</div>
 
 	</header>
 
 
-	<!-- Nội dung chính -->
-	<main class="dashboard">
 
-		<!-- Tiêu đề -->
-		<section class="hero">
+	<!-- =========================================================
+     MAIN
+========================================================= -->
 
-			<div class="hero-content">
-
-				<p class="subtitle">HÀNH TRÌNH CỦA ANH BẮT ĐẦU TỪ ĐÂY</p>
-
-				<h1>
-					Chào mừng đến với <span>Aetherlia!</span>
-				</h1>
-
-				<p class="description">Khám phá thế giới Aetherlia, thu phục
-					những Monster mạnh mẽ và xây dựng đội hình của riêng anh.</p>
-
-			</div>
-
-		</section>
+	<main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
 
 
-		<!-- Các chức năng -->
-		<section class="menu-section">
+		<!-- =====================================================
+         HERO BANNER
+    ====================================================== -->
 
-			<h2>Hành trình của Trainer</h2>
+		<section
+			class="relative overflow-hidden rounded-[2rem]
+               border border-violet-100
+               bg-gradient-to-br
+               from-violet-50
+               via-white
+               to-red-50
+               shadow-xl shadow-violet-100/50">
 
-			<div class="menu-grid">
+			<!-- Decorative blobs -->
 
-
-				<!-- Chọn Monster -->
-				<a th:href="@{/starter-monsters}" class="menu-card">
-
-					<div class="card-icon">⚡</div>
-
-					<h3>Chọn Monster khởi đầu</h3>
-
-					<p>Chọn Monster đầu tiên để bắt đầu hành trình khám phá
-						Aetherlia.</p> <span class="card-link"> Bắt đầu → </span>
-
-				</a>
-
-
-				<!-- Monster của tôi -->
-				<a th:href="@{/my-monsters}" class="menu-card">
-
-					<div class="card-icon">🐾</div>
-
-					<h3>Monster của tôi</h3>
-
-					<p>Xem những Monster mà anh đang sở hữu, cấp độ, EXP và HP.</p> <span
-					class="card-link"> Xem Monster → </span>
-
-				</a> <a th:href="@{/team}" class="menu-card">
-
-					<div class="card-icon">⚔️</div>
-
-					<h3>Đội Monster</h3>
-
-					<p>Quản lý đội hình và chọn Monster tham gia chiến đấu.</p> <span
-					class="card-link"> Quản lý Team → </span>
-
-				</a> <a th:href="@{/map}" class="menu-card">
-
-					<div class="card-icon">🗺️</div>
-
-					<h3>Bản đồ Aetherlia</h3>
-
-					<p>Khám phá các khu vực, thành phố, Dungeon và những nơi chưa
-						được mở khóa.</p> <span class="card-link"> Mở bản đồ → </span>
-
-				</a>
+			<div
+				class="absolute -right-24 -top-24 h-72 w-72 rounded-full
+                   bg-red-200/30 blur-3xl
+                   animate-[floatSlow_9s_ease-in-out_infinite]"></div>
 
 
-				<!-- Battle -->
-				<div class="menu-card locked">
+			<div
+				class="absolute -bottom-24 left-1/3 h-72 w-72 rounded-full
+                   bg-green-200/30 blur-3xl
+                   animate-[floatSlow_11s_ease-in-out_infinite_reverse]"></div>
 
-					<div class="card-icon">⚔️</div>
 
-					<h3>Battle</h3>
+			<div class="relative grid min-h-[440px] lg:grid-cols-[1.05fr_0.95fr]">
 
-					<p>Tham gia những trận chiến theo lượt cùng đội Monster của
-						anh.</p>
 
-					<span class="locked-text"> 🔒 Chưa mở khóa </span>
+				<!-- HERO CONTENT -->
+
+				<div
+					class="flex flex-col justify-center
+                       p-7 sm:p-10 lg:p-14">
+
+					<span
+						class="inline-flex w-fit items-center gap-2
+                           rounded-full border
+                           border-red-200
+                           bg-red-50
+                           px-4 py-2
+                           text-xs font-black
+                           uppercase tracking-[0.18em]
+                           text-red-600
+                           shadow-sm">
+
+						<span
+						class="h-2 w-2 rounded-full bg-red-500
+                               animate-pulse"></span>
+
+						HÀNH TRÌNH ĐANG CHỜ
+
+					</span>
+
+
+					<h1
+						class="mt-5 max-w-2xl text-4xl font-black
+                           leading-tight tracking-tight
+                           text-slate-900 sm:text-5xl lg:text-6xl">
+
+						Chào mừng đến với <span
+							class="bg-gradient-to-r
+                               from-red-500
+                               via-violet-500
+                               to-blue-500
+                               bg-clip-text
+                               text-transparent">
+							Aetherlia </span>
+
+					</h1>
+
+
+					<p
+						class="mt-5 max-w-xl text-sm leading-7
+                           text-slate-600 sm:text-base">
+						Khám phá các vùng đất, thu phục Monster, xây dựng đội hình và trở
+						thành Trainer của riêng anh trong thế giới Aetherlia.</p>
+
+
+					<!-- HERO BUTTON -->
+
+					<div class="mt-8 flex flex-col gap-3 sm:flex-row">
+
+						<a th:href="@{/map}"
+							class="group inline-flex items-center
+                               justify-center gap-2
+                               rounded-2xl
+                               bg-gradient-to-r
+                               from-violet-600
+                               to-blue-600
+                               px-6 py-3.5
+                               text-sm font-black text-white
+                               shadow-lg shadow-violet-200
+                               transition duration-300
+                               hover:-translate-y-1
+                               hover:shadow-xl">
+
+							🗺️ <span> Khám phá Aetherlia </span> <span
+							class="transition duration-200
+                                   group-hover:translate-x-1">
+								→ </span>
+
+						</a> <a th:href="@{/starter-monsters}"
+							class="inline-flex items-center justify-center
+                               gap-2 rounded-2xl
+                               border border-green-200
+                               bg-white
+                               px-6 py-3.5
+                               text-sm font-black
+                               text-green-700
+                               shadow-sm
+                               transition duration-300
+                               hover:-translate-y-1
+                               hover:bg-green-50
+                               hover:shadow-lg">
+							⚡ Chọn Monster </a>
+
+					</div>
+
+
+					<!-- HERO STATS -->
+
+					<div class="mt-9 flex flex-wrap gap-3">
+
+						<div
+							class="rounded-2xl border border-violet-100
+                               bg-white/80 px-5 py-3 shadow-sm
+                               backdrop-blur">
+
+							<div class="text-xl font-black text-violet-700">
+								9</div>
+
+							<div class="text-xs font-semibold text-slate-500">
+								Khu vực</div>
+
+						</div>
+
+
+						<div
+							class="rounded-2xl border border-green-100
+                               bg-white/80 px-5 py-3 shadow-sm
+                               backdrop-blur">
+
+							<div class="text-xl font-black text-green-700">
+								12</div>
+
+							<div class="text-xs font-semibold text-slate-500">
+								Hệ Monster</div>
+
+						</div>
+
+
+						<div
+							class="rounded-2xl border border-red-100
+                               bg-white/80 px-5 py-3 shadow-sm
+                               backdrop-blur">
+
+							<div class="text-xl font-black text-red-600">
+								6</div>
+
+							<div class="text-xs font-semibold text-slate-500">
+								Monster / Team</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+
+				<!-- HERO VISUAL -->
+
+				<div
+					class="relative min-h-[320px]
+                       overflow-hidden
+                       border-t border-violet-100
+                       bg-gradient-to-br
+                       from-violet-100/50
+                       via-white
+                       to-red-100/40
+                       lg:border-l lg:border-t-0">
+
+					<!-- Floating circles -->
+
+					<div
+						class="absolute left-1/2 top-1/2
+                           h-64 w-64
+                           -translate-x-1/2
+                           -translate-y-1/2
+                           rounded-full
+                           border border-violet-200
+                           animate-[spin_18s_linear_infinite]"></div>
+
+
+					<div
+						class="absolute left-1/2 top-1/2
+                           h-48 w-48
+                           -translate-x-1/2
+                           -translate-y-1/2
+                           rounded-full
+                           border border-red-200
+                           animate-[spin_12s_linear_infinite_reverse]"></div>
+
+
+					<!-- Main emblem -->
+
+					<div
+						class="absolute left-1/2 top-1/2
+                           flex h-44 w-44
+                           -translate-x-1/2
+                           -translate-y-1/2
+                           items-center justify-center
+                           rounded-full
+                           bg-gradient-to-br
+                           from-red-500
+                           via-violet-500
+                           to-blue-500
+                           shadow-2xl
+                           shadow-violet-300
+                           animate-[floatSlow_4s_ease-in-out_infinite]">
+
+						<div
+							class="flex h-32 w-32
+                               items-center justify-center
+                               rounded-full
+                               bg-white/90">
+
+							<span
+								class="text-6xl font-black
+                                   bg-gradient-to-br
+                                   from-red-500
+                                   via-violet-500
+                                   to-blue-500
+                                   bg-clip-text
+                                   text-transparent">
+								A </span>
+
+						</div>
+
+					</div>
+
+
+					<!-- Floating icons -->
+
+					<span
+						class="absolute left-12 top-16
+                           text-3xl
+                           animate-[floatSlow_3s_ease-in-out_infinite]">
+						🌿 </span> <span
+						class="absolute right-16 top-20
+                           text-3xl
+                           animate-[floatSlow_4s_ease-in-out_infinite_reverse]">
+						🔥 </span> <span
+						class="absolute bottom-16 left-20
+                           text-3xl
+                           animate-[floatSlow_5s_ease-in-out_infinite]">
+						💧 </span> <span
+						class="absolute bottom-20 right-14
+                           text-2xl
+                           animate-[floatSlow_3.5s_ease-in-out_infinite_reverse]">
+						✦ </span>
+
+
+					<div
+						class="absolute bottom-6 left-1/2
+                           -translate-x-1/2
+                           rounded-full
+                           border border-white
+                           bg-white/80 px-4 py-2
+                           text-xs font-bold
+                           text-slate-600
+                           shadow-sm
+                           backdrop-blur">
+						Một thế giới mới đang chờ anh</div>
 
 				</div>
 
@@ -126,16 +470,1365 @@
 		</section>
 
 
-		<!-- Footer -->
-		<footer class="footer">
 
-			<p>AETHERLIA © 2026</p>
+		<!-- =====================================================
+         EVENTS
+    ====================================================== -->
 
-			<p>Hành trình thu phục Monster bắt đầu từ đây.</p>
+		<section id="events" class="mt-12">
+
+			<div
+				class="mb-5 flex flex-col gap-3
+                   sm:flex-row sm:items-end
+                   sm:justify-between">
+
+				<div>
+
+					<div class="flex items-center gap-2">
+
+						<span
+							class="h-2.5 w-2.5 rounded-full
+                               bg-red-500
+                               animate-pulse"></span>
+
+						<span
+							class="text-xs font-black
+                               uppercase tracking-[0.2em]
+                               text-red-500">
+							Live Events </span>
+
+					</div>
+
+
+					<h2
+						class="mt-2 text-2xl font-black
+                           text-slate-900 sm:text-3xl">
+						Sự kiện nổi bật</h2>
+
+
+					<p class="mt-1 text-sm text-slate-500">Hoạt
+						động đang diễn ra và sắp diễn ra.</p>
+
+				</div>
+
+
+				<a href="#events"
+					class="text-sm font-bold text-violet-600
+                       transition hover:text-violet-800">
+					Xem tất cả → </a>
+
+			</div>
+
+
+
+			<!-- EVENT CAROUSEL -->
+
+			<div
+				class="relative overflow-hidden rounded-3xl
+                   border border-red-100
+                   bg-white
+                   shadow-xl shadow-red-100/40">
+
+				<div id="eventCarousel">
+
+
+					<!-- =============================================
+                     SLIDE 1
+                ============================================== -->
+
+					<article
+						class="event-slide block min-h-[330px]
+                           bg-gradient-to-br
+                           from-red-500
+                           via-orange-500
+                           to-rose-500
+                           p-7 sm:p-10">
+
+						<div
+							class="flex h-full flex-col
+                               justify-center lg:max-w-2xl">
+
+							<div class="flex flex-wrap items-center gap-3">
+
+								<span
+									class="rounded-full
+                                       bg-white/20
+                                       px-3 py-1.5
+                                       text-xs font-black
+                                       text-white
+                                       backdrop-blur">
+									🔥 ĐANG DIỄN RA </span> <span
+									class="rounded-full
+                                       bg-white/10
+                                       px-3 py-1.5
+                                       text-xs font-bold
+                                       text-white">
+									EVENT 01 </span>
+
+							</div>
+
+
+							<h3
+								class="mt-5 text-3xl font-black
+                                   text-white sm:text-4xl">
+								Lễ Hội Ánh Trăng</h3>
+
+
+							<p
+								class="mt-3 max-w-xl text-sm
+                                   leading-6 text-red-50">
+								Thu thập vật phẩm đặc biệt, hoàn thành nhiệm vụ và nhận phần
+								thưởng giới hạn.</p>
+
+
+							<div class="mt-7 flex flex-wrap gap-3">
+
+								<div
+									class="rounded-2xl
+                                       bg-white/15
+                                       px-4 py-3
+                                       backdrop-blur">
+
+									<p
+										class="text-[10px]
+                                           uppercase
+                                           tracking-wider
+                                           text-white/70">
+										Còn lại</p>
+
+
+									<p id="countdown"
+										class="mt-1 text-lg font-black
+                                           text-white">
+										05 ngày 13 giờ</p>
+
+								</div>
+
+
+								<a href="#"
+									class="inline-flex items-center
+                                       rounded-2xl
+                                       bg-white
+                                       px-5 py-3
+                                       text-sm font-black
+                                       text-red-600
+                                       shadow-md
+                                       transition
+                                       hover:-translate-y-0.5
+                                       hover:bg-red-50">
+									Tham gia ngay → </a>
+
+							</div>
+
+						</div>
+
+					</article>
+
+
+
+					<!-- =============================================
+                     SLIDE 2
+                ============================================== -->
+
+					<article
+						class="event-slide hidden min-h-[330px]
+                           bg-gradient-to-br
+                           from-green-500
+                           via-emerald-500
+                           to-teal-500
+                           p-7 sm:p-10">
+
+						<div
+							class="flex h-full flex-col
+                               justify-center lg:max-w-2xl">
+
+							<span
+								class="w-fit rounded-full
+                                   bg-white/20
+                                   px-3 py-1.5
+                                   text-xs font-black
+                                   text-white">
+								🌿 ĐANG DIỄN RA </span>
+
+
+							<h3
+								class="mt-5 text-3xl font-black
+                                   text-white sm:text-4xl">
+								Rừng Thì Thầm</h3>
+
+
+							<p
+								class="mt-3 max-w-xl text-sm
+                                   leading-6 text-green-50">
+								Khám phá khu rừng huyền bí, tìm Monster hoang dã và hoàn thành
+								thử thách.</p>
+
+
+							<a th:href="@{/map}"
+								class="mt-7 inline-flex w-fit
+                                   items-center rounded-2xl
+                                   bg-white px-5 py-3
+                                   text-sm font-black
+                                   text-green-700
+                                   shadow-md
+                                   transition
+                                   hover:-translate-y-0.5
+                                   hover:bg-green-50">
+								Khám phá ngay → </a>
+
+						</div>
+
+					</article>
+
+
+
+					<!-- =============================================
+                     SLIDE 3
+                ============================================== -->
+
+					<article
+						class="event-slide hidden min-h-[330px]
+                           bg-gradient-to-br
+                           from-violet-600
+                           via-purple-600
+                           to-blue-600
+                           p-7 sm:p-10">
+
+						<div
+							class="flex h-full flex-col
+                               justify-center lg:max-w-2xl">
+
+							<span
+								class="w-fit rounded-full
+                                   bg-white/20
+                                   px-3 py-1.5
+                                   text-xs font-black
+                                   text-white">
+								⏳ SẮP DIỄN RA </span>
+
+
+							<h3
+								class="mt-5 text-3xl font-black
+                                   text-white sm:text-4xl">
+								Giải Đấu Tân Binh</h3>
+
+
+							<p
+								class="mt-3 max-w-xl text-sm
+                                   leading-6 text-violet-50">
+								Chuẩn bị đội hình và sẵn sàng cho giải đấu Trainer tiếp theo.</p>
+
+
+							<div
+								class="mt-7 w-fit
+                                   rounded-2xl
+                                   border border-white/10
+                                   bg-white/15
+                                   px-5 py-3
+                                   text-sm font-bold
+                                   text-white backdrop-blur">
+								Bắt đầu: 02/10/2026</div>
+
+						</div>
+
+					</article>
+
+				</div>
+
+
+
+				<!-- DOTS -->
+
+				<div
+					class="absolute bottom-5 left-1/2
+                       flex -translate-x-1/2
+                       gap-2">
+
+					<button type="button"
+						class="event-dot h-2.5 w-7 rounded-full
+                           bg-white shadow"
+						data-slide="0" aria-label="Sự kiện 1"></button>
+
+
+					<button type="button"
+						class="event-dot h-2.5 w-2.5 rounded-full
+                           bg-white/50"
+						data-slide="1" aria-label="Sự kiện 2"></button>
+
+
+					<button type="button"
+						class="event-dot h-2.5 w-2.5 rounded-full
+                           bg-white/50"
+						data-slide="2" aria-label="Sự kiện 3"></button>
+
+				</div>
+
+			</div>
+
+
+
+			<!-- EVENT MINI CARDS -->
+
+			<div class="mt-5 grid gap-4 md:grid-cols-3">
+
+
+				<!-- RED -->
+
+				<article
+					class="group rounded-2xl
+                       border border-red-100
+                       bg-white p-5
+                       shadow-sm
+                       transition duration-300
+                       hover:-translate-y-1
+                       hover:shadow-lg hover:shadow-red-100">
+
+					<div class="flex items-center justify-between">
+
+						<span
+							class="rounded-full
+                               bg-red-50 px-3 py-1
+                               text-[10px] font-black
+                               text-red-600">
+							● ĐANG DIỄN RA </span> <span class="text-xl"> 🌙 </span>
+
+					</div>
+
+
+					<h3 class="mt-4 font-black text-slate-900">
+						Lễ Hội Ánh Trăng</h3>
+
+
+					<p class="mt-2 text-xs leading-5 text-slate-500">
+						Thu thập vật phẩm và nhận phần thưởng.</p>
+
+
+					<div
+						class="mt-4 flex justify-between
+                           text-xs">
+
+						<span class="text-slate-400"> Kết thúc </span> <strong
+							class="text-red-600"> 05 ngày </strong>
+
+					</div>
+
+				</article>
+
+
+
+				<!-- GREEN -->
+
+				<article
+					class="group rounded-2xl
+                       border border-green-100
+                       bg-white p-5
+                       shadow-sm
+                       transition duration-300
+                       hover:-translate-y-1
+                       hover:shadow-lg hover:shadow-green-100">
+
+					<div class="flex items-center justify-between">
+
+						<span
+							class="rounded-full
+                               bg-green-50 px-3 py-1
+                               text-[10px] font-black
+                               text-green-600">
+							● ĐANG DIỄN RA </span> <span class="text-xl"> 🌿 </span>
+
+					</div>
+
+
+					<h3 class="mt-4 font-black text-slate-900">
+						Rừng Thì Thầm</h3>
+
+
+					<p class="mt-2 text-xs leading-5 text-slate-500">
+						Khám phá Monster trong khu rừng.</p>
+
+
+					<div
+						class="mt-4 flex justify-between
+                           text-xs">
+
+						<span class="text-slate-400"> Khu vực </span> <strong
+							class="text-green-600"> Map 2 </strong>
+
+					</div>
+
+				</article>
+
+
+
+				<!-- VIOLET -->
+
+				<article
+					class="group rounded-2xl
+                       border border-violet-100
+                       bg-white p-5
+                       shadow-sm
+                       transition duration-300
+                       hover:-translate-y-1
+                       hover:shadow-lg hover:shadow-violet-100">
+
+					<div class="flex items-center justify-between">
+
+						<span
+							class="rounded-full
+                               bg-violet-50 px-3 py-1
+                               text-[10px] font-black
+                               text-violet-600">
+							◷ SẮP DIỄN RA </span> <span class="text-xl"> 🏆 </span>
+
+					</div>
+
+
+					<h3 class="mt-4 font-black text-slate-900">
+						Giải Đấu Tân Binh</h3>
+
+
+					<p class="mt-2 text-xs leading-5 text-slate-500">
+						Chuẩn bị đội hình cho giải đấu.</p>
+
+
+					<div
+						class="mt-4 flex justify-between
+                           text-xs">
+
+						<span class="text-slate-400"> Bắt đầu </span> <strong
+							class="text-violet-600"> 02/10/2026 </strong>
+
+					</div>
+
+				</article>
+
+			</div>
+
+		</section>
+
+
+
+		<!-- =====================================================
+         QUICK ACTIONS
+    ====================================================== -->
+
+		<section class="mt-12">
+
+			<div class="mb-5">
+
+				<p
+					class="text-xs font-black uppercase
+                       tracking-[0.2em] text-violet-600">
+					Trainer Hub</p>
+
+
+				<h2
+					class="mt-2 text-2xl font-black
+                       text-slate-900">
+					Hoạt động nhanh</h2>
+
+			</div>
+
+
+			<div
+				class="grid gap-4
+                   sm:grid-cols-2
+                   lg:grid-cols-4">
+
+
+				<!-- MONSTER -->
+
+				<a th:href="@{/my-monsters}"
+					class="group rounded-2xl
+                       border border-green-100
+                       bg-white p-5
+                       shadow-sm
+                       transition duration-300
+                       hover:-translate-y-2
+                       hover:border-green-200
+                       hover:shadow-xl
+                       hover:shadow-green-100">
+
+					<div
+						class="flex h-12 w-12 items-center
+                           justify-center rounded-2xl
+                           bg-green-100 text-2xl
+                           transition duration-300
+                           group-hover:scale-110
+                           group-hover:rotate-3">
+						🐾</div>
+
+
+					<h3 class="mt-4 font-black text-slate-900">
+						Monster của tôi</h3>
+
+
+					<p class="mt-2 text-xs leading-5 text-slate-500">
+						Xem Monster, level, EXP và HP.</p> <span
+					class="mt-4 inline-block
+                           text-xs font-black
+                           text-green-600
+                           transition
+                           group-hover:translate-x-1">
+						Xem Monster → </span>
+
+				</a>
+
+
+
+				<!-- TEAM -->
+
+				<a th:href="@{/team}"
+					class="group rounded-2xl
+                       border border-red-100
+                       bg-white p-5
+                       shadow-sm
+                       transition duration-300
+                       hover:-translate-y-2
+                       hover:border-red-200
+                       hover:shadow-xl
+                       hover:shadow-red-100">
+
+					<div
+						class="flex h-12 w-12 items-center
+                           justify-center rounded-2xl
+                           bg-red-100 text-2xl
+                           transition duration-300
+                           group-hover:scale-110
+                           group-hover:rotate-3">
+						⚔️</div>
+
+
+					<h3 class="mt-4 font-black text-slate-900">
+						Đội hình</h3>
+
+
+					<p class="mt-2 text-xs leading-5 text-slate-500">
+						Quản lý đội hình Monster.</p> <span
+					class="mt-4 inline-block
+                           text-xs font-black
+                           text-red-600
+                           transition
+                           group-hover:translate-x-1">
+						Quản lý Team → </span>
+
+				</a>
+
+
+
+				<!-- MAP -->
+
+				<a th:href="@{/map}"
+					class="group rounded-2xl
+                       border border-blue-100
+                       bg-white p-5
+                       shadow-sm
+                       transition duration-300
+                       hover:-translate-y-2
+                       hover:border-blue-200
+                       hover:shadow-xl
+                       hover:shadow-blue-100">
+
+					<div
+						class="flex h-12 w-12 items-center
+                           justify-center rounded-2xl
+                           bg-blue-100 text-2xl
+                           transition duration-300
+                           group-hover:scale-110
+                           group-hover:rotate-3">
+						🗺️</div>
+
+
+					<h3 class="mt-4 font-black text-slate-900">
+						Bản đồ</h3>
+
+
+					<p class="mt-2 text-xs leading-5 text-slate-500">
+						Khám phá thế giới Aetherlia.</p> <span
+					class="mt-4 inline-block
+                           text-xs font-black
+                           text-blue-600
+                           transition
+                           group-hover:translate-x-1">
+						Mở bản đồ → </span>
+
+				</a>
+
+
+
+				<!-- STARTER -->
+
+				<a th:if="${!hasStarter}" th:href="@{/starter-monsters}"
+					class="group rounded-2xl border border-violet-100 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-100">
+
+					<div
+						class="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-100 text-2xl transition duration-300 group-hover:scale-110 group-hover:rotate-3">
+						⚡</div>
+
+					<h3 class="mt-4 font-black text-slate-900">Monster khởi đầu</h3>
+
+					<p class="mt-2 text-xs leading-5 text-slate-500">Chọn Monster
+						đầu tiên của anh.</p> <span
+					class="mt-4 inline-block text-xs font-black text-violet-600 transition group-hover:translate-x-1">
+						Chọn Monster → </span>
+
+				</a>
+
+			</div>
+
+		</section>
+
+
+
+		<!-- =====================================================
+         TOP UP
+    ====================================================== -->
+
+		<section id="topup" class="mt-12">
+
+			<div
+				class="relative overflow-hidden
+                   rounded-3xl
+                   border border-green-100
+                   bg-gradient-to-r
+                   from-green-50
+                   via-white
+                   to-violet-50
+                   p-6
+                   shadow-lg shadow-green-100/40
+                   sm:p-8">
+
+				<div
+					class="absolute -right-20 -top-20
+                       h-56 w-56 rounded-full
+                       bg-green-200/40 blur-3xl"></div>
+
+
+				<div
+					class="relative flex flex-col gap-6
+                       lg:flex-row
+                       lg:items-center
+                       lg:justify-between">
+
+					<div>
+
+						<div class="flex items-center gap-2">
+
+							<span class="text-2xl"> 💎 </span>
+
+							<p
+								class="text-xs font-black
+                                   uppercase
+                                   tracking-[0.2em]
+                                   text-green-600">
+								Aether Crystal</p>
+
+						</div>
+
+
+						<h2
+							class="mt-3 text-2xl font-black
+                               text-slate-900 sm:text-3xl">
+							Nạp Crystal cho hành trình</h2>
+
+
+						<p
+							class="mt-2 max-w-2xl
+                               text-sm leading-6
+                               text-slate-500">
+							Chuẩn bị tài nguyên cho những hành trình tiếp theo trong
+							Aetherlia.</p>
+
+					</div>
+
+
+					<a href="#"
+						class="inline-flex items-center
+                           justify-center
+                           rounded-2xl
+                           bg-gradient-to-r
+                           from-green-500
+                           to-violet-500
+                           px-7 py-3.5
+                           text-sm font-black
+                           text-white
+                           shadow-lg
+                           shadow-green-100
+                           transition duration-300
+                           hover:-translate-y-1
+                           hover:shadow-xl">
+						Nạp tiền ngay → </a>
+
+				</div>
+
+			</div>
+
+		</section>
+
+
+
+		<!-- =========================================================
+     FOOTER - SUPPORT
+========================================================= -->
+
+		<footer class="mt-16 border-t border-slate-200 bg-white">
+
+			<div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+
+				<!-- =================================================
+             SUPPORT AREA
+        ================================================== -->
+
+				<div
+					class="grid gap-10
+                   md:grid-cols-2
+                   lg:grid-cols-4">
+
+
+					<!-- =============================================
+                 AETHERLIA
+            ============================================== -->
+
+					<div>
+
+						<div class="flex items-center gap-3">
+
+							<div
+								class="flex h-11 w-11 items-center
+                               justify-center rounded-2xl
+                               bg-gradient-to-br
+                               from-red-500
+                               via-violet-500
+                               to-blue-500
+                               text-xl font-black text-white
+                               shadow-lg shadow-violet-100">
+								A</div>
+
+
+							<div>
+
+								<h3
+									class="text-lg font-black
+                                   tracking-[0.15em]
+                                   text-slate-900">
+									AETHERLIA</h3>
+
+								<p
+									class="text-[10px] font-semibold
+                                   tracking-[0.2em]
+                                   text-slate-400">
+									MONSTER ADVENTURE</p>
+
+							</div>
+
+						</div>
+
+
+						<p
+							class="mt-5 max-w-xs
+                           text-sm leading-6
+                           text-slate-500">
+							Thế giới Monster nơi mỗi Trainer đều có một hành trình riêng.
+							Khám phá, chiến đấu và trở thành huyền thoại của Aetherlia.</p>
+
+					</div>
+
+
+
+					<!-- =============================================
+                 SUPPORT
+            ============================================== -->
+
+					<div>
+
+						<h3
+							class="text-sm font-black
+                           uppercase
+                           tracking-[0.15em]
+                           text-slate-900">
+							Hỗ trợ người chơi</h3>
+
+
+						<ul class="mt-5 space-y-3">
+
+							<li><a href="#"
+								class="group inline-flex
+                                   items-center gap-2
+                                   text-sm
+                                   text-slate-500
+                                   transition
+                                   hover:text-violet-600">
+
+									<span class="text-base"> ❓
+								</span> Trung tâm trợ giúp
+
+							</a></li>
+
+
+							<li><a href="#"
+								class="group inline-flex
+                                   items-center gap-2
+                                   text-sm
+                                   text-slate-500
+                                   transition
+                                   hover:text-violet-600">
+
+									<span> 🐞 </span> Báo lỗi trò chơi
+
+							</a></li>
+
+
+							<li><a href="#"
+								class="group inline-flex
+                                   items-center gap-2
+                                   text-sm
+                                   text-slate-500
+                                   transition
+                                   hover:text-violet-600">
+
+									<span> 💳 </span> Hỗ trợ thanh toán
+
+							</a></li>
+
+
+							<li><a href="#"
+								class="group inline-flex
+                                   items-center gap-2
+                                   text-sm
+                                   text-slate-500
+                                   transition
+                                   hover:text-violet-600">
+
+									<span> 🎒 </span> Mất vật phẩm / Monster
+
+							</a></li>
+
+						</ul>
+
+					</div>
+
+
+
+					<!-- =============================================
+                 CONTACT
+            ============================================== -->
+
+					<div>
+
+						<h3
+							class="text-sm font-black
+                           uppercase
+                           tracking-[0.15em]
+                           text-slate-900">
+							Liên hệ</h3>
+
+
+						<div class="mt-5 space-y-4">
+
+
+							<!-- EMAIL -->
+
+							<a href="mailto:support@aetherlia.com"
+								class="group flex items-start gap-3">
+
+								<div
+									class="flex h-9 w-9 shrink-0
+                                   items-center justify-center
+                                   rounded-xl
+                                   bg-violet-50
+                                   text-violet-600
+                                   transition
+                                   group-hover:scale-105">
+									✉</div>
+
+
+								<div>
+
+									<p
+										class="text-xs
+                                       font-semibold
+                                       text-slate-400">
+										Email hỗ trợ</p>
+
+									<p
+										class="mt-0.5 text-sm
+                                       font-bold
+                                       text-slate-700
+                                       group-hover:text-violet-600">
+										support@aetherlia.com</p>
+
+								</div>
+
+							</a>
+
+
+
+							<!-- DISCORD -->
+
+							<a href="#" class="group flex items-start gap-3">
+
+								<div
+									class="flex h-9 w-9 shrink-0
+                                   items-center justify-center
+                                   rounded-xl
+                                   bg-blue-50
+                                   text-blue-600
+                                   transition
+                                   group-hover:scale-105">
+									💬</div>
+
+
+								<div>
+
+									<p
+										class="text-xs
+                                       font-semibold
+                                       text-slate-400">
+										Cộng đồng</p>
+
+									<p
+										class="mt-0.5 text-sm
+                                       font-bold
+                                       text-slate-700
+                                       group-hover:text-blue-600">
+										Aetherlia Community</p>
+
+								</div>
+
+							</a>
+
+
+
+							<!-- SUPPORT TIME -->
+
+							<div class="flex items-start gap-3">
+
+								<div
+									class="flex h-9 w-9 shrink-0
+                                   items-center justify-center
+                                   rounded-xl
+                                   bg-green-50
+                                   text-green-600">
+									⏰</div>
+
+
+								<div>
+
+									<p
+										class="text-xs
+                                       font-semibold
+                                       text-slate-400">
+										Thời gian hỗ trợ</p>
+
+									<p
+										class="mt-0.5 text-sm
+                                       font-bold
+                                       text-slate-700">
+										08:00 - 22:00</p>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+
+
+					<!-- =============================================
+                 REPORT ISSUE
+            ============================================== -->
+
+					<div
+						class="rounded-2xl
+                       border border-red-100
+                       bg-gradient-to-br
+                       from-red-50
+                       via-white
+                       to-violet-50
+                       p-5
+                       shadow-sm">
+
+						<div class="flex items-center gap-2">
+
+							<span class="text-xl"> 🛠️ </span>
+
+							<h3
+								class="text-sm font-black
+                               text-slate-900">
+								Gặp sự cố?</h3>
+
+						</div>
+
+
+						<p
+							class="mt-3 text-xs
+                           leading-5
+                           text-slate-500">
+							Hãy gửi thông tin lỗi cho đội ngũ Aetherlia để được hỗ trợ.</p>
+
+
+						<a href="#"
+							class="mt-5 inline-flex w-full
+                           items-center
+                           justify-center
+                           gap-2
+                           rounded-xl
+                           bg-gradient-to-r
+                           from-red-500
+                           to-violet-500
+                           px-4 py-3
+                           text-xs font-black
+                           text-white
+                           shadow-md
+                           shadow-red-100
+                           transition duration-300
+                           hover:-translate-y-0.5
+                           hover:shadow-lg">
+
+							Báo cáo sự cố <span> → </span>
+
+						</a>
+
+
+						<p
+							class="mt-3 text-center
+                           text-[10px]
+                           text-slate-400">
+							Phản hồi trong thời gian sớm nhất</p>
+
+					</div>
+
+				</div>
+
+
+
+				<!-- =================================================
+             DIVIDER
+        ================================================== -->
+
+				<div class="my-8 h-px bg-slate-100"></div>
+
+
+
+				<!-- =================================================
+             BOTTOM FOOTER
+        ================================================== -->
+
+				<div
+					class="flex flex-col
+                   gap-4
+                   text-center
+                   sm:flex-row
+                   sm:items-center
+                   sm:justify-between
+                   sm:text-left">
+
+					<div>
+
+						<p
+							class="text-sm font-black
+                           tracking-[0.15em]
+                           text-slate-500">
+							AETHERLIA</p>
+
+						<p class="mt-1 text-xs
+                           text-slate-400">
+							Hành trình thu phục Monster bắt đầu từ đây.</p>
+
+					</div>
+
+
+					<div
+						class="flex flex-wrap
+                       items-center
+                       justify-center
+                       gap-4
+                       text-xs
+                       text-slate-400
+                       sm:justify-end">
+
+						<a href="#"
+							class="transition
+                           hover:text-violet-600">
+							Điều khoản </a> <span class="text-slate-200">
+							| </span> <a href="#"
+							class="transition
+                           hover:text-violet-600">
+							Chính sách bảo mật </a> <span class="text-slate-200">
+							| </span> <span> © 2026 Aetherlia </span>
+
+					</div>
+
+				</div>
+
+			</div>
 
 		</footer>
 
+
 	</main>
+
+
+
+	<!-- =========================================================
+     CAROUSEL + COUNTDOWN
+========================================================= -->
+
+	<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        /* ================================================
+           CAROUSEL
+        ================================================= */
+
+        const slides =
+            document.querySelectorAll(
+                ".event-slide"
+            );
+
+        const dots =
+            document.querySelectorAll(
+                ".event-dot"
+            );
+
+
+        if (
+            slides.length > 0
+            &&
+            dots.length > 0
+        ) {
+
+            let current =
+                0;
+
+
+            function showSlide(
+                index
+            ) {
+
+                slides.forEach(
+                    (
+                        slide,
+                        slideIndex
+                    ) => {
+
+                        if (
+                            slideIndex === index
+                        ) {
+
+                            slide.classList.remove(
+                                "hidden"
+                            );
+
+                            slide.classList.add(
+                                "block"
+                            );
+
+                        } else {
+
+                            slide.classList.remove(
+                                "block"
+                            );
+
+                            slide.classList.add(
+                                "hidden"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                dots.forEach(
+                    (
+                        dot,
+                        dotIndex
+                    ) => {
+
+                        if (
+                            dotIndex === index
+                        ) {
+
+                            dot.classList.remove(
+                                "w-2.5",
+                                "bg-white/50"
+                            );
+
+                            dot.classList.add(
+                                "w-7",
+                                "bg-white"
+                            );
+
+                        } else {
+
+                            dot.classList.remove(
+                                "w-7",
+                                "bg-white"
+                            );
+
+                            dot.classList.add(
+                                "w-2.5",
+                                "bg-white/50"
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            dots.forEach(
+                (
+                    dot
+                ) => {
+
+                    dot.addEventListener(
+                        "click",
+                        () => {
+
+                            current =
+                                Number(
+                                    dot.dataset.slide
+                                );
+
+                            showSlide(
+                                current
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+            setInterval(
+                () => {
+
+                    current =
+                        (
+                            current + 1
+                        )
+                        %
+                        slides.length;
+
+                    showSlide(
+                        current
+                    );
+
+                },
+                6000
+            );
+
+
+            showSlide(0);
+
+        }
+
+
+
+        /* ================================================
+           COUNTDOWN
+        ================================================= */
+
+        const countdown =
+            document.getElementById(
+                "countdown"
+            );
+
+
+        const eventEnd =
+            new Date(
+                "2026-10-01T23:59:59+07:00"
+            ).getTime();
+
+
+        function updateCountdown() {
+
+            if (
+                !countdown
+            ) {
+                return;
+            }
+
+
+            const now =
+                Date.now();
+
+
+            const distance =
+                eventEnd - now;
+
+
+            if (
+                distance <= 0
+            ) {
+
+                countdown.textContent =
+                    "Đã kết thúc";
+
+                return;
+            }
+
+
+            const days =
+                Math.floor(
+                    distance /
+                    (
+                        1000 *
+                        60 *
+                        60 *
+                        24
+                    )
+                );
+
+
+            const hours =
+                Math.floor(
+                    (
+                        distance %
+                        (
+                            1000 *
+                            60 *
+                            60 *
+                            24
+                        )
+                    )
+                    /
+                    (
+                        1000 *
+                        60 *
+                        60
+                    )
+                );
+
+
+            countdown.textContent =
+                `${days} ngày ${hours} giờ`;
+
+        }
+
+
+        updateCountdown();
+
+        setInterval(
+            updateCountdown,
+            60000
+        );
+
+    }
+);
+
+</script>
+
 
 </body>
 

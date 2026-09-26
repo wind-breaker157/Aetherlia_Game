@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Nạp tiền - Aetherlia</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-white via-violet-50 to-red-50">
+
+<header class="sticky top-0 z-50 border-b border-white/70 bg-white/80 backdrop-blur-xl">
+
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+
+        <a href="/dashboard"
+           class="text-2xl font-black tracking-tight text-violet-700">
+
+            AETHERLIA
+
+        </a>
+
+        <a href="/dashboard"
+           class="rounded-xl px-4 py-2 font-semibold text-slate-600 transition hover:bg-slate-100">
+
+            ← Trang chủ
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="mx-auto max-w-6xl px-6 py-12">
+
+    <div class="mb-10 text-center">
+
+        <p class="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-violet-600">
+            Aetherlia Wallet
+        </p>
+
+        <h1 class="text-4xl font-black text-slate-900 md:text-5xl">
+            Nạp tiền
+        </h1>
+
+        <p class="mx-auto mt-4 max-w-2xl text-slate-500">
+            Nạp Aether Crystal để sử dụng các tính năng trong thế giới Aetherlia.
+        </p>
+
+    </div>
+
+
+    <div class="mx-auto mb-10 max-w-md rounded-3xl border border-white bg-white p-6 shadow-xl shadow-violet-100">
+
+        <p class="text-sm font-semibold text-slate-500">
+            Số dư hiện tại
+        </p>
+
+        <div class="mt-2 flex items-end justify-between">
+
+            <div>
+
+                <span
+                    class="text-4xl font-black text-violet-700"
+                    th:text="${#numbers.formatInteger(balance, 3, 'POINT')} + 'đ'">
+                    0đ
+                </span>
+
+            </div>
+
+            <div class="rounded-2xl bg-green-50 px-3 py-2 text-xs font-bold text-green-700">
+
+                WALLET
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="mx-auto max-w-4xl rounded-[2rem] border border-white bg-white p-6 shadow-2xl shadow-violet-100 md:p-10">
+
+        <form
+            th:action="@{/topup/create}"
+            method="post"
+            id="topupForm">
+
+            <input
+                type="hidden"
+                th:name="${_csrf.parameterName}"
+                th:value="${_csrf.token}">
+
+
+            <div class="mb-8">
+
+                <h2 class="text-2xl font-black text-slate-900">
+                    Chọn số tiền
+                </h2>
+
+                <p class="mt-2 text-sm text-slate-500">
+                    Chọn nhanh một mức nạp hoặc nhập số tiền riêng.
+                </p>
+
+            </div>
+
+
+            <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+
+                <button
+                    type="button"
+                    data-amount="10000"
+                    class="amount-btn rounded-2xl border-2 border-slate-100 bg-slate-50 px-5 py-5 text-center font-black text-slate-700 transition hover:-translate-y-1 hover:border-violet-400 hover:bg-violet-50">
+
+                    10.000đ
+
+                </button>
+
+                <button
+                    type="button"
+                    data-amount="50000"
+                    class="amount-btn rounded-2xl border-2 border-slate-100 bg-slate-50 px-5 py-5 text-center font-black text-slate-700 transition hover:-translate-y-1 hover:border-violet-400 hover:bg-violet-50">
+
+                    50.000đ
+
+                </button>
+
+                <button
+                    type="button"
+                    data-amount="100000"
+                    class="amount-btn rounded-2xl border-2 border-slate-100 bg-slate-50 px-5 py-5 text-center font-black text-slate-700 transition hover:-translate-y-1 hover:border-violet-400 hover:bg-violet-50">
+
+                    100.000đ
+
+                </button>
+
+                <button
+                    type="button"
+                    data-amount="200000"
+                    class="amount-btn rounded-2xl border-2 border-slate-100 bg-slate-50 px-5 py-5 text-center font-black text-slate-700 transition hover:-translate-y-1 hover:border-violet-400 hover:bg-violet-50">
+
+                    200.000đ
+
+                </button>
+
+            </div>
+
+
+            <div class="mt-8">
+
+                <label
+                    for="amount"
+                    class="mb-3 block text-sm font-bold text-slate-700">
+
+                    Hoặc nhập số tiền
+
+                </label>
+
+                <div class="relative">
+
+                    <input
+                        type="number"
+                        id="amount"
+                        name="amount"
+                        min="10000"
+                        max="10000000"
+                        step="1000"
+                        required
+                        placeholder="Ví dụ: 500000"
+                        class="w-full rounded-2xl border-2 border-slate-200 bg-white px-5 py-4 pr-14 text-lg font-bold outline-none transition focus:border-violet-500 focus:ring-4 focus:ring-violet-100">
+
+                    <span class="absolute right-5 top-1/2 -translate-y-1/2 font-bold text-slate-400">
+                        VNĐ
+                    </span>
+
+                </div>
+
+                <p class="mt-3 text-xs text-slate-400">
+                    Tối thiểu 10.000đ · tối đa 10.000.000đ · bội số của 1.000đ
+                </p>
+
+            </div>
+
+
+            <div class="mt-8 rounded-2xl bg-violet-50 p-5">
+
+                <div class="flex gap-4">
+
+                    <div class="text-2xl">
+                        💳
+                    </div>
+
+                    <div>
+
+                        <p class="font-bold text-violet-900">
+                            Thanh toán bằng chuyển khoản
+                        </p>
+
+                        <p class="mt-1 text-sm leading-6 text-violet-700">
+                            Sau khi chọn số tiền, Aetherlia sẽ tạo một mã thanh toán riêng
+                            và QR ngân hàng tương ứng.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="mt-8 w-full rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 px-6 py-4 text-lg font-black text-white shadow-lg shadow-violet-200 transition hover:-translate-y-1 hover:shadow-xl">
+
+                TIẾP TỤC THANH TOÁN →
+
+            </button>
+
+        </form>
+
+    </div>
+
+</main>
+
+
+<script>
+
+    const amountInput =
+        document.getElementById("amount");
+
+    document.querySelectorAll(".amount-btn")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const amount =
+                        button.dataset.amount;
+
+                    amountInput.value = amount;
+
+                    document
+                        .querySelectorAll(".amount-btn")
+                        .forEach(btn => {
+
+                            btn.classList.remove(
+                                "border-violet-500",
+                                "bg-violet-50",
+                                "text-violet-700"
+                            );
+
+                        });
+
+                    button.classList.add(
+                        "border-violet-500",
+                        "bg-violet-50",
+                        "text-violet-700"
+                    );
+
+                }
+            );
+
+        });
+
+</script>
+
+</body>
+</html>

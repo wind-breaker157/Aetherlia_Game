@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Thanh toán - Aetherlia</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body
+	class="min-h-screen bg-gradient-to-br from-white via-violet-50 to-green-50">
+
+
+	<header
+		class="sticky top-0 z-50 border-b border-white/70 bg-white/80 backdrop-blur-xl">
+
+		<div
+			class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+
+			<a href="/dashboard" class="text-2xl font-black text-violet-700">
+
+				AETHERLIA </a> <a href="/topup"
+				class="rounded-xl px-4 py-2 font-semibold text-slate-600 transition hover:bg-slate-100">
+
+				← Chọn lại </a>
+
+		</div>
+
+	</header>
+
+
+	<main class="mx-auto max-w-5xl px-6 py-10">
+
+		<div class="mb-8 text-center">
+
+			<p
+				class="text-sm font-bold uppercase tracking-[0.25em] text-violet-600">
+				Payment</p>
+
+			<h1 class="mt-2 text-4xl font-black text-slate-900">Thanh toán
+				nạp tiền</h1>
+
+			<p class="mt-3 text-slate-500">Quét QR bằng ứng dụng ngân hàng
+				của anh.</p>
+
+		</div>
+
+
+		<div class="grid gap-8 lg:grid-cols-[1fr_1.15fr]">
+
+
+			<!-- QR -->
+
+			<section
+				class="rounded-[2rem] border border-white bg-white p-6 shadow-2xl shadow-violet-100 md:p-8">
+
+				<div class="text-center">
+
+					<div
+						class="mx-auto inline-flex rounded-2xl bg-violet-100 px-4 py-2 text-sm font-black text-violet-700">
+
+						QR THANH TOÁN</div>
+
+					<div class="mt-6 rounded-3xl bg-slate-50 p-5">
+
+						<img th:src="${qrUrl}" alt="QR thanh toán Aetherlia"
+							class="mx-auto aspect-square w-full max-w-[360px] rounded-2xl">
+
+					</div>
+
+				</div>
+
+			</section>
+
+
+			<!-- INFO -->
+
+			<section
+				class="rounded-[2rem] border border-white bg-white p-6 shadow-2xl shadow-violet-100 md:p-8">
+
+				<div class="flex items-center justify-between">
+
+					<div>
+
+						<p class="text-sm font-semibold text-slate-500">Mã thanh toán
+						</p>
+
+						<p id="paymentCode"
+							class="mt-1 text-xl font-black text-violet-700"
+							th:text="${transaction.paymentCode}">TOPUP_XXXXXXXX</p>
+
+					</div>
+
+					<div id="statusBadge"
+						class="rounded-full bg-yellow-100 px-4 py-2 text-sm font-black text-yellow-700">
+
+						ĐANG CHỜ</div>
+
+				</div>
+
+
+				<div class="mt-8 rounded-3xl bg-slate-50 p-5">
+
+					<p class="text-sm text-slate-500">Số tiền cần chuyển</p>
+
+					<p class="mt-1 text-4xl font-black text-slate-900"
+						th:text="${#numbers.formatInteger(transaction.amount, 3, 'POINT')} + 'đ'">
+						50.000đ</p>
+
+				</div>
+
+
+				<div class="mt-6 space-y-4">
+
+					<div>
+
+						<p
+							class="text-xs font-bold uppercase tracking-wider text-slate-400">
+							Ngân hàng</p>
+
+						<p class="mt-1 font-bold text-slate-800" th:text="${bankCode}">
+							BANK</p>
+
+					</div>
+
+
+					<div>
+
+						<p
+							class="text-xs font-bold uppercase tracking-wider text-slate-400">
+							Số tài khoản</p>
+
+						<p class="mt-1 text-lg font-black text-slate-800"
+							th:text="${accountNumber}">0000000000</p>
+
+					</div>
+
+
+					<div>
+
+						<p
+							class="text-xs font-bold uppercase tracking-wider text-slate-400">
+							Chủ tài khoản</p>
+
+						<p class="mt-1 font-bold text-slate-800" th:text="${accountName}">
+							ACCOUNT NAME</p>
+
+					</div>
+
+
+					<div>
+
+						<p
+							class="text-xs font-bold uppercase tracking-wider text-slate-400">
+							Nội dung chuyển khoản</p>
+
+						<div class="mt-1 flex items-center gap-2">
+
+							<code id="transferContent"
+								class="flex-1 rounded-xl bg-violet-50 px-4 py-3 font-black text-violet-700"
+								th:text="${transaction.paymentCode}"> TOPUP_XXXXXXXX </code>
+
+							<button type="button" id="copyButton"
+								class="rounded-xl bg-violet-600 px-4 py-3 font-bold text-white transition hover:bg-violet-700">
+
+								COPY</button>
+
+						</div>
+
+					</div>
+
+				</div>
+
+
+				<div id="paymentMessage"
+					class="mt-6 rounded-2xl bg-yellow-50 p-4 text-sm leading-6 text-yellow-800">
+
+					Hệ thống đang tự động chờ giao dịch. Anh không cần bấm xác nhận.</div>
+
+
+				<a href="/dashboard" id="successButton"
+					class="mt-6 hidden w-full rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-4 text-center font-black text-white shadow-lg shadow-green-100">
+
+					VỀ TRANG CHỦ → </a>
+
+			</section>
+
+		</div>
+
+	</main>
+
+
+	<script th:inline="javascript">
+
+    const paymentCode =
+        /*[[${transaction.paymentCode}]]*/ "TOPUP_XXXXXXXX";
+
+    const statusBadge =
+        document.getElementById("statusBadge");
+
+    const paymentMessage =
+        document.getElementById("paymentMessage");
+
+    const successButton =
+        document.getElementById("successButton");
+
+    const copyButton =
+        document.getElementById("copyButton");
+
+    const transferContent =
+        document.getElementById("transferContent");
+
+
+    // =====================================================
+    // COPY
+    // =====================================================
+
+    copyButton.addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    transferContent.textContent.trim()
+                );
+
+                copyButton.textContent = "ĐÃ COPY";
+
+                setTimeout(
+                    () => {
+                        copyButton.textContent = "COPY";
+                    },
+                    1500
+                );
+
+            } catch (error) {
+
+                alert(
+                    "Không thể copy tự động."
+                );
+
+            }
+
+        }
+    );
+
+
+    // =====================================================
+    // CHECK PAYMENT
+    // =====================================================
+
+    async function checkPayment() {
+
+        try {
+
+            const response =
+                await fetch(
+                    "/payment/api/status/"
+                    + paymentCode,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        },
+                        cache: "no-store"
+                    }
+                );
+
+            if (!response.ok) {
+                return;
+            }
+
+            const data =
+                await response.json();
+
+            if (data.status === "PAID") {
+
+                statusBadge.textContent =
+                    "ĐÃ THANH TOÁN";
+
+                statusBadge.className =
+                    "rounded-full bg-green-100 px-4 py-2 text-sm font-black text-green-700";
+
+                paymentMessage.textContent =
+                    "Thanh toán thành công! "
+                    + "Aetherlia đã cộng "
+                    + Number(data.amount)
+                        .toLocaleString("vi-VN")
+                    + "đ vào ví của anh.";
+
+                paymentMessage.className =
+                    "mt-6 rounded-2xl bg-green-50 p-4 text-sm leading-6 text-green-800";
+
+                successButton.classList.remove(
+                    "hidden"
+                );
+
+                return;
+            }
+
+        } catch (error) {
+
+            console.log(
+                "Payment polling:",
+                error
+            );
+
+        }
+
+        setTimeout(
+            checkPayment,
+            3000
+        );
+    }
+
+
+    checkPayment();
+
+</script>
+
+</body>
+</html>

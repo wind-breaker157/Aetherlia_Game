@@ -125,6 +125,13 @@ public class BattleController {
             if (activeEncounter.isEmpty()) {
                 return "redirect:/map/1";
             }
+            
+            List<TeamMember> teamMembers =
+                    teamService.getTeamMembers(username);
+
+            if (teamMembers == null || teamMembers.isEmpty()) {
+                return "redirect:/starter";
+            }
 
             BattleStartData start =
                     battleService.prepareBattle(username);

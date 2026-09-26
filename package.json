@@ -1,0 +1,26 @@
+{
+  "name": "aetherlia",
+  "version": "1.0.0",
+  "description": "# Aetherlia_Game",
+  "main": "index.js",
+  "scripts": {
+    "css:build": "tailwindcss -i ./src/main/resources/static/css/tailwind-input.css -o ./src/main/resources/static/css/tailwind.css",
+    "css:watch": "tailwindcss -i ./src/main/resources/static/css/tailwind-input.css -o ./src/main/resources/static/css/tailwind.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wind-breaker157/Aetherlia_Game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/wind-breaker157/Aetherlia_Game/issues"
+  },
+  "homepage": "https://github.com/wind-breaker157/Aetherlia_Game#readme",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
